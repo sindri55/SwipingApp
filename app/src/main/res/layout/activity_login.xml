@@ -17,7 +17,14 @@
         android:paddingTop="@dimen/activity_login_vertical_margin"
         tools:context=".activities.account.LoginActivity">
 
+        <LinearLayout style="@style/Header.Login"
+            android:id="@+id/header_container">
 
+            <ImageView style="@style/Image.Center"
+                android:src="@drawable/android_logo"
+                android:contentDescription="@string/content_description_image_logo"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/login_form"
@@ -30,13 +37,11 @@
             <EditText style="@style/Input"
                 android:id="@+id/email"
                 android:hint="@string/activity_login_hint_email"
-                android:text="user"
                 android:inputType="textEmailAddress" />
 
             <EditText style="@style/Input"
                 android:id="@+id/password"
                 android:hint="@string/activity_login_hint_password"
-                android:text="123"
                 android:inputType="textPassword" />
 
             <Button style="@style/Button.Transparent"
