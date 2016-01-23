@@ -20,9 +20,9 @@
         <LinearLayout style="@style/Header.Login"
             android:id="@+id/header_container">
 
-            <!--<ImageView style="@style/Image.Center"
+            <ImageView style="@style/Image.Center"
                 android:src="@drawable/android_logo"
-                android:contentDescription="@string/content_description_image_logo"/>-->
+                android:contentDescription="@string/content_description_image_logo"/>
 
         </LinearLayout>
 

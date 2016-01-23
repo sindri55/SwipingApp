@@ -20,10 +20,10 @@
         <RelativeLayout style="@style/Header.Register"
             android:id="@+id/header_container">
 
-            <!--<ImageView style="@style/Image.Center"
+            <ImageView style="@style/Image.Center"
                 android:src="@drawable/android_logo"
                 android:contentDescription="@string/content_description_image_logo"
-                android:layout_above="@+id/txt_sign_up"/>-->
+                android:layout_above="@+id/txt_sign_up"/>
 
             <TextView style="@style/Text.XLarge.Light"
                 android:id="@+id/txt_sign_up"
