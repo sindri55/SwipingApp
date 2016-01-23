@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
             UpdateButtonState(true);
 
             if (success) {
-                Intent intent = new Intent(LoginActivity.this, PaymentActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
 
             } else {
