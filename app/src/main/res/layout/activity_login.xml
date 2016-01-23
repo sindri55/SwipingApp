@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView style="@style/BackgroundImage"
+        android:src="@drawable/background_login"
+        android:contentDescription="@string/content_description_image_background"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_login_vertical_margin"
+        android:paddingLeft="@dimen/activity_login_horizontal_margin"
+        android:paddingRight="@dimen/activity_login_horizontal_margin"
+        android:paddingTop="@dimen/activity_login_vertical_margin"
+        tools:context=".activities.account.LoginActivity">
+
+        <LinearLayout style="@style/Header.Login"
+            android:id="@+id/header_container">
+
+            <!--<ImageView style="@style/Image.Center"
+                android:src="@drawable/android_logo"
+                android:contentDescription="@string/content_description_image_logo"/>-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/login_form"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/header_container"
+            android:layout_above="@+id/footer_container">
+
+            <EditText style="@style/Input"
+                android:id="@+id/email"
+                android:hint="@string/activity_login_hint_email"
+                android:inputType="textEmailAddress" />
+
+            <EditText style="@style/Input"
+                android:id="@+id/password"
+                android:hint="@string/activity_login_hint_password"
+                android:inputType="textPassword" />
+
+            <Button style="@style/Button.Transparent"
+                android:id="@+id/btn_login"
+                android:text="@string/activity_login_btn_login"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/footer_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+
+            <TextView style="@style/Text.Small.Light.Clickable"
+                android:id="@+id/txt_register"
+                android:layout_gravity="center"
+                android:text="@string/activity_login_txt_create_account"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

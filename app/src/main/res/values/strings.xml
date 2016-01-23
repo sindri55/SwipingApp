@@ -1,3 +1,30 @@
 <resources>
-    <string name="app_name">SwipingApp</string>
+    <string name="app_name">SwipingApplication</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Content Descriptions -->
+    <string name="content_description_image_background">Background Image</string>
+    <string name="content_description_image_logo">Logo Image</string>
+
+    <!-- Login Activity -->
+    <string name="activity_login_btn_login">Login</string>
+    <string name="activity_login_btn_login_processing">Logging in...</string>
+    <string name="activity_login_hint_email">Email</string>
+    <string name="activity_login_hint_password">Password</string>
+    <string name="activity_login_txt_create_account">Are you joining us? Lets create a account</string>
+
+    <!-- Register Activity -->
+    <string name="activity_register_btn_sign_up">Sign Up</string>
+    <string name="activity_register_btn_sign_up_processing">Signing up...</string>
+    <string name="activity_register_txt_sign_up">Sign Up</string>
+    <string name="activity_register_txt_terms_and_conditions">By clicking \'Sign Up\' you are agreeing to our Terms and Conditions</string>
+    <string name="activity_register_hint_full_name">Full Name</string>
+    <string name="activity_register_hint_email">Email</string>
+    <string name="activity_register_hint_password">Password</string>
+    <string name="activity_register_hint_confirm_password">Confirm Password</string>
+
+    <!-- Terms and Conditions Activity -->
+    <string name="activity_terms_and_conditions_caption">Terms and Conditions</string>
 </resources>

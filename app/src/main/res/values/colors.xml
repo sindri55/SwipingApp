@@ -1,6 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <!-- Color format: #AARRGGBB -->
+
+    <!-- Basic colors -->
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+
+    <color name="gray">#727771</color>
+    <color name="gray_light">#dddddd</color>
+    <color name="gray_dark">#aaaaaa</color>
+    <color name="gray_darker">#666666</color>
+
+    <color name="red">#ffffff</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="transparent_black_90">#1a000000</color>    <!-- 90% transparent black -->
+    <color name="transparent_black_80">#33000000</color>
+    <color name="transparent_black_70">#4d000000</color>
+    <color name="transparent_black_60">#66000000</color>
+    <color name="transparent_black_50">#80000000</color>
+    <color name="transparent_black_40">#99000000</color>
+    <color name="transparent_black_30">#b3000000</color>
+    <color name="transparent_black_20">#cc000000</color>
+    <color name="transparent_black_10">#e6000000</color>
+
+    <!-- Company color (test) -->
+    <color name="green_dark">#089524</color>
+    <color name="green_light">#1bbf60</color>
+    <color name="blue_dark">#1546ff</color>
+    <color name="blue_light">#3d3fff</color>
+    <color name="orange_dark">#ff4c17</color>
+    <color name="orange_light">#ff7226</color>
+
+    <!-- Buttons -->
+    <color name="button_transparent_background">@color/transparent_black_90</color>
+    <color name="button_transparent_background_pressed">@color/transparent_black_80</color>
+    <color name="button_transparent_background_disabled">@color/transparent_black_70</color>
+    <color name="button_transparent_text">@color/white</color>
+    <color name="button_transparent_text_pressed">@color/gray_light</color>
+    <color name="button_transparent_text_disabled">@color/gray_dark</color>
+    <color name="button_transparent_border">@color/button_transparent_text</color>
+    <color name="button_transparent_border_pressed">@color/button_transparent_text_pressed</color>
+    <color name="button_transparent_border_disabled">@color/button_transparent_text_disabled</color>
+
+    <!-- Inputs -->
+    <color name="input_text">@color/white</color>
+    <color name="input_text_hint">@color/gray_light</color>
+
+    <!-- Backgrounds -->
+    <color name="background_default">@color/gray_light</color>
+
+    <!-- Texts -->
+    <color name="text_default">@color/black</color>
+    <color name="text_light">@color/white</color>
+    <color name="text_light_pressed">@color/gray_dark</color>
 </resources>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView style="@style/BackgroundImage"
+        android:src="@drawable/background_register"
+        android:contentDescription="@string/content_description_image_background"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_register_vertical_margin"
+        android:paddingLeft="@dimen/activity_register_horizontal_margin"
+        android:paddingRight="@dimen/activity_register_horizontal_margin"
+        android:paddingTop="@dimen/activity_register_vertical_margin"
+        tools:context=".activities.account.RegisterActivity">
+
+        <RelativeLayout style="@style/Header.Register"
+            android:id="@+id/header_container">
+
+            <!--<ImageView style="@style/Image.Center"
+                android:src="@drawable/android_logo"
+                android:contentDescription="@string/content_description_image_logo"
+                android:layout_above="@+id/txt_sign_up"/>-->
+
+            <TextView style="@style/Text.XLarge.Light"
+                android:id="@+id/txt_sign_up"
+                android:text="@string/activity_register_txt_sign_up"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/register_form"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/header_container"
+            android:layout_above="@+id/footer_container">
+
+            <EditText style="@style/Input"
+                android:id="@+id/full_name"
+                android:hint="@string/activity_register_hint_full_name"
+                android:inputType="textPersonName" />
+
+            <EditText style="@style/Input"
+                android:id="@+id/email"
+                android:hint="@string/activity_register_hint_email"
+                android:inputType="textEmailAddress" />
+
+            <EditText style="@style/Input"
+                android:id="@+id/password"
+                android:hint="@string/activity_register_hint_password"
+                android:inputType="textPassword" />
+
+            <EditText style="@style/Input"
+                android:id="@+id/confirm_password"
+                android:hint="@string/activity_register_hint_confirm_password"
+                android:inputType="textPassword" />
+
+            <Button style="@style/Button.Transparent"
+                android:id="@+id/btn_sign_up"
+                android:text="@string/activity_register_btn_sign_up"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/footer_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+
+            <TextView style="@style/Text.Small.Light.Clickable"
+                android:id="@+id/txt_terms_and_conditions"
+                android:gravity="center"
+                android:text="@string/activity_register_txt_terms_and_conditions"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>
