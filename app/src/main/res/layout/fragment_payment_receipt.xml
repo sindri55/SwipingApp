@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/step_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:weightSum="3">
+
+        <TextView style="@style/Text.StepIndicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/activity_payment_step_amount"/>
+
+        <TextView style="@style/Text.StepIndicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/activity_payment_step_payment"/>
+
+        <TextView style="@style/Text.StepIndicator.Active"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/activity_payment_step_receipt"/>
+
+    </LinearLayout>
+
 
     <TextView style="@style/Text.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Receipt..."/>
 
-</RelativeLayout>
+    <Button android:id="@+id/done"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="done"/>
+
+</LinearLayout>

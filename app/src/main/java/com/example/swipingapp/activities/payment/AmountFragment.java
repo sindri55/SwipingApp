@@ -1,7 +1,10 @@
 package com.example.swipingapp.activities.payment;
 
-import android.app.Fragment;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +19,7 @@ import com.example.swipingapp.enums.Currency;
 import com.example.swipingapp.services.settings.ISettingsService;
 import com.example.swipingapp.services.settings.SettingsServiceStub;
 
-import java.util.ArrayList;
+import java.util.Objects;
 
 public class AmountFragment extends Fragment {
 
@@ -24,18 +27,14 @@ public class AmountFragment extends Fragment {
     private int mAmount;
     private IAmountListener mAmountListener;
     private ISettingsService mSettingsService;
+    private FragmentManager fragmentManager;
 
     // UI references
     private EditText mAmountView;
     private Button mNextButton;
     private ListView mAmountSpinnerList;
 
-    // Constructors
-    public AmountFragment(){
-        mAmount = 0;
-        mAmountListener = new AmountListener();
-        mSettingsService = SettingsServiceStub.getInstance();
-    }
+
 
     // Override functions
     @Override
@@ -44,9 +43,31 @@ public class AmountFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_payment_amount, container, false);
 
+        mAmount = 0;
+        mAmountListener = new AmountListener();
+        mSettingsService = SettingsServiceStub.getInstance();
+
         mAmountView = (EditText) view.findViewById(R.id.amount);
         mNextButton = (Button) view.findViewById(R.id.btn_next);
         mAmountSpinnerList = (ListView) view.findViewById(R.id.amount_spinner_list);
+
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mAmountView != null){
+
+                    // TODO laga þannig main contentið slide-ar bara en ekki statusProcess propertíin 3 upp..
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
+                    fragmentTransaction.replace(R.id.main_container, new CardInfoFragment());
+                    fragmentTransaction.commit();
+
+
+
+                }
+            }
+        });
 
         Currency currency = mSettingsService.getUserCurrency();
 
@@ -63,7 +84,13 @@ public class AmountFragment extends Fragment {
 
         @Override
         public void changeAmount(int value) {
-            mAmount += value;
+            int currentValue = 0;
+
+            if (!Objects.equals(mAmountView.getText().toString(), ""))
+                 currentValue = Integer.valueOf(mAmountView.getText().toString());
+
+
+            mAmount = value + currentValue;
             mAmount = (mAmount < 0) ? 0 : mAmount;
 
             mAmountView.setText(Integer.toString(mAmount));
@@ -76,4 +103,5 @@ public class AmountFragment extends Fragment {
             mAmountView.setText(Integer.toString(mAmount));
         }
     }
+
 }

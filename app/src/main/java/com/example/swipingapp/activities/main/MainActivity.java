@@ -1,15 +1,22 @@
 package com.example.swipingapp.activities.main;
 
+
+import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
+
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.swipingapp.R;
 import com.example.swipingapp.activities.account.LoginActivity;
+import com.example.swipingapp.activities.account.ProfileFragment;
+import com.example.swipingapp.activities.payment.AmountFragment;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -22,7 +29,11 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends FragmentActivity{
+
+    private static String TAG = MainActivity.class.getSimpleName();
+    private Drawer result;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +42,22 @@ public class MainActivity extends AppCompatActivity{
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+/*
+
+        CardInfoFragment cardInfoFragment = new CardInfoFragment();
+        // Add the fragment to the 'fragment_container' FrameLayout
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, cardInfoFragment).commit();
+
+
+*/
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.add(R.id.main_container, new AmountFragment());
+        ft.commit();
+
 
         new DrawerBuilder().withActivity(this).build();
 
@@ -41,6 +68,7 @@ public class MainActivity extends AppCompatActivity{
         PrimaryDrawerItem item2 = new PrimaryDrawerItem().withName(R.string.nav_item_notifications);
         PrimaryDrawerItem item3 = new PrimaryDrawerItem().withName(R.string.nav_item_notifications);
         PrimaryDrawerItem item4 = new PrimaryDrawerItem().withName(R.string.nav_item_notifications);
+
         //SecondaryDrawerItem item4 = new SecondaryDrawerItem().withName(R.string.nav_item_notifications);
 
         AccountHeader headerResult = new AccountHeaderBuilder()
@@ -63,7 +91,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         //create the drawer and remember the `Drawer` result object
-        Drawer result = new DrawerBuilder()
+        result = new DrawerBuilder()
                 .withAccountHeader(headerResult)
                 .withActivity(this)
                 .withToolbar(toolbar)
@@ -97,22 +125,67 @@ public class MainActivity extends AppCompatActivity{
                                         .withColorPressed(Color.BLUE)
                                         .withTextColor(Color.CYAN)
                                         .withColorRes(R.color.green_dark))
+
                 )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                   @Override
+                   public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+
+                       // Check that the activity is using the layout version with
+                       // the fragment_container FrameLayout
+                       if (findViewById(R.id.main_container) != null) {
+                           selectItem(position);
+                           result.closeDrawer();
+
+                           Toast.makeText(MainActivity.this, "Clicked:" + position + " OR: " + drawerItem.getIdentifier(), Toast.LENGTH_SHORT).show();
+                       }
+                       return true;
+                   }
+                }).build();
+
+        result.addItem(new DividerDrawerItem());
+        result.addStickyFooterItem(new
+                        PrimaryDrawerItem()
+                        .withName("Log out")
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        // do something with the clicked item :D
+                        selectItem(0);
 
-                        Toast.makeText(MainActivity.this, "Clicked:" + position, Toast.LENGTH_SHORT).show();
                         return true;
                     }
                 })
+        );
+    }
 
-                .build();
+    private void selectItem(int position) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
 
-        result.addItem(new DividerDrawerItem());
 
-        result.addStickyFooterItem(new PrimaryDrawerItem().withName("Log out"));
+        switch (position) {
+
+            //Logout
+            case 0:
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
+
+            // Start a transaction
+            case 1:
+
+                ft.replace(R.id.main_container, new AmountFragment(), TAG);
+                ft.commit();
+
+                break;
+
+            // Start profile
+            case 3:
+                ft.replace(R.id.main_container, new ProfileFragment(), TAG);
+                ft.commit();
+                break;
+
+        }
 
 
     }

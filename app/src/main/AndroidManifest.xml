@@ -9,15 +9,11 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
         <activity android:name=".activities.account.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activities.main.MainActivity"
-             >
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,9 +22,7 @@
         </activity>
         <activity android:name=".activities.account.RegisterActivity" />
         <activity android:name=".activities.about.TermsAndConditionsActivity" />
-        <activity
-            android:name=".activities.payment.PaymentActivity"
-            android:windowSoftInputMode="adjustPan"/>
+
     </application>
 
 </manifest>
