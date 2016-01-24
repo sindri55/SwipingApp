@@ -26,7 +26,9 @@
         </activity>
         <activity android:name=".activities.account.RegisterActivity" />
         <activity android:name=".activities.about.TermsAndConditionsActivity" />
-        <activity android:name=".activities.payment.PaymentActivity"></activity>
+        <activity
+            android:name=".activities.payment.PaymentActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

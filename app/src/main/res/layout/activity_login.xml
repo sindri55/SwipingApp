@@ -34,12 +34,12 @@
             android:layout_below="@+id/header_container"
             android:layout_above="@+id/footer_container">
 
-            <EditText style="@style/Input"
+            <EditText style="@style/Input.Transparent"
                 android:id="@+id/email"
                 android:hint="@string/activity_login_hint_email"
                 android:inputType="textEmailAddress" />
 
-            <EditText style="@style/Input"
+            <EditText style="@style/Input.Transparent"
                 android:id="@+id/password"
                 android:hint="@string/activity_login_hint_password"
                 android:inputType="textPassword" />

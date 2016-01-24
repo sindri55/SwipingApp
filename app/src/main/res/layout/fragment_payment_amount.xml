@@ -3,8 +3,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView style="@style/Text.Large"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/step_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Payment Amount..."/>
+        android:layout_alignParentTop="true"
+        android:weightSum="3">
+
+        <TextView style="@style/Text.StepIndicator.Active"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/activity_payment_step_amount"/>
+
+        <TextView style="@style/Text.StepIndicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/activity_payment_step_payment"/>
+
+        <TextView style="@style/Text.StepIndicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/activity_payment_step_receipt"/>
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/Layout.Padding"
+        android:id="@+id/amount_form"
+        android:orientation="vertical"
+        android:layout_above="@+id/amount_spinner_container"
+        android:layout_below="@+id/step_container">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView style="@style/InputBox.Label"
+                android:text="@string/activity_payment_label_amount" />
+
+            <EditText style="@style/InputBox.Value"
+                android:id="@+id/amount"
+                android:inputType="number"
+                android:textCursorDrawable="@null"
+                android:imeOptions="actionDone"/>
+        </LinearLayout>
+
+        <Button style="@style/Button"
+            android:id="@+id/btn_next"
+            android:text="@string/activity_payment_btn_next"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/amount_spinner_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <ListView
+            android:id="@+id/amount_spinner_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:choiceMode="none"
+            android:divider="@color/transparent"/>
+
+    </LinearLayout>
 </RelativeLayout>

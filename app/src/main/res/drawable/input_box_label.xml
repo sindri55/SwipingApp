@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:right="@dimen/input_box_border_width_negative">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/input_box_label_background"/>
+            <corners
+                android:bottomLeftRadius="@dimen/input_box_border_radius"
+                android:bottomRightRadius="0dp"
+                android:topLeftRadius="@dimen/input_box_border_radius"
+                android:topRightRadius="0dp"/>
+            <stroke android:width="@dimen/input_box_border_width" android:color="@color/input_box_border"/>
+        </shape>
+    </item>
+</layer-list>

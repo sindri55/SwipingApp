@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.swipingapp.R;
-import com.example.swipingapp.activities.main.MainActivity;
 import com.example.swipingapp.activities.payment.PaymentActivity;
 import com.example.swipingapp.services.account.AccountServiceStub;
 import com.example.swipingapp.services.account.IAccountService;
@@ -119,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
             UpdateButtonState(true);
 
             if (success) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, PaymentActivity.class);
                 startActivity(intent);
 
             } else {

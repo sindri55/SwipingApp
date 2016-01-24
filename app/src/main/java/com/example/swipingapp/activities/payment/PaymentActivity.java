@@ -15,9 +15,6 @@ public class PaymentActivity extends Activity {
     // Properties
 
     // UI references
-    private Button mAmountButton;
-    private Button mCardInfoButton;
-    private Button mReceiptButton;
 
     // Override functions
     @Override
@@ -25,17 +22,20 @@ public class PaymentActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
-        mAmountButton = (Button) findViewById(R.id.btn_amount);
-        mCardInfoButton = (Button) findViewById(R.id.btn_card_info);
-        mReceiptButton = (Button) findViewById(R.id.btn_receipt);
+        // TODO: Rethink, make fragment as property?
+        Fragment fragment = new AmountFragment();
+        displayFragment(fragment);
+    }
 
-        mAmountButton.setOnClickListener(new FragmentButtonClickListener());
-        mCardInfoButton.setOnClickListener(new FragmentButtonClickListener());
-        mReceiptButton.setOnClickListener(new FragmentButtonClickListener());
+    // Private functions
+    private void displayFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment).commit();
     }
 
     // Listeners
-    private class FragmentButtonClickListener implements Button.OnClickListener {
+    /*private class FragmentButtonClickListener implements Button.OnClickListener {
 
         @Override
         public void onClick(View v) {
@@ -54,14 +54,12 @@ public class PaymentActivity extends Activity {
             }
 
             if (fragment != null) {
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment).commit();
+                displayFragment(fragment);
             } else {
                 // error in creating fragment
                 Log.e("MainActivity", "Error in creating fragment");
             }
 
         }
-    }
+    }*/
 }

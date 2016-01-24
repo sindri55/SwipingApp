@@ -1,50 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout style="@style/Layout.Background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.work.swipingapplication.activities.payment.PaymentActivity">
 
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="50dp">
-
-    </FrameLayout>
-
-    <LinearLayout
-        android:id="@+id/btn_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
-
-        <Button style="@style/Button"
-            android:id="@+id/btn_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Amount"
-            android:layout_weight="1"/>
-
-        <Button style="@style/Button"
-            android:id="@+id/btn_card_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Card Info"
-            android:layout_weight="1"/>
-
-        <Button style="@style/Button"
-            android:id="@+id/btn_receipt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Receipt"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

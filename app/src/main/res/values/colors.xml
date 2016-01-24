@@ -4,13 +4,20 @@
     <!-- Color format: #AARRGGBB -->
 
     <!-- Basic colors -->
-    <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="whiteish">#f5f5f5</color>
 
-    <color name="gray">#727771</color>
+    <color name="blackish">#373a3c</color>
+
+    <color name="black_lighter">#666666</color>
+    <color name="black_light">#333333</color>
+    <color name="black">#000000</color>
+
+    <color name="gray_lighter">#eeeeee</color>
     <color name="gray_light">#dddddd</color>
+    <color name="gray">#cccccc</color>
     <color name="gray_dark">#aaaaaa</color>
-    <color name="gray_darker">#666666</color>
+    <color name="gray_darker">#888888</color>
 
     <color name="red">#ffffff</color>
 
@@ -34,6 +41,15 @@
     <color name="orange_light">#ff7226</color>
 
     <!-- Buttons -->
+    <color name="button_default_background">@color/gray_light</color>
+    <color name="button_default_background_pressed">@color/gray</color>
+    <color name="button_default_background_disabled">@color/gray_dark</color>
+    <color name="button_default_text">@color/blackish</color>
+    <color name="button_default_text_disabled">@color/black_light</color>
+    <color name="button_default_border">@color/gray</color>
+    <color name="button_default_border_pressed">@color/gray_dark</color>
+    <color name="button_default_border_disabled">@color/gray_darker</color>
+
     <color name="button_transparent_background">@color/transparent_black_90</color>
     <color name="button_transparent_background_pressed">@color/transparent_black_80</color>
     <color name="button_transparent_background_disabled">@color/transparent_black_70</color>
@@ -44,9 +60,23 @@
     <color name="button_transparent_border_pressed">@color/button_transparent_text_pressed</color>
     <color name="button_transparent_border_disabled">@color/button_transparent_text_disabled</color>
 
+    <color name="button_amount_spinner_background">@color/gray_light</color>
+    <color name="button_amount_spinner_background_pressed">@color/gray</color>
+    <color name="button_amount_spinner_border">@color/gray</color>
+    <color name="button_amount_spinner_border_pressed">@color/gray_dark</color>
+    <color name="button_amount_spinner_text">@color/black_lighter</color>
+
     <!-- Inputs -->
-    <color name="input_text">@color/white</color>
-    <color name="input_text_hint">@color/gray_light</color>
+    <color name="input_text">@color/black</color>
+    <color name="input_text_hint">@color/gray_darker</color>
+
+    <color name="input_transparent_text">@color/white</color>
+    <color name="input_transparent_text_hint">@color/gray</color>
+
+    <!-- Input Box -->
+    <color name="input_box_border">@color/gray_light</color>
+    <color name="input_box_label_background">@color/gray_lighter</color>
+    <color name="input_box_value_background">@color/whiteish</color>
 
     <!-- Backgrounds -->
     <color name="background_default">@color/gray_light</color>
@@ -55,4 +85,10 @@
     <color name="text_default">@color/black</color>
     <color name="text_light">@color/white</color>
     <color name="text_light_pressed">@color/gray_dark</color>
+
+    <color name="text_step_indicator_background">@color/gray_light</color>
+    <color name="text_step_indicator_background_active">@color/green_dark</color>
+    <color name="text_step_indicator_text">@color/black_lighter</color>
+    <color name="text_step_indicator_text_active">@color/white</color>
+    <color name="text_step_indicator_border">@color/gray</color>
 </resources>
