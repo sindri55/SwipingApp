@@ -1,6 +1,7 @@
 package com.example.swipingapp.activities.main;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 
@@ -15,8 +16,9 @@ import android.widget.Toast;
 
 import com.example.swipingapp.R;
 import com.example.swipingapp.activities.account.LoginActivity;
-import com.example.swipingapp.activities.account.ProfileFragment;
+import com.example.swipingapp.activities.user_account.UserFragment;
 import com.example.swipingapp.activities.payment.AmountFragment;
+import com.mikepenz.iconics.context.IconicsContextWrapper;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -25,7 +27,6 @@ import com.mikepenz.materialdrawer.holder.BadgeStyle;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
@@ -33,6 +34,17 @@ public class MainActivity extends FragmentActivity{
 
     private static String TAG = MainActivity.class.getSimpleName();
     private Drawer result;
+
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(IconicsContextWrapper.wrap(newBase));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
 
     @Override
@@ -181,7 +193,7 @@ public class MainActivity extends FragmentActivity{
 
             // Start profile
             case 3:
-                ft.replace(R.id.main_container, new ProfileFragment(), TAG);
+                ft.replace(R.id.main_container, new UserFragment(), TAG);
                 ft.commit();
                 break;
 

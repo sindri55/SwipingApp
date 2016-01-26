@@ -31,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button mLoginButton;
     private TextView mRegisterText;
 
+
+
     // Override functions
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -20,6 +20,9 @@
     <dimen name="text_size_xLarge">30sp</dimen>
     <dimen name="text_size_xxLarge">35sp</dimen>
 
+
+
+
     <dimen name="text_step_indicator_padding">10dp</dimen>
     <dimen name="text_step_indicator_border_width">1dp</dimen>
 
@@ -31,7 +34,9 @@
     <dimen name="button_corner_radius">2dp</dimen>
     <dimen name="button_border_width">1dp</dimen>
 
-    <dimen name="button_transparent_margin_top">25dp</dimen>
+    <dimen name="button_transparent_margin_top25">25dp</dimen>
+    <dimen name="button_transparent_margin_top10">10dp</dimen>
+
     <dimen name="button_transparent_border_width">2dp</dimen>
 
     <dimen name="button_amount_spinner_layout_width">60dp</dimen>

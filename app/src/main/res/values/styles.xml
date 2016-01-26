@@ -70,7 +70,12 @@
     <style name="Button.Transparent">
         <item name="android:background">@drawable/button_transparent</item>
         <item name="android:textColor">@drawable/button_transparent_text</item>
-        <item name="android:layout_marginTop">@dimen/button_transparent_margin_top</item>
+        <item name="android:layout_marginTop">@dimen/button_transparent_margin_top25</item>
+    </style>
+    <style name="Layout.Transparent">
+        <item name="android:background">@drawable/button_transparent</item>
+        <item name="android:textColor">@drawable/button_transparent_text</item>
+        <item name="android:layout_marginTop">@dimen/button_transparent_margin_top10</item>
     </style>
 
     <style name="Button.AmountSpinner">
@@ -176,6 +181,9 @@
         <item name="android:background">@color/text_step_indicator_background_active</item>
         <item name="android:textColor">@color/text_step_indicator_text_active</item>
     </style>
+
+
+
 
     <!-- MyMaterialTheme -->
     <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
