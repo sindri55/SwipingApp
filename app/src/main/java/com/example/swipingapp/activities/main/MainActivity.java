@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.swipingapp.R;
 import com.example.swipingapp.activities.account.LoginActivity;
-import com.example.swipingapp.activities.user_account.UserFragment;
+import com.example.swipingapp.activities.userAccount.UserFragment;
 import com.example.swipingapp.activities.payment.AmountFragment;
 import com.mikepenz.iconics.context.IconicsContextWrapper;
 import com.mikepenz.materialdrawer.AccountHeader;

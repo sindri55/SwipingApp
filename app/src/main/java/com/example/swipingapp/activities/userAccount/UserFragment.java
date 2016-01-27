@@ -1,4 +1,4 @@
-package com.example.swipingapp.activities.user_account;
+package com.example.swipingapp.activities.userAccount;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.swipingapp.R;
-import com.example.swipingapp.activities.payment.CardInfoFragment;
 
 /**
  * Created by Sindri on 24/01/16.

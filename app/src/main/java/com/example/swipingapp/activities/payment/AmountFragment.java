@@ -27,14 +27,12 @@ public class AmountFragment extends Fragment {
     private int mAmount;
     private IAmountListener mAmountListener;
     private ISettingsService mSettingsService;
-    private FragmentManager fragmentManager;
+    private FragmentManager mFragmentManager;
 
     // UI references
     private EditText mAmountView;
     private Button mNextButton;
     private ListView mAmountSpinnerList;
-
-
 
     // Override functions
     @Override
@@ -46,28 +44,13 @@ public class AmountFragment extends Fragment {
         mAmount = 0;
         mAmountListener = new AmountListener();
         mSettingsService = SettingsServiceStub.getInstance();
+        mFragmentManager = getFragmentManager();
 
         mAmountView = (EditText) view.findViewById(R.id.amount);
         mNextButton = (Button) view.findViewById(R.id.btn_next);
         mAmountSpinnerList = (ListView) view.findViewById(R.id.amount_spinner_list);
 
-        mNextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mAmountView != null){
-
-                    // TODO laga þannig main contentið slide-ar bara en ekki statusProcess propertíin 3 upp..
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-                    fragmentTransaction.replace(R.id.main_container, new CardInfoFragment());
-                    fragmentTransaction.commit();
-
-
-
-                }
-            }
-        });
+        mNextButton.setOnClickListener(new NextButtonClickListener());
 
         Currency currency = mSettingsService.getUserCurrency();
 
@@ -80,6 +63,21 @@ public class AmountFragment extends Fragment {
     }
 
     // Listeners
+    private class NextButtonClickListener implements Button.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            if(mAmountView != null){
+
+                // TODO laga þannig main contentið slide-ar bara en ekki statusProcess propertíin 3 upp..
+                FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
+                fragmentTransaction.replace(R.id.main_container, new CardInfoFragment());
+                fragmentTransaction.commit();
+            }
+        }
+    }
+
     private class AmountListener implements IAmountListener {
 
         @Override

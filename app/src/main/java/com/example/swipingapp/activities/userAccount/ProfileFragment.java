@@ -1,4 +1,4 @@
-package com.example.swipingapp.activities.user_account;
+package com.example.swipingapp.activities.userAccount;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.swipingapp.R;
