@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.example.swipingapp.R;
 import com.example.swipingapp.enums.Currency;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class AmountSpinnerAdapter extends BaseAdapter {
@@ -60,7 +61,8 @@ public class AmountSpinnerAdapter extends BaseAdapter {
         Button amountButton = (Button) convertView.findViewById(R.id.btn_amount);
         Button increaseButton = (Button) convertView.findViewById(R.id.btn_increase);
 
-        String amountText = Integer.toString(value) + " " + mCurrency.getSymbol();
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(mCurrency.getLocale());
+        String amountText = formatter.format(value);
         amountButton.setText(amountText);
 
         decreaseButton.setOnClickListener(new AmountButtonClickListener(value));

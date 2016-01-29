@@ -1,6 +1,5 @@
 package com.example.swipingapp.enums;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -11,18 +10,6 @@ public enum Currency {
     US_DOLLAR;
 
     // Public functions
-    // TODO: Redundant?
-    public String getSymbol() {
-        switch (this) {
-            case ICELANDIC_KRONA:
-                return "ISK";
-            case US_DOLLAR:
-                return "$";
-        }
-
-        return "";
-    }
-
     public Locale getLocale() {
         switch (this) {
             case ICELANDIC_KRONA:
