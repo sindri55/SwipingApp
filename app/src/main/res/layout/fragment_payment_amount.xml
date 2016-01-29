@@ -15,19 +15,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/activity_payment_step_amount"/>
+            android:text="@string/fragment_payment_step_amount"/>
 
         <TextView style="@style/Text.StepIndicator"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/activity_payment_step_payment"/>
+            android:text="@string/fragment_payment_step_payment"/>
 
         <TextView style="@style/Text.StepIndicator"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/activity_payment_step_receipt"/>
+            android:text="@string/fragment_payment_step_receipt"/>
 
     </LinearLayout>
 
@@ -43,18 +43,22 @@
             android:orientation="horizontal">
 
             <TextView style="@style/InputBox.Label"
-                android:text="@string/activity_payment_label_amount" />
+                android:text="@string/fragment_payment_label_amount" />
 
-            <EditText style="@style/InputBox.Value"
-                android:id="@+id/amount"
+            <com.example.swipingapp.customViews.input.InputAmount style="@style/InputBox.Value"
+                android:id="@+id/input_amount"
                 android:inputType="number"
+                android:cursorVisible="false"
+                android:layout_gravity="end"
+                android:textAlignment="textEnd"
                 android:textCursorDrawable="@null"
                 android:imeOptions="actionDone"/>
+
         </LinearLayout>
 
         <Button style="@style/Button"
             android:id="@+id/btn_next"
-            android:text="@string/activity_payment_btn_next"/>
+            android:text="@string/fragment_payment_btn_next"/>
 
     </LinearLayout>
 

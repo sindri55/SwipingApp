@@ -19,10 +19,10 @@ public class AmountSpinnerAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<Integer> mValues;
     private Currency mCurrency;
-    private IAmountListener mAmountListener;
+    private IAmountSpinnerListener mAmountListener;
 
     // Constructors
-    public AmountSpinnerAdapter(Context context, Currency currency, IAmountListener amountListener) {
+    public AmountSpinnerAdapter(Context context, Currency currency, IAmountSpinnerListener amountListener) {
         mContext = context;
         mCurrency = currency;
         mAmountListener = amountListener;
@@ -56,9 +56,9 @@ public class AmountSpinnerAdapter extends BaseAdapter {
 
         int value = mValues.get(position);
 
-        Button decreaseButton = (Button) convertView.findViewById(R.id.btn_decrement);
+        Button decreaseButton = (Button) convertView.findViewById(R.id.btn_decrease);
         Button amountButton = (Button) convertView.findViewById(R.id.btn_amount);
-        Button increaseButton = (Button) convertView.findViewById(R.id.btn_increment);
+        Button increaseButton = (Button) convertView.findViewById(R.id.btn_increase);
 
         String amountText = Integer.toString(value) + " " + mCurrency.getSymbol();
         amountButton.setText(amountText);
@@ -74,10 +74,10 @@ public class AmountSpinnerAdapter extends BaseAdapter {
     private class AmountButtonClickListener implements Button.OnClickListener {
 
         // Properties
-        private int mValue;
+        private double mValue;
 
         // Constructors
-        public AmountButtonClickListener(int value) {
+        public AmountButtonClickListener(double value) {
             mValue = value;
         }
 
@@ -86,14 +86,14 @@ public class AmountSpinnerAdapter extends BaseAdapter {
         public void onClick(View v) {
             if(mAmountListener != null) {
                 switch (v.getId()) {
-                    case R.id.btn_decrement:
-                        mAmountListener.changeAmount(-mValue);
+                    case R.id.btn_decrease:
+                        mAmountListener.decreaseAmount(mValue);
                         break;
                     case R.id.btn_amount:
                         mAmountListener.setAmount(mValue);
                         break;
-                    case R.id.btn_increment:
-                        mAmountListener.changeAmount(mValue);
+                    case R.id.btn_increase:
+                        mAmountListener.increaseAmount(mValue);
                         break;
                 }
             }

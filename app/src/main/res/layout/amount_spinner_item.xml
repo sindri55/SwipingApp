@@ -5,10 +5,7 @@
     android:layout_height="wrap_content">
 
     <Button style="@style/Button.AmountSpinner.Decrement"
-        android:id="@+id/btn_decrement"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:textSize="30sp"
+        android:id="@+id/btn_decrease"
         android:text="-"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"/>
@@ -16,13 +13,13 @@
     <Button style="@style/Button.AmountSpinner"
         android:id="@+id/btn_amount"
         android:layout_width="match_parent"
-        android:layout_toLeftOf="@+id/btn_increment"
-        android:layout_toStartOf="@id/btn_increment"
-        android:layout_toEndOf="@+id/btn_decrement"
-        android:layout_toRightOf="@id/btn_decrement"/>
+        android:layout_toLeftOf="@+id/btn_increase"
+        android:layout_toStartOf="@id/btn_increase"
+        android:layout_toEndOf="@+id/btn_decrease"
+        android:layout_toRightOf="@id/btn_decrease"/>
 
     <Button style="@style/Button.AmountSpinner.Increment"
-        android:id="@+id/btn_increment"
+        android:id="@+id/btn_increase"
         android:text="+"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"/>

@@ -25,15 +25,16 @@
     <string name="activity_register_hint_password">Password</string>
     <string name="activity_register_hint_confirm_password">Confirm Password</string>
 
-    <!-- Payment Activity -->
-    <string name="activity_payment_step_amount">Amount</string>
-    <string name="activity_payment_step_payment">Payment</string>
-    <string name="activity_payment_step_receipt">Receipt</string>
-    <string name="activity_payment_btn_next">Next</string>
-    <string name="activity_payment_label_amount">Amount</string>
-
     <!-- Terms and Conditions Activity -->
     <string name="activity_terms_and_conditions_caption">Terms and Conditions</string>
+
+    <!-- Payment Fragments -->
+    <string name="fragment_payment_step_amount">Amount</string>
+    <string name="fragment_payment_step_payment">Payment</string>
+    <string name="fragment_payment_step_receipt">Receipt</string>
+    <string name="fragment_payment_btn_next">Next</string>
+    <string name="fragment_payment_label_amount">Amount</string>
+    <string name="fragment_payment_error_amount_missing">Please specify the amount</string>
 
     <!-- Drawer Items -->
     <string name="drawer_item_persistent_compact_header">PersistentHeader Drawer</string>

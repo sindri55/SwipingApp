@@ -9,28 +9,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.swipingapp.R;
 import com.example.swipingapp.customViews.amountSpinner.AmountSpinnerAdapter;
-import com.example.swipingapp.customViews.amountSpinner.IAmountListener;
+import com.example.swipingapp.customViews.amountSpinner.IAmountSpinnerListener;
+import com.example.swipingapp.customViews.input.InputAmount;
 import com.example.swipingapp.enums.Currency;
 import com.example.swipingapp.services.settings.ISettingsService;
 import com.example.swipingapp.services.settings.SettingsServiceStub;
 
-import java.util.Objects;
-
 public class AmountFragment extends Fragment {
 
     // Properties
-    private int mAmount;
-    private IAmountListener mAmountListener;
+    private IAmountSpinnerListener mAmountListener;
     private ISettingsService mSettingsService;
     private FragmentManager mFragmentManager;
+    private Currency mCurrency;
 
     // UI references
-    private EditText mAmountView;
+    private InputAmount mInputAmountView;
     private Button mNextButton;
     private ListView mAmountSpinnerList;
 
@@ -41,25 +39,37 @@ public class AmountFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_payment_amount, container, false);
 
-        mAmount = 0;
-        mAmountListener = new AmountListener();
+        mAmountListener = new AmountSpinnerListener();
         mSettingsService = SettingsServiceStub.getInstance();
         mFragmentManager = getFragmentManager();
+        mCurrency = mSettingsService.getUserCurrency();
 
-        mAmountView = (EditText) view.findViewById(R.id.amount);
+        mInputAmountView = (InputAmount) view.findViewById(R.id.input_amount);
         mNextButton = (Button) view.findViewById(R.id.btn_next);
         mAmountSpinnerList = (ListView) view.findViewById(R.id.amount_spinner_list);
 
         mNextButton.setOnClickListener(new NextButtonClickListener());
 
-        Currency currency = mSettingsService.getUserCurrency();
-
-        mAmountView.setHint("0 " + currency.getSymbol());
-
-        AmountSpinnerAdapter amountSpinnerAdapter = new AmountSpinnerAdapter(getActivity().getApplicationContext(), currency, mAmountListener);
+        AmountSpinnerAdapter amountSpinnerAdapter = new AmountSpinnerAdapter(getActivity().getApplicationContext(), mCurrency, mAmountListener);
         mAmountSpinnerList.setAdapter(amountSpinnerAdapter);
 
         return view;
+    }
+
+    // Private functions
+    private boolean validateInputAmount() {
+        double amount = mInputAmountView.getAmount();
+
+        if(amount > 0) {
+            mInputAmountView.setError(null);
+
+            return true;
+        } else {
+            mInputAmountView.setError(getString(R.string.fragment_payment_error_amount_missing));
+            mInputAmountView.requestFocus();
+
+            return false;
+        }
     }
 
     // Listeners
@@ -67,39 +77,42 @@ public class AmountFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            if(mAmountView != null){
-
-                // TODO laga þannig main contentið slide-ar bara en ekki statusProcess propertíin 3 upp..
-                FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-                fragmentTransaction.replace(R.id.main_container, new CardInfoFragment());
-                fragmentTransaction.commit();
+            if(mInputAmountView != null){
+                if(validateInputAmount()) {
+                    // TODO: Fix so that only the main content slides, not the statusProcess properties 3 up
+                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                    fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
+                    fragmentTransaction.replace(R.id.main_container, new CardInfoFragment());
+                    fragmentTransaction.commit();
+                }
             }
         }
     }
 
-    private class AmountListener implements IAmountListener {
+    private class AmountSpinnerListener implements IAmountSpinnerListener {
 
         @Override
-        public void changeAmount(int value) {
-            int currentValue = 0;
+        public void setAmount(double value) {
+            mInputAmountView.setAmount(value);
 
-            if (!Objects.equals(mAmountView.getText().toString(), ""))
-                 currentValue = Integer.valueOf(mAmountView.getText().toString());
-
-
-            mAmount = value + currentValue;
-            mAmount = (mAmount < 0) ? 0 : mAmount;
-
-            mAmountView.setText(Integer.toString(mAmount));
+            // Clear errors
+            mInputAmountView.setError(null);
         }
 
         @Override
-        public void setAmount(int value) {
-            mAmount = value;
+        public void increaseAmount(double value) {
+            mInputAmountView.increaseAmount(value);
 
-            mAmountView.setText(Integer.toString(mAmount));
+            // Clear errors
+            mInputAmountView.setError(null);
+        }
+
+        @Override
+        public void decreaseAmount(double value) {
+            mInputAmountView.decreaseAmount(value);
+
+            // Clear errors
+            mInputAmountView.setError(null);
         }
     }
-
 }
