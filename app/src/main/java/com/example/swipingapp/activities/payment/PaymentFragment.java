@@ -109,7 +109,7 @@ public class PaymentFragment extends Fragment {
         @Override
         public void onClick(View v) {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-            fragmentTransaction.setCustomAnimations(R.anim.slide_out_right, R.anim.slide_in_left);
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
             fragmentTransaction.replace(R.id.main_container, new AmountFragment());
             fragmentTransaction.commit();
         }
