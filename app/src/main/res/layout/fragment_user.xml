@@ -26,11 +26,10 @@
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginTop="40dp"/>
 
-        <TextView
+        <TextView style="@style/Text.Large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
-            style="@style/Text.Large"
             android:textStyle="italic"
             android:text="Sindri Þór Stefánsson"/>
 
@@ -44,12 +43,12 @@
         android:orientation="vertical">
 
 
-        <LinearLayout android:id="@+id/profileBtn"
-            android:clickable="true"
+        <LinearLayout style="@style/Layout.Transparent"
+            android:id="@+id/profileBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            style="@style/Layout.Transparent"
+            android:clickable="true"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -66,22 +65,21 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <TextView
+                <TextView style="@style/Text.XLarge"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Profile"
-                    style="@style/Text.XLarge"
                     android:gravity="center_vertical"
                     android:textColor="@color/white"/>
             </RelativeLayout>
         </LinearLayout>
-        <LinearLayout android:id="@+id/settingsBtn"
-            android:clickable="true"
+        <LinearLayout style="@style/Layout.Transparent"
+            android:id="@+id/settingsBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            style="@style/Layout.Transparent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:clickable="true">
 
             <RelativeLayout
                 android:layout_width="100dp"
@@ -97,23 +95,22 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <TextView
+                <TextView style="@style/Text.XLarge"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Settings"
-                    style="@style/Text.XLarge"
                     android:gravity="center_vertical"
                     android:textColor="@color/white"/>
             </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout android:id="@+id/bankBtn"
-            android:clickable="true"
+        <LinearLayout style="@style/Layout.Transparent"
+            android:id="@+id/bankBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            style="@style/Layout.Transparent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:clickable="true">
 
             <RelativeLayout
                 android:layout_width="100dp"
@@ -129,11 +126,10 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <TextView
+                <TextView style="@style/Text.XLarge"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Bank information"
-                    style="@style/Text.XLarge"
                     android:gravity="center_vertical"
                     android:textColor="@color/white"/>
             </RelativeLayout>

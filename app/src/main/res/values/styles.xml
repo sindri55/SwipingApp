@@ -6,10 +6,7 @@
     </style>
 
     <!-- Layouts -->
-    <style name="Layout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-    </style>
+    <style name="Layout"/>
 
     <style name="Layout.Background">
         <item name="android:background">@color/background_default</item>
@@ -26,17 +23,6 @@
         <item name="android:background">@drawable/button_transparent</item>
         <item name="android:textColor">@drawable/button_transparent_text</item>
         <item name="android:layout_marginTop">@dimen/button_transparent_margin_top10</item>
-    </style>
-
-    <!-- Images -->
-    <style name="Image">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="Image.Center">
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
     </style>
 
     <!-- Background Images -->
@@ -65,8 +51,6 @@
 
     <!-- Button styles -->
     <style name="Button">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/button_default</item>
         <item name="android:textColor">@color/button_default_text</item>
         <item name="android:gravity">center</item>
@@ -141,8 +125,6 @@
 
     <!-- Texts -->
     <style name="Text">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/text_default</item>
         <item name="android:textSize">@dimen/text_size_default</item>
     </style>

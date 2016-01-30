@@ -20,7 +20,10 @@
         <LinearLayout style="@style/Header.Login"
             android:id="@+id/header_container">
 
-            <ImageView style="@style/Image.Center"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:src="@drawable/android_logo"
                 android:contentDescription="@string/content_description_image_logo"/>
 
@@ -46,6 +49,8 @@
 
             <Button style="@style/Button.Transparent"
                 android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/activity_login_btn_login"/>
 
         </LinearLayout>
@@ -58,6 +63,8 @@
             android:layout_alignParentBottom="true">
 
             <TextView style="@style/Text.Small.Light.Clickable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/txt_register"
                 android:layout_gravity="center"
                 android:text="@string/activity_login_txt_create_account"/>
