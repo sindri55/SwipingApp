@@ -32,9 +32,13 @@
     <string name="fragment_payment_step_amount">Amount</string>
     <string name="fragment_payment_step_payment">Payment</string>
     <string name="fragment_payment_step_receipt">Receipt</string>
-    <string name="fragment_payment_btn_next">Next</string>
-    <string name="fragment_payment_label_amount">Amount</string>
-    <string name="fragment_payment_error_amount_missing">Please specify the amount</string>
+
+    <string name="fragment_payment_amount_btn_next">Next</string>
+    <string name="fragment_payment_amount_label_amount">Amount</string>
+    <string name="fragment_payment_amount_error_amount_missing">Please specify the amount</string>
+
+    <string name="fragment_payment_payment_txt_amount">Amount</string>
+    <string name="fragment_payment_payment_btn_pay">Pay</string>
 
     <!-- Drawer Items -->
     <string name="drawer_item_persistent_compact_header">PersistentHeader Drawer</string>

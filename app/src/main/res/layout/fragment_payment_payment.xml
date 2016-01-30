@@ -10,13 +10,13 @@
         android:layout_alignParentTop="true"
         android:weightSum="3">
 
-        <TextView style="@style/Text.StepIndicator.Active"
+        <TextView style="@style/Text.StepIndicator"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/fragment_payment_step_amount"/>
 
-        <TextView style="@style/Text.StepIndicator"
+        <TextView style="@style/Text.StepIndicator.Active"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -31,49 +31,42 @@
     </LinearLayout>
 
     <LinearLayout style="@style/Layout.Padding"
-        android:id="@+id/amount_form"
+        android:id="@+id/payment_form"
         android:orientation="vertical"
-        android:layout_above="@+id/amount_spinner_container"
-        android:layout_below="@+id/step_container">
+        android:layout_below="@+id/step_container"
+        android:layout_above="@+id/btn_container">
 
-        <LinearLayout
+        <TextView style="@style/Text.Large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView style="@style/InputBox.Label"
-                android:text="@string/fragment_payment_amount_label_amount" />
-
-            <com.example.swipingapp.customViews.input.InputAmount style="@style/InputBox.Value"
-                android:id="@+id/input_amount"
-                android:inputType="number"
-                android:cursorVisible="false"
-                android:layout_gravity="end"
-                android:textAlignment="textEnd"
-                android:textCursorDrawable="@null"
-                android:imeOptions="actionDone"/>
-
-        </LinearLayout>
-
-        <Button style="@style/Button"
-            android:id="@+id/btn_next"
-            android:text="@string/fragment_payment_amount_btn_next"/>
+            android:id="@+id/txt_amount"
+            android:gravity="center"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/amount_spinner_container"
+        android:id="@+id/btn_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:weightSum="2"
         android:layout_alignParentBottom="true">
 
-        <ListView
-            android:id="@+id/amount_spinner_list"
-            android:layout_width="match_parent"
+        <!-- The back button does not belong here -->
+        <Button style="@style/Button"
+            android:id="@+id/btn_back"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:choiceMode="none"
-            android:divider="@color/transparent"/>
+            android:layout_weight="1"
+            android:text="Back"/>
+
+        <Button style="@style/Button"
+            android:id="@+id/btn_pay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/fragment_payment_payment_btn_pay"/>
 
     </LinearLayout>
+
 </RelativeLayout>

@@ -27,9 +27,9 @@ public class CardInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
 
-        view = inflater.inflate(R.layout.fragment_payment_card_info, container, false);
+        return inflater.inflate(R.layout.fragment_payment_payment, container, false);
 
-        mNextButton = (Button) view.findViewById(R.id.btnPaymentNext);
+        /*mNextButton = (Button) view.findViewById(R.id.btnPaymentNext);
 
 
         mNextButton.setOnClickListener(new View.OnClickListener() {
@@ -46,10 +46,6 @@ public class CardInfoFragment extends Fragment {
             }
         });
 
-
-
-        return view;
-
-
+        return view;*/
     }
 }

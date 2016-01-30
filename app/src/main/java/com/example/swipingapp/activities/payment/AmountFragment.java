@@ -18,6 +18,7 @@ import com.example.swipingapp.customViews.input.InputAmount;
 import com.example.swipingapp.enums.Currency;
 import com.example.swipingapp.services.settings.ISettingsService;
 import com.example.swipingapp.services.settings.SettingsServiceStub;
+import com.example.swipingapp.viewModels.payment.PaymentViewModel;
 
 public class AmountFragment extends Fragment {
 
@@ -65,7 +66,7 @@ public class AmountFragment extends Fragment {
 
             return true;
         } else {
-            mInputAmountView.setError(getString(R.string.fragment_payment_error_amount_missing));
+            mInputAmountView.setError(getString(R.string.fragment_payment_amount_error_amount_missing));
             mInputAmountView.requestFocus();
 
             return false;
@@ -79,10 +80,12 @@ public class AmountFragment extends Fragment {
         public void onClick(View v) {
             if(mInputAmountView != null){
                 if(validateInputAmount()) {
+                    PaymentViewModel paymentViewModel = new PaymentViewModel(mInputAmountView.getAmount(), mCurrency);
+
                     // TODO: Fix so that only the main content slides, not the statusProcess properties 3 up
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                     fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-                    fragmentTransaction.replace(R.id.main_container, new CardInfoFragment());
+                    fragmentTransaction.replace(R.id.main_container, PaymentFragment.newInstance(paymentViewModel));
                     fragmentTransaction.commit();
                 }
             }
