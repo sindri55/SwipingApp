@@ -13,18 +13,18 @@ import android.widget.TextView;
 
 import com.example.swipingapp.R;
 import com.example.swipingapp.enums.Currency;
-import com.example.swipingapp.viewModels.payment.PaymentViewModel;
+import com.example.swipingapp.viewModels.payment.AmountViewModel;
 
 import java.text.NumberFormat;
 
 public class PaymentFragment extends Fragment {
 
     // Constants
-    private static final String ARG_PAYMENT_VIEW_MODEL = "paymentViewModel";
+    private static final String ARG_PAYMENT_VIEW_MODEL = "amountViewModel";
 
     // Properties
     private FragmentManager mFragmentManager;
-    private PaymentViewModel mPaymentViewModel;
+    private AmountViewModel mAmountViewModel;
 
     // UI references
     private TextView mAmountText;
@@ -34,11 +34,11 @@ public class PaymentFragment extends Fragment {
     // Constructors
     public PaymentFragment() {  }
 
-    public static PaymentFragment newInstance(PaymentViewModel paymentViewModel) {
+    public static PaymentFragment newInstance(AmountViewModel amountViewModel) {
         PaymentFragment fragment = new PaymentFragment();
         Bundle args = new Bundle();
 
-        args.putParcelable(ARG_PAYMENT_VIEW_MODEL, paymentViewModel);
+        args.putParcelable(ARG_PAYMENT_VIEW_MODEL, amountViewModel);
 
         fragment.setArguments(args);
         return fragment;
@@ -49,10 +49,10 @@ public class PaymentFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mPaymentViewModel = getArguments().getParcelable(ARG_PAYMENT_VIEW_MODEL);
+            mAmountViewModel = getArguments().getParcelable(ARG_PAYMENT_VIEW_MODEL);
         } else {
             // TODO: Handle more elegant
-            mPaymentViewModel = new PaymentViewModel(0, Currency.ICELANDIC_KRONA);
+            mAmountViewModel = new AmountViewModel(0, Currency.ICELANDIC_KRONA);
         }
 
         mFragmentManager = getFragmentManager();
@@ -72,8 +72,8 @@ public class PaymentFragment extends Fragment {
         mPayButton.setOnClickListener(new PayButtonClickListener());
 
         // TODO: This could use some refactoring...
-        NumberFormat formatter = NumberFormat.getCurrencyInstance(mPaymentViewModel.currency.getLocale());
-        String formattedAmount = formatter.format(mPaymentViewModel.amount);
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(mAmountViewModel.currency.getLocale());
+        String formattedAmount = formatter.format(mAmountViewModel.amount);
         String amountText = getString(R.string.fragment_payment_payment_txt_amount) + ": " + formattedAmount;
         mAmountText.setText(amountText);
 

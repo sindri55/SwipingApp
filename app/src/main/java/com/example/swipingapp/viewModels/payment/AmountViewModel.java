@@ -5,34 +5,33 @@ import android.os.Parcelable;
 
 import com.example.swipingapp.enums.Currency;
 
-public class PaymentViewModel implements Parcelable {
+public class AmountViewModel implements Parcelable {
 
     // Properties
     public double amount;
     public Currency currency;
-    public CreditCardViewModel creditCardViewModel;
 
     // Constructors
-    public PaymentViewModel(double amount, Currency currency) {
+    public AmountViewModel(double amount, Currency currency) {
         this.amount = amount;
         this.currency = currency;
     }
 
     // Parcelable
-    protected PaymentViewModel(Parcel in) {
+    protected AmountViewModel(Parcel in) {
         amount = in.readDouble();
         currency = (Currency) in.readSerializable();
     }
 
-    public static final Creator<PaymentViewModel> CREATOR = new Creator<PaymentViewModel>() {
+    public static final Creator<AmountViewModel> CREATOR = new Creator<AmountViewModel>() {
         @Override
-        public PaymentViewModel createFromParcel(Parcel in) {
-            return new PaymentViewModel(in);
+        public AmountViewModel createFromParcel(Parcel in) {
+            return new AmountViewModel(in);
         }
 
         @Override
-        public PaymentViewModel[] newArray(int size) {
-            return new PaymentViewModel[size];
+        public AmountViewModel[] newArray(int size) {
+            return new AmountViewModel[size];
         }
     };
 
