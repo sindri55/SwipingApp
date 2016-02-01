@@ -9,9 +9,7 @@
 
     <dimen name="activity_register_horizontal_margin">@dimen/activity_login_horizontal_margin</dimen>
     <dimen name="activity_register_vertical_margin">@dimen/activity_login_vertical_margin</dimen>
-    <dimen name="activity_register_header_layout_height">
-        @dimen/activity_login_header_layout_height
-    </dimen>
+    <dimen name="activity_register_header_layout_height">@dimen/activity_login_header_layout_height</dimen>
 
     <!-- Texts -->
     <dimen name="text_size_small">15sp</dimen>
@@ -19,9 +17,6 @@
     <dimen name="text_size_large">25sp</dimen>
     <dimen name="text_size_xLarge">30sp</dimen>
     <dimen name="text_size_xxLarge">35sp</dimen>
-
-
-
 
     <dimen name="text_step_indicator_padding">10dp</dimen>
     <dimen name="text_step_indicator_border_width">1dp</dimen>
@@ -54,11 +49,14 @@
     <!-- Input Box -->
     <dimen name="input_box_layout_height">55dp</dimen>
     <dimen name="input_box_text_size">@dimen/text_size_default</dimen>
+    <dimen name="input_box_margin_top">15dp</dimen>
     <dimen name="input_box_border_radius">2dp</dimen>
     <dimen name="input_box_border_width">2dp</dimen>
     <dimen name="input_box_border_width_negative">-2dp</dimen>
+
     <dimen name="input_box_label_padding_left">20dp</dimen>
     <dimen name="input_box_label_padding_right">@dimen/input_box_label_padding_left</dimen>
+
     <dimen name="input_box_value_padding_left">10dp</dimen>
     <dimen name="input_box_value_padding_right">@dimen/input_box_value_padding_left</dimen>
 </resources>

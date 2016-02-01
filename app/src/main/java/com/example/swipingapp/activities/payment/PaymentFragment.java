@@ -66,10 +66,10 @@ public class PaymentFragment extends Fragment {
 
         mAmountText = (TextView) view.findViewById(R.id.txt_amount);
         mBackButton = (Button) view.findViewById(R.id.btn_back);
-        mPayButton = (Button) view.findViewById(R.id.btn_pay);
+        mPayButton = (Button) view.findViewById(R.id.btn_confirm_payment);
 
         mBackButton.setOnClickListener(new BackButtonClickListener());
-        mPayButton.setOnClickListener(new PayButtonClickListener());
+        mPayButton.setOnClickListener(new ConfirmPaymentButtonClickListener());
 
         // TODO: This could use some refactoring...
         NumberFormat formatter = NumberFormat.getCurrencyInstance(mAmountViewModel.currency.getLocale());
@@ -93,7 +93,7 @@ public class PaymentFragment extends Fragment {
     }
 
     // Listeners
-    private class PayButtonClickListener implements Button.OnClickListener {
+    private class ConfirmPaymentButtonClickListener implements Button.OnClickListener {
 
         @Override
         public void onClick(View v) {

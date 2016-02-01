@@ -107,18 +107,20 @@
     <style name="InputBox">
         <item name="android:layout_height">@dimen/input_box_layout_height</item>
         <item name="android:textSize">@dimen/input_box_text_size</item>
+        <item name="android:layout_marginTop">@dimen/input_box_margin_top</item>
     </style>
     <style name="InputBox.Label">
-        <item name="android:layout_width">wrap_content</item>
         <item name="android:background">@drawable/input_box_label</item>
-        <item name="android:gravity">center</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/input_box_label_text</item>
         <item name="android:paddingLeft">@dimen/input_box_label_padding_left</item>
         <item name="android:paddingRight">@dimen/input_box_label_padding_right</item>
     </style>
     <style name="InputBox.Value">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:gravity">center_vertical</item>
         <item name="android:background">@drawable/input_box_value</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:textColor">@color/input_box_value_text</item>
         <item name="android:paddingRight">@dimen/input_box_value_padding_right</item>
         <item name="android:paddingLeft">@dimen/input_box_value_padding_left</item>
     </style>

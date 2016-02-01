@@ -5,7 +5,7 @@
 
     <!-- Basic colors -->
     <color name="white">#ffffff</color>
-    <color name="whiteish">#f5f5f5</color>
+    <color name="whitish">#f5f5f5</color>
 
     <color name="blackish">#373a3c</color>
 
@@ -19,7 +19,7 @@
     <color name="gray_dark">#aaaaaa</color>
     <color name="gray_darker">#888888</color>
 
-    <color name="red">#ffffff</color>
+    <color name="red">#c9302c</color>
 
     <color name="transparent">#00000000</color>
     <color name="transparent_black_90">#1a000000</color>    <!-- 90% transparent black -->
@@ -76,7 +76,9 @@
     <!-- Input Box -->
     <color name="input_box_border">@color/gray_light</color>
     <color name="input_box_label_background">@color/gray_lighter</color>
-    <color name="input_box_value_background">@color/whiteish</color>
+    <color name="input_box_label_text">@color/black_lighter</color>
+    <color name="input_box_value_background">@color/whitish</color>
+    <color name="input_box_value_text">@color/black</color>
 
     <!-- Backgrounds -->
     <color name="background_default">@color/orange_dark</color>

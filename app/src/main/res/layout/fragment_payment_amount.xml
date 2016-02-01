@@ -44,15 +44,18 @@
             android:orientation="horizontal">
 
             <TextView style="@style/InputBox.Label"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="0dp"
                 android:text="@string/fragment_payment_amount_label_amount" />
 
             <com.example.swipingapp.customViews.input.InputAmount style="@style/InputBox.Value"
                 android:id="@+id/input_amount"
+                android:layout_width="match_parent"
+                android:layout_marginTop="0dp"
                 android:inputType="number"
                 android:cursorVisible="false"
                 android:layout_gravity="end"
                 android:textAlignment="textEnd"
-                android:textCursorDrawable="@null"
                 android:imeOptions="actionDone"/>
 
         </LinearLayout>
@@ -61,7 +64,7 @@
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_payment_amount_btn_next"/>
+            android:text="@string/fragment_payment_amount_btn_payment"/>
 
     </LinearLayout>
 
