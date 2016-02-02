@@ -8,10 +8,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.swipingapp.R;
+import com.example.swipingapp.customViews.input.InputCardNumber;
 import com.example.swipingapp.enums.Currency;
 import com.example.swipingapp.viewModels.payment.AmountViewModel;
 
@@ -28,6 +32,12 @@ public class PaymentFragment extends Fragment {
 
     // UI references
     private TextView mAmountText;
+    private EditText mCardholderInput;
+    private InputCardNumber mCardNumberInput;
+    private EditText mCVCInput;
+    private Spinner mExpireMonthSpinner;
+    private Spinner mExpireYearSpinner;
+
     private Button mBackButton;
     private Button mPayButton;
 
@@ -65,11 +75,25 @@ public class PaymentFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_payment_payment, container, false);
 
         mAmountText = (TextView) view.findViewById(R.id.txt_amount);
+        mCardholderInput = (EditText) view.findViewById(R.id.input_cardholder);
+        mCardNumberInput = (InputCardNumber) view.findViewById(R.id.input_card_number);
+        mCVCInput = (EditText) view.findViewById(R.id.input_cvc);
+        mExpireMonthSpinner = (Spinner) view.findViewById(R.id.spinner_expire_month);
+        mExpireYearSpinner = (Spinner) view.findViewById(R.id.spinner_expire_year);
         mBackButton = (Button) view.findViewById(R.id.btn_back);
         mPayButton = (Button) view.findViewById(R.id.btn_confirm_payment);
 
         mBackButton.setOnClickListener(new BackButtonClickListener());
         mPayButton.setOnClickListener(new ConfirmPaymentButtonClickListener());
+
+        // TODO: Refactor spinners
+        ArrayAdapter<CharSequence> expireMonthAdapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.months_array, R.layout.input_box_spinner_item);
+        expireMonthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mExpireMonthSpinner.setAdapter(expireMonthAdapter);
+
+        ArrayAdapter<CharSequence> expireYearAdapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.years_array, R.layout.input_box_spinner_item);
+        expireYearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mExpireYearSpinner.setAdapter(expireYearAdapter);
 
         // TODO: This could use some refactoring...
         NumberFormat formatter = NumberFormat.getCurrencyInstance(mAmountViewModel.currency.getLocale());

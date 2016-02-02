@@ -41,6 +41,7 @@
     <string name="fragment_payment_payment_btn_confirm_payment">Confirm Payment</string>
     <string name="fragment_payment_payment_label_cardholder">Cardholder</string>
     <string name="fragment_payment_payment_label_card_number">Card number</string>
+    <string name="fragment_payment_payment_label_expire_date">Expire date</string>
     <string name="fragment_payment_payment_label_cvc">CVC</string>
 
     <!-- Drawer Items -->
