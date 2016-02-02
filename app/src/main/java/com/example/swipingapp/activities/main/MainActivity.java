@@ -55,16 +55,6 @@ public class MainActivity extends FragmentActivity{
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-/*
-
-        CardInfoFragment cardInfoFragment = new CardInfoFragment();
-        // Add the fragment to the 'fragment_container' FrameLayout
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, cardInfoFragment).commit();
-
-
-*/
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.add(R.id.main_container, new AmountFragment());
