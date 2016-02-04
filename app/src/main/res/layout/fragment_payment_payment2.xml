@@ -39,81 +39,77 @@
         android:layout_above="@+id/btn_container">
 
         <TextView style="@style/Text.Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/txt_amount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:gravity="center"/>
-
-        <LinearLayout style="@style/FormGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView style="@style/FormControl.Label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/fragment_payment_payment_label_cardholder"/>
-
-            <EditText style="@style/FormControl.Value"
-                android:id="@+id/input_cardholder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textCapWords"/>
-
-        </LinearLayout>
-
-        <LinearLayout style="@style/FormGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView style="@style/FormControl.Label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/fragment_payment_payment_label_card_number"/>
-
-            <com.example.swipingapp.customViews.input.InputCardNumber style="@style/FormControl.Value"
-                android:id="@+id/input_card_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"/>
-
-        </LinearLayout>
-
-        <LinearLayout style="@style/FormGroup"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView style="@style/FormControl.Label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/fragment_payment_payment_label_cvc"/>
-
-            <EditText style="@style/FormControl.Value"
-                android:id="@+id/input_cvc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"/>
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/spinner_expire_month"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <Spinner
-                android:id="@+id/spinner_expire_year"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"/>
+                android:orientation="vertical">
+
+                <TextView style="@style/InputBox.Label"
+                    android:layout_width="match_parent"
+                    android:text="@string/fragment_payment_payment_label_cardholder"/>
+
+                <TextView style="@style/InputBox.Label"
+                    android:layout_width="match_parent"
+                    android:text="@string/fragment_payment_payment_label_card_number"/>
+
+                <TextView style="@style/InputBox.Label"
+                    android:layout_width="match_parent"
+                    android:text="@string/fragment_payment_payment_label_expire_date"/>
+
+                <TextView style="@style/InputBox.Label"
+                    android:layout_width="match_parent"
+                    android:text="@string/fragment_payment_payment_label_cvc"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText style="@style/InputBox.Value"
+                    android:id="@+id/input_cardholder"
+                    android:layout_width="match_parent"
+                    android:inputType="textCapWords"/>
+
+                <com.example.swipingapp.customViews.input.InputCardNumber style="@style/InputBox.Value"
+                    android:id="@+id/input_card_number"
+                    android:layout_width="match_parent"
+                    android:inputType="number"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Spinner style="@style/InputBox.Value"
+                        android:id="@+id/spinner_expire_month"
+                        android:layout_width="wrap_content"/>
+
+                    <Spinner style="@style/InputBox.Value"
+                        android:id="@+id/spinner_expire_year"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"/>
+                </LinearLayout>
+
+                <EditText style="@style/InputBox.Value"
+                    android:id="@+id/input_cvc"
+                    android:layout_width="100dp"
+                    android:inputType="number"/>
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <!-- The back button does not belong here -->

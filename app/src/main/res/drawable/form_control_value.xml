@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:right="@dimen/form_control_value_border_width_negative"
+        android:left="@dimen/form_control_value_border_width_negative"
+        android:bottom="@dimen/form_control_value_border_width_negative">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/form_control_value_background"/>
+            <stroke
+                android:width="@dimen/form_control_value_border_width"
+                android:color="@color/form_control_value_border"/>
+        </shape>
+    </item>
+</layer-list>

@@ -130,6 +130,30 @@
         <item name="android:paddingLeft">@dimen/input_box_value_padding_left</item>
     </style>
 
+    <!-- Form group -->
+    <style name="FormGroup">
+        <item name="android:layout_marginTop">@dimen/form_group_margin_top</item>
+    </style>
+
+    <!-- Form control -->
+    <style name="FormControl">
+    </style>
+    <style name="FormControl.Label">
+        <item name="android:textSize">@dimen/form_control_label_text_size</item>
+        <item name="android:textColor">@color/form_control_label_text</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:paddingBottom">@dimen/form_control_label_padding_bottom</item>
+    </style>
+    <style name="FormControl.Value">
+        <item name="android:background">@drawable/form_control_value</item>
+        <item name="android:textSize">@dimen/form_control_value_text_size</item>
+        <item name="android:textColor">@color/form_control_value_text</item>
+        <item name="android:textColorHint">@color/form_control_value_hint</item>
+        <item name="android:padding">@dimen/form_control_value_padding</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
     <!-- Texts -->
     <style name="Text">
         <item name="android:textColor">@color/text_default</item>

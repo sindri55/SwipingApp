@@ -35,8 +35,11 @@
     <!-- Company color (test) -->
     <color name="green_dark">#089524</color>
     <color name="green_light">#1bbf60</color>
-    <color name="blue_dark">#1546ff</color>
+
     <color name="blue_light">#3d3fff</color>
+    <color name="blue">#3e50b4</color>
+    <color name="blue_dark">#1546ff</color>
+
     <color name="orange_dark">#ff4c17</color>
     <color name="orange_light">#ff7226</color>
 
@@ -79,6 +82,13 @@
     <color name="input_box_label_text">@color/black_lighter</color>
     <color name="input_box_value_background">@color/whitish</color>
     <color name="input_box_value_text">@color/black</color>
+
+    <!-- Form control -->
+    <color name="form_control_label_text">@color/blue</color>
+    <color name="form_control_value_text">@color/black</color>
+    <color name="form_control_value_hint">@color/gray_darker</color>
+    <color name="form_control_value_background">@color/whitish</color>
+    <color name="form_control_value_border">@color/blue</color>
 
     <!-- Backgrounds -->
     <color name="background_default">@color/orange_dark</color>
