@@ -50,8 +50,8 @@
     <dimen name="form_group_margin_top">15dp</dimen>
 
     <!-- Form control -->
-    <dimen name="form_control_label_padding_bottom">2dp</dimen>
-    <dimen name="form_control_label_text_size">@dimen/text_size_default</dimen>
+    <dimen name="form_control_label_padding_bottom">1dp</dimen>
+    <dimen name="form_control_label_text_size">@dimen/text_size_small</dimen>
     <dimen name="form_control_value_padding">10dp</dimen>
     <dimen name="form_control_value_text_size">@dimen/text_size_default</dimen>
     <dimen name="form_control_value_border_width">4dp</dimen>
