@@ -75,12 +75,12 @@ public class MainActivity extends FragmentActivity{
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
-                .withHeaderBackground(R.drawable.profile_background_image)
+                .withHeaderBackground(R.drawable.background_account_header)
                 .addProfiles(
                         new ProfileDrawerItem().withName("Sindri Þór").
                                 withEmail("55@55.is").
                                 withIcon(getResources().
-                                        getDrawable(R.drawable.ic_launcher))
+                                        getDrawable(R.mipmap.ic_launcher))
                 )
 
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
@@ -101,26 +101,26 @@ public class MainActivity extends FragmentActivity{
                         item1.withName("Make a transaction")
                                 .withBadge("4")
                                 .withDescriptionTextColor(getResources().getColor(R.color.green_dark))
-                                .withIcon(getResources().getDrawable(R.drawable.ic_launcher)
+                                .withIcon(getResources().getDrawable(R.mipmap.ic_launcher)
                                 )
                                 .withBadgeStyle(new BadgeStyle()
                                         .withTextColor(Color.WHITE)
                                         .withColorRes(R.color.md_red_700)),
                         new DividerDrawerItem(),
                         item5.withName("Profile")
-                                .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
+                                .withIcon(getResources().getDrawable(R.mipmap.ic_launcher))
                                 .withDescription("description"),
                         new DividerDrawerItem(),
 
                         item2.withName("History")
-                                .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
+                                .withIcon(getResources().getDrawable(R.mipmap.ic_launcher))
 
                                 .withTextColor(getResources().getColor(R.color.blue_dark)),
                         new DividerDrawerItem(),
 
                         item3.withName("Settings")
                                 .withDescription("Hægt að leika sér endalaust með þetta")
-                                .withIcon(getResources().getDrawable(R.drawable.ic_launcher))
+                                .withIcon(getResources().getDrawable(R.mipmap.ic_launcher))
 
                                 .withBadge("Item")
                                 .withBadgeStyle(new BadgeStyle()
