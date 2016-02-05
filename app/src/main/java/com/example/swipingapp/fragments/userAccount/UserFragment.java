@@ -1,4 +1,4 @@
-package com.example.swipingapp.activities.userAccount;
+package com.example.swipingapp.fragments.userAccount;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

@@ -1,4 +1,4 @@
-package com.example.swipingapp.activities.payment;
+package com.example.swipingapp.fragments.payment;
 
 
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.swipingapp.activities.userAccount;
+package com.example.swipingapp.fragments.userAccount;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
