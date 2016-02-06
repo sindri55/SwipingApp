@@ -44,14 +44,21 @@
     <color name="orange_light">#ff7226</color>
 
     <!-- Buttons -->
-    <color name="button_default_background">@color/gray_light</color>
-    <color name="button_default_background_pressed">@color/gray</color>
-    <color name="button_default_background_disabled">@color/gray_dark</color>
-    <color name="button_default_text">@color/blackish</color>
-    <color name="button_default_text_disabled">@color/black_light</color>
-    <color name="button_default_border">@color/gray</color>
-    <color name="button_default_border_pressed">@color/gray_dark</color>
-    <color name="button_default_border_disabled">@color/gray_darker</color>
+    <color name="button_default_background">#e6e6e6</color>
+    <color name="button_default_background_pressed">#d4d4d4</color>
+    <color name="button_default_background_disabled">#ffffff</color>
+    <color name="button_default_text">#373a3c</color>
+    <color name="button_default_border">#adadad</color>
+    <color name="button_default_border_pressed">#8c8c8c</color>
+    <color name="button_default_border_disabled">#cccccc</color>
+    
+    <color name="button_success_background">#449d44</color>
+    <color name="button_success_background_pressed">#398439</color>
+    <color name="button_success_background_disabled">#5cb85c</color>
+    <color name="button_success_text">@color/white</color>
+    <color name="button_success_border">#419641</color>
+    <color name="button_success_border_pressed">#2d672d</color>
+    <color name="button_success_border_disabled">#5cb85c</color>
 
     <color name="button_transparent_background">@color/transparent_black_90</color>
     <color name="button_transparent_background_pressed">@color/transparent_black_80</color>
@@ -70,8 +77,8 @@
     <color name="button_amount_spinner_text">@color/black_lighter</color>
 
     <!-- Inputs -->
-    <color name="input_text">@color/black</color>
-    <color name="input_text_hint">@color/gray_darker</color>
+    <color name="input_text">#55595c</color>
+    <color name="input_text_hint">@color/gray_dark</color>
 
     <color name="input_transparent_text">@color/white</color>
     <color name="input_transparent_text_hint">@color/gray</color>
@@ -81,12 +88,13 @@
     <color name="input_box_label_background">@color/gray_lighter</color>
     <color name="input_box_label_text">@color/black_lighter</color>
     <color name="input_box_value_background">@color/whitish</color>
-    <color name="input_box_value_text">@color/black</color>
+    <color name="input_box_value_text">@color/input_text</color>
+    <color name="input_box_value_text_hint">@color/input_text_hint</color>
 
     <!-- Form control -->
     <color name="form_control_label_text">@color/orange_dark</color>
-    <color name="form_control_value_text">@color/black</color>
-    <color name="form_control_value_hint">@color/gray_darker</color>
+    <color name="form_control_value_text">@color/input_text</color>
+    <color name="form_control_value_hint">@color/input_text_hint</color>
     <color name="form_control_value_background">@color/whitish</color>
     <color name="form_control_value_border">@color/orange_dark</color>
 

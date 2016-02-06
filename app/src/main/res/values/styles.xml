@@ -58,6 +58,10 @@
         <item name="android:textSize">@dimen/button_text_size_default</item>
         <item name="android:layout_marginTop">@dimen/button_margin_top</item>
     </style>
+    <style name="Button.Success">
+        <item name="android:background">@drawable/button_success</item>
+        <item name="android:textColor">@color/button_success_text</item>
+    </style>
 
     <style name="Button.Transparent">
         <item name="android:background">@drawable/button_transparent</item>
@@ -120,6 +124,7 @@
         <item name="android:background">@drawable/input_box_value</item>
         <item name="android:textCursorDrawable">@null</item>
         <item name="android:textColor">@color/input_box_value_text</item>
+        <item name="android:textColorHint">@color/input_box_value_text_hint</item>
         <item name="android:paddingRight">@dimen/input_box_value_padding_right</item>
         <item name="android:paddingLeft">@dimen/input_box_value_padding_left</item>
     </style>

@@ -131,7 +131,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
 
-        <Button style="@style/Button"
+        <Button style="@style/Button.Success"
             android:id="@+id/btn_confirm_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
