@@ -5,10 +5,14 @@ import com.example.swipingapp.exceptions.NotImplementedException;
 
 public class UserService implements IUserService {
 
-    // Properties
+    // region Properties
+
     private static IUserService mInstance;
 
-    // Get instance (Singleton)
+    // endregion
+
+    // region Get instance (Singleton)
+
     public static IUserService getInstance() {
         if(mInstance == null) {
             mInstance = new UserService();
@@ -17,9 +21,14 @@ public class UserService implements IUserService {
         return mInstance;
     }
 
-    // Override functions
+    // endregion
+
+    // region Override functions
+
     @Override
     public UserDTO getUser(int userId) {
         throw new NotImplementedException();
     }
+
+    // endregion
 }

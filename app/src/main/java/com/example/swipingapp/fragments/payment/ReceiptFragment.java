@@ -1,6 +1,5 @@
 package com.example.swipingapp.fragments.payment;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,17 +13,25 @@ import com.example.swipingapp.R;
 
 public class ReceiptFragment extends Fragment {
 
-    // Properties
+    // region Properties
     private FragmentManager mFragmentManager;
 
-    // UI references
+    // endregion
+
+    // region UI references
+
     private View view;
     private Button mButton;
     private Button mBackButton;
 
-    // Constructors
+    // endregion
 
-    // Override functions
+    // region Constructors
+
+    // endregion
+
+    // region Override functions
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -54,7 +61,10 @@ public class ReceiptFragment extends Fragment {
         return view;
     }
 
-    // Listeners
+    // endregion
+
+    // region Listeners
+
     private class BackButtonClickListener implements Button.OnClickListener {
 
         @Override
@@ -65,4 +75,6 @@ public class ReceiptFragment extends Fragment {
             fragmentTransaction.commit();
         }
     }
+
+    // endregion
 }

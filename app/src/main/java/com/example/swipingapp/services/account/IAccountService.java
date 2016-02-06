@@ -5,7 +5,10 @@ import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
 public interface IAccountService {
 
-    // Functions
+    // region Public functions
+
     boolean login(LoginViewModel model);
     boolean register(RegisterViewModel model);
+
+    // endregion
 }

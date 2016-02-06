@@ -16,13 +16,17 @@ import java.util.ArrayList;
 
 public class AmountSpinnerAdapter extends BaseAdapter {
 
-    // Properties
+    // region Properties
+
     private Context mContext;
     private ArrayList<Integer> mValues;
     private Currency mCurrency;
     private IAmountSpinnerListener mAmountListener;
 
-    // Constructors
+    // endregion
+
+    // region Constructors
+
     public AmountSpinnerAdapter(Context context, Currency currency, IAmountSpinnerListener amountListener) {
         mContext = context;
         mCurrency = currency;
@@ -31,7 +35,10 @@ public class AmountSpinnerAdapter extends BaseAdapter {
         mValues = currency.getAmountSpinnerValues();
     }
 
-    // Override functions
+    // endregion
+
+    // region Override functions
+
     @Override
     public int getCount() {
         return mValues.size();
@@ -72,7 +79,10 @@ public class AmountSpinnerAdapter extends BaseAdapter {
         return convertView;
     }
 
-    // Listeners
+    // endregion
+
+    // region Listeners
+
     private class AmountButtonClickListener implements Button.OnClickListener {
 
         // Properties
@@ -101,4 +111,6 @@ public class AmountSpinnerAdapter extends BaseAdapter {
             }
         }
     }
+
+    // endregion
 }

@@ -4,10 +4,14 @@ import com.example.swipingapp.DTOs.UserDTO;
 
 public class UserServiceStub implements IUserService {
 
-    // Properties
+    // region Properties
+
     private static IUserService mInstance;
 
-    // Get instance (Singleton)
+    // endregion
+
+    // region Get instance (Singleton)
+
     public static IUserService getInstance() {
         if(mInstance == null) {
             mInstance = new UserServiceStub();
@@ -16,7 +20,10 @@ public class UserServiceStub implements IUserService {
         return mInstance;
     }
 
-    // Override functions
+    // endregion
+
+    // region Override functions
+
     @Override
     public UserDTO getUser(int userId) {
         // Simulate network access, sleep for 2 seconds
@@ -30,4 +37,6 @@ public class UserServiceStub implements IUserService {
         // Return static user
         return new UserDTO(1, "Sindri Þór", "sindri@55.is");
     }
+
+    // endregion
 }

@@ -1,6 +1,5 @@
 package com.example.swipingapp.fragments.payment;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,18 +21,25 @@ import com.example.swipingapp.viewModels.payment.AmountViewModel;
 
 public class AmountFragment extends Fragment {
 
-    // Properties
+    // region Properties
+
     private IAmountSpinnerListener mAmountListener;
     private ISettingsService mSettingsService;
     private FragmentManager mFragmentManager;
     private Currency mCurrency;
 
-    // UI references
+    // endregion
+
+    // region UI references
+
     private InputAmount mInputAmountView;
     private Button mNextButton;
     private ListView mAmountSpinnerList;
 
-    // Override functions
+    // endregion
+
+    // region Override functions
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -57,7 +63,10 @@ public class AmountFragment extends Fragment {
         return view;
     }
 
-    // Private functions
+    // endregion
+
+    // region Private functions
+
     private boolean validateInputAmount() {
         double amount = mInputAmountView.getAmount();
 
@@ -73,7 +82,10 @@ public class AmountFragment extends Fragment {
         }
     }
 
-    // Listeners
+    // endregion
+
+    // region Listeners
+
     private class NextButtonClickListener implements Button.OnClickListener {
 
         @Override
@@ -118,4 +130,6 @@ public class AmountFragment extends Fragment {
             mInputAmountView.setError(null);
         }
     }
+
+    // endregion
 }

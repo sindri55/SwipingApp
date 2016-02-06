@@ -5,11 +5,15 @@ import java.util.Locale;
 
 public enum Currency {
 
-    // Values
+    // region Values
+
     ICELANDIC_KRONA,
     US_DOLLAR;
 
-    // Public functions
+    // endregion
+
+    // region Public functions
+
     public Locale getLocale() {
         switch (this) {
             case ICELANDIC_KRONA:
@@ -43,4 +47,6 @@ public enum Currency {
 
         return values;
     }
+
+    // endregion
 }

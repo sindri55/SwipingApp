@@ -2,13 +2,19 @@ package com.example.swipingapp.viewModels.account;
 
 public class LoginViewModel {
 
-    // Properties
+    // region Properties
+
     public String email;
     public String password;
 
-    // Constructors
+    // endregion
+
+    // region Constructors
+
     public LoginViewModel(String email, String password){
         this.email = email;
         this.password = password;
     }
+
+    // endregion
 }

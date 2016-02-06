@@ -23,14 +23,21 @@ import java.text.NumberFormat;
 
 public class PaymentFragment extends Fragment {
 
-    // Constants
+    // region Constants
+
     private static final String ARG_PAYMENT_VIEW_MODEL = "amountViewModel";
 
-    // Properties
+    // endregion
+
+    // region Properties
+
     private FragmentManager mFragmentManager;
     private AmountViewModel mAmountViewModel;
 
-    // UI references
+    // endregion
+
+    // region UI references
+
     private TextView mAmountText;
     private EditText mCardholderInput;
     private InputCardNumber mCardNumberInput;
@@ -41,7 +48,10 @@ public class PaymentFragment extends Fragment {
     private Button mBackButton;
     private Button mPayButton;
 
-    // Constructors
+    // endregion
+
+    // region Constructors
+
     public PaymentFragment() {  }
 
     public static PaymentFragment newInstance(AmountViewModel amountViewModel) {
@@ -54,7 +64,10 @@ public class PaymentFragment extends Fragment {
         return fragment;
     }
 
-    // Override functions
+    // endregion
+
+    // region Override functions
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +129,10 @@ public class PaymentFragment extends Fragment {
         // Detach listeners, etc.
     }
 
-    // Listeners
+    // endregion
+
+    // region Listeners
+
     private class ConfirmPaymentButtonClickListener implements Button.OnClickListener {
 
         @Override
@@ -138,4 +154,6 @@ public class PaymentFragment extends Fragment {
             fragmentTransaction.commit();
         }
     }
+
+    // endregion
 }

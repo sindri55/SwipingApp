@@ -6,12 +6,18 @@ import android.widget.EditText;
 
 public class InputCardNumber extends EditText {
 
-    // Properties
+    // region Properties
 
-    // UI references
+    // endregion
+
+    // region UI references
+
     private InputCardNumber mInputCardNumberView;
 
-    // Constructors
+    // endregion
+
+    // region Constructors
+
     public InputCardNumber(Context context) {
         super(context);
         initialize();
@@ -27,10 +33,15 @@ public class InputCardNumber extends EditText {
         initialize();
     }
 
-    // Initialize
+    // endregion
+
+    // region Initialize
+
     private void initialize() {
         mInputCardNumberView = this;
     }
+
+    // endregion
 
     // TODO: Format credit card number, and more stuff
 }

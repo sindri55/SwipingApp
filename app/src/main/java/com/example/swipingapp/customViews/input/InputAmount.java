@@ -15,7 +15,8 @@ import java.text.NumberFormat;
 
 public class InputAmount extends EditText {
 
-    // Properties
+    // region Properties
+
     private double mAmount;
     private String mDigits;
     private String mFormattedString;
@@ -24,10 +25,16 @@ public class InputAmount extends EditText {
     private NumberFormat mFormatter;
     private Currency mCurrency;
 
-    // UI references
+    // endregion
+
+    // region UI references
+
     private InputAmount mInputAmountView;
 
-    // Constructors
+    // endregion
+
+    // region Constructors
+
     public InputAmount(Context context) {
         super(context);
         initialize();
@@ -43,7 +50,10 @@ public class InputAmount extends EditText {
         initialize();
     }
 
-    // Initialize
+    // endregion
+
+    // region Initialize
+
     private void initialize() {
         mAmount = 0;
         mDigits = "0";
@@ -60,7 +70,10 @@ public class InputAmount extends EditText {
         mInputAmountView.addTextChangedListener(new InputAmountTextChangedListener());
     }
 
-    // Public functions
+    // endregion
+
+    // region Public functions
+
     public double getAmount() {
         return mAmount;
     }
@@ -84,7 +97,10 @@ public class InputAmount extends EditText {
         updateView();
     }
 
-    // Private functions
+    // endregion
+
+    // region Private functions
+
     private void updateView() {
         mFormattedString = mFormatter.format(mAmount) + " ";    // TODO: Find solution to hack (spacing for error popup)
         mDigits = mFormattedString.replaceAll("\\D", "");
@@ -93,7 +109,10 @@ public class InputAmount extends EditText {
         mInputAmountView.setSelection(mFormattedString.length() - 1);
     }
 
-    // Listeners
+    // endregion
+
+    // region Listeners
+
     private class InputAmountClickListener implements EditText.OnClickListener {
 
         @Override
@@ -140,4 +159,6 @@ public class InputAmount extends EditText {
         @Override
         public void afterTextChanged(Editable s) {  }
     }
+
+    // endregion
 }

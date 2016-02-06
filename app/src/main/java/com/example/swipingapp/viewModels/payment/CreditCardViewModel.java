@@ -2,14 +2,18 @@ package com.example.swipingapp.viewModels.payment;
 
 public class CreditCardViewModel {
 
-    // Properties
+    // region Properties
+
     public String cardholder;
     public String cardNumber;
     public String expireMonth;
     public String expireYear;
     public String CVC;
 
-    // Constructors
+    // endregion
+
+    // region Constructors
+
     public CreditCardViewModel(String cardholder, String cardNumber, String expireMonth, String expireYear, String CVC) {
         this.cardholder = cardholder;
         this.cardNumber = cardNumber;
@@ -17,4 +21,6 @@ public class CreditCardViewModel {
         this.expireYear = expireYear;
         this.CVC = CVC;
     }
+
+    // endregion
 }

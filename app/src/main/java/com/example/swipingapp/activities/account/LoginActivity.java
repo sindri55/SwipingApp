@@ -20,20 +20,25 @@ import com.example.swipingapp.viewModels.account.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
-    // Properties
+    // region Properties
+
     private IAccountService mAccountService;
     private UserLoginTask mUserLoginTask = null;
     final Context mContext = this;
 
-    // UI references
+    // endregion
+
+    // region UI references
+
     private EditText mEmailView;
     private EditText mPasswordView;
     private Button mLoginButton;
     private TextView mRegisterText;
 
+    // endregion
 
+    // region Override functions
 
-    // Override functions
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +55,10 @@ public class LoginActivity extends AppCompatActivity {
         mRegisterText.setOnClickListener(new RegisterTextClickListener());
     }
 
-    // Functions
+    // endregion
+
+    // region Private functions
+
     private void UpdateButtonState(final boolean enabled) {
         mLoginButton.setEnabled(enabled);
 
@@ -61,7 +69,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    // Listeners
+    // endregion
+
+    // region Listeners
+
     private class LoginButtonClickListener implements Button.OnClickListener {
 
         @Override
@@ -97,7 +108,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    // Async tasks
+    // endregion
+
+    // region Async tasks
+
     private class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         // Properties
@@ -155,4 +169,6 @@ public class LoginActivity extends AppCompatActivity {
             UpdateButtonState(true);
         }
     }
+
+    // endregion
 }

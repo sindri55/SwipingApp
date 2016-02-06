@@ -7,17 +7,24 @@ import com.example.swipingapp.enums.Currency;
 
 public class AmountViewModel implements Parcelable {
 
-    // Properties
+    // region Properties
+
     public double amount;
     public Currency currency;
 
-    // Constructors
+    // endregion
+
+    // region Constructors
+
     public AmountViewModel(double amount, Currency currency) {
         this.amount = amount;
         this.currency = currency;
     }
 
-    // Parcelable
+    // endregion
+
+    // region Parcelable
+
     protected AmountViewModel(Parcel in) {
         amount = in.readDouble();
         currency = (Currency) in.readSerializable();
@@ -45,4 +52,6 @@ public class AmountViewModel implements Parcelable {
         dest.writeDouble(amount);
         dest.writeSerializable(currency);
     }
+
+    // endregion
 }

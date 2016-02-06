@@ -21,12 +21,16 @@ import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    // Properties
+    // region Properties
+
     private IAccountService mAccountService;
     private UserRegisterTask mUserRegisterTask = null;
     final Context mContext = this;
 
-    // UI references
+    // endregion
+
+    // region UI references
+
     private EditText mFullNameView;
     private EditText mEmailView;
     private EditText mPasswordView;
@@ -34,7 +38,10 @@ public class RegisterActivity extends AppCompatActivity {
     private Button mSignUpButton;
     private TextView mTermsAndConditionsText;
 
-    // Override functions
+    // endregion
+
+    // region Override functions
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +60,10 @@ public class RegisterActivity extends AppCompatActivity {
         mTermsAndConditionsText.setOnClickListener(new TermsAndConditionsTextClickListener());
     }
 
-    // Functions
+    // endregion
+
+    // region Private functions
+
     private void UpdateButtonState(final boolean enabled) {
         mSignUpButton.setEnabled(enabled);
 
@@ -64,7 +74,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    // Listeners
+    // endregion
+
+    // region Listeners
+
     private class SignUpButtonClickListener implements Button.OnClickListener {
 
         @Override
@@ -102,7 +115,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    // Async tasks
+    // endregion
+
+    // region Async tasks
+
     private class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
 
         // Properties
@@ -159,4 +175,6 @@ public class RegisterActivity extends AppCompatActivity {
             UpdateButtonState(true);
         }
     }
+
+    // endregion
 }

@@ -5,10 +5,14 @@ import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
 public class AccountServiceStub implements IAccountService {
 
-    // Properties
+    // region Properties
+
     private static IAccountService mInstance;
 
-    // Functions
+    // endregion
+
+    // region Get instance (Singleton)
+
     public static IAccountService getInstance() {
         if(mInstance == null) {
             mInstance = new AccountServiceStub();
@@ -17,7 +21,10 @@ public class AccountServiceStub implements IAccountService {
         return mInstance;
     }
 
-    // Override functions
+    // endregion
+
+    // region Override functions
+
     @Override
     public boolean login(LoginViewModel model) {
 
@@ -43,7 +50,10 @@ public class AccountServiceStub implements IAccountService {
             e.printStackTrace();
             return false;
         }
+
         // Just always return true for now
         return true;
     }
+
+    // endregion
 }

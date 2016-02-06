@@ -22,25 +22,29 @@ import android.widget.LinearLayout;
 
 import com.example.swipingapp.R;
 
-/**
- * Created by Sindri on 24/01/16.
- */
 public class UserFragment extends Fragment {
 
-    // Properties
+    // region Properties
+
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
-    // UI references
+    // endregion
+
+    // region UI references
+
     private View view;
     private Button mButton;
     private LinearLayout profileBtn, settingsBtn, bankBtn;
 
-    // Constructors
+    // endregion
 
+    // region Constructors
 
+    // endregion
 
-    // Override functions
+    // region Override functions
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -96,6 +100,9 @@ public class UserFragment extends Fragment {
         return view;
     }
 
+    // endregion
+
+    // region Private functions
 
     private Bitmap getCircleBitmap(Bitmap bitmap) {
         final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
@@ -119,4 +126,6 @@ public class UserFragment extends Fragment {
 
         return output;
     }
+
+    // endregion
 }

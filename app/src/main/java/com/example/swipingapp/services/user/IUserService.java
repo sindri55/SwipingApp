@@ -4,6 +4,9 @@ import com.example.swipingapp.DTOs.UserDTO;
 
 public interface IUserService {
 
-    // Public functions
+    // region Public functions
+
     UserDTO getUser(int userId);
+
+    // endregion
 }

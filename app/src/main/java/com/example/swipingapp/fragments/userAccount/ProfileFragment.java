@@ -11,21 +11,28 @@ import android.widget.ImageView;
 
 import com.example.swipingapp.R;
 
-/**
- * Created by Sindri on 26/01/16.
- */
 public class ProfileFragment extends Fragment {
 
-    // Properties
+    // region Properties
+
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-    // UI references
+
+    // endregion
+
+    // region UI references
+
     private View view;
     private ImageView backBtn;
-    // Constructors
 
+    // endregion
 
-    // Override functions
+    // region Constructors
+
+    // endregion
+
+    // region Override functions
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +53,7 @@ public class ProfileFragment extends Fragment {
         });
 
         return view;
-
     }
+
+    // endregion
 }
