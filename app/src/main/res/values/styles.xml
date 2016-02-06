@@ -158,6 +158,12 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textCursorDrawable">@null</item>
     </style>
+    <style name="FormControl.DropdownItem">
+        <item name="android:textColor">@color/form_control_value_text</item>
+        <item name="android:textSize">@dimen/form_control_value_text_size</item>
+        <item name="android:padding">@dimen/form_control_value_padding</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
 
     <!-- Texts -->
     <style name="Text">

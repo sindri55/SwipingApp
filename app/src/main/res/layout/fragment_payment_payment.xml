@@ -80,6 +80,49 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout style="@style/FormGroup"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView style="@style/FormControl.Label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_payment_payment_label_expire_month"/>
+
+                <com.example.swipingapp.customViews.spinner.CustomSpinner style="@style/FormControl.Value"
+                    android:id="@+id/spinner_expire_month"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/FormGroup"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp">
+
+                <TextView style="@style/FormControl.Label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_payment_payment_label_expire_year"/>
+
+                <com.example.swipingapp.customViews.spinner.CustomSpinner style="@style/FormControl.Value"
+                    android:id="@+id/spinner_expire_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
         <LinearLayout style="@style/FormGroup"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
@@ -96,24 +139,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"/>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/spinner_expire_month"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <Spinner
-                android:id="@+id/spinner_expire_year"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"/>
         </LinearLayout>
 
         <!-- The back button does not belong here -->
