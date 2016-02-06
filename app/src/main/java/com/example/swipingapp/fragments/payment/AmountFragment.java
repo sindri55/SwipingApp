@@ -1,5 +1,6 @@
 package com.example.swipingapp.fragments.payment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,12 +22,19 @@ import com.example.swipingapp.viewModels.payment.AmountViewModel;
 
 public class AmountFragment extends Fragment {
 
+    // region Constants
+
+    private static final String ARG_AMOUNT = "amount";
+
+    // endregion
+
     // region Properties
 
     private IAmountSpinnerListener mAmountListener;
     private ISettingsService mSettingsService;
     private FragmentManager mFragmentManager;
     private Currency mCurrency;
+    private double mAmount;
 
     // endregion
 
@@ -38,7 +46,43 @@ public class AmountFragment extends Fragment {
 
     // endregion
 
+    // region Constructors
+
+    public AmountFragment() {  }
+
+    public static AmountFragment newInstance() {
+        return new AmountFragment();
+    }
+
+    public static AmountFragment newInstance(double amount) {
+        AmountFragment fragment = new AmountFragment();
+        Bundle args = new Bundle();
+
+        args.putDouble(ARG_AMOUNT, amount);
+
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    // endregion
+
     // region Override functions
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mAmount = getArguments().getDouble(ARG_AMOUNT);
+        } else {
+            // TODO: Handle more elegant
+            mAmount = 0;
+        }
+
+        mFragmentManager = getFragmentManager();
+        mAmountListener = new AmountSpinnerListener();
+        mSettingsService = SettingsServiceStub.getInstance();
+        mCurrency = mSettingsService.getUserCurrency();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,14 +90,13 @@ public class AmountFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_payment_amount, container, false);
 
-        mAmountListener = new AmountSpinnerListener();
-        mSettingsService = SettingsServiceStub.getInstance();
-        mFragmentManager = getFragmentManager();
-        mCurrency = mSettingsService.getUserCurrency();
-
         mInputAmountView = (InputAmount) view.findViewById(R.id.input_amount);
         mNextButton = (Button) view.findViewById(R.id.btn_next);
         mAmountSpinnerList = (ListView) view.findViewById(R.id.amount_spinner_list);
+
+        if(mAmount > 0) {
+            mInputAmountView.setAmount(mAmount);
+        }
 
         mNextButton.setOnClickListener(new NextButtonClickListener());
 
@@ -61,6 +104,18 @@ public class AmountFragment extends Fragment {
         mAmountSpinnerList.setAdapter(amountSpinnerAdapter);
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        // Attach listeners, etc.
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        // Detach listeners, etc.
     }
 
     // endregion

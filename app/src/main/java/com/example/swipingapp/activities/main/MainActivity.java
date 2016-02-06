@@ -75,7 +75,7 @@ public class MainActivity extends FragmentActivity{
         mUserService = UserServiceStub.getInstance();
         mFragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = mFragmentManager.beginTransaction();
-        ft.add(R.id.fragment_container, new AmountFragment());
+        ft.add(R.id.fragment_container, AmountFragment.newInstance());
         ft.commit();
 
         mToolbarView = (Toolbar) findViewById(R.id.toolbar);

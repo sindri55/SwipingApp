@@ -25,7 +25,7 @@ public class PaymentFragment extends Fragment {
 
     // region Constants
 
-    private static final String ARG_PAYMENT_VIEW_MODEL = "amountViewModel";
+    private static final String ARG_AMOUNT_VIEW_MODEL = "amountViewModel";
 
     // endregion
 
@@ -58,7 +58,7 @@ public class PaymentFragment extends Fragment {
         PaymentFragment fragment = new PaymentFragment();
         Bundle args = new Bundle();
 
-        args.putParcelable(ARG_PAYMENT_VIEW_MODEL, amountViewModel);
+        args.putParcelable(ARG_AMOUNT_VIEW_MODEL, amountViewModel);
 
         fragment.setArguments(args);
         return fragment;
@@ -72,7 +72,7 @@ public class PaymentFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mAmountViewModel = getArguments().getParcelable(ARG_PAYMENT_VIEW_MODEL);
+            mAmountViewModel = getArguments().getParcelable(ARG_AMOUNT_VIEW_MODEL);
         } else {
             // TODO: Handle more elegant
             mAmountViewModel = new AmountViewModel(0, Currency.ICELANDIC_KRONA);
@@ -150,7 +150,7 @@ public class PaymentFragment extends Fragment {
         public void onClick(View v) {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-            fragmentTransaction.replace(R.id.fragment_container, new AmountFragment());
+            fragmentTransaction.replace(R.id.fragment_container, AmountFragment.newInstance(mAmountViewModel.amount));
             fragmentTransaction.commit();
         }
     }
