@@ -39,7 +39,7 @@ public class BankInformationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-                fragmentTransaction.replace(R.id.main_container, new UserFragment());
+                fragmentTransaction.replace(R.id.fragment_container, new UserFragment());
                 fragmentTransaction.commit();
             }
         });

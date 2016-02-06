@@ -65,7 +65,7 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-                fragmentTransaction.replace(R.id.main_container, new ProfileFragment());
+                fragmentTransaction.replace(R.id.fragment_container, new ProfileFragment());
                 fragmentTransaction.commit();
             }
         });
@@ -74,7 +74,7 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-                fragmentTransaction.replace(R.id.main_container, new SettingsFragment());
+                fragmentTransaction.replace(R.id.fragment_container, new SettingsFragment());
                 fragmentTransaction.commit();
             }
         });
@@ -83,7 +83,7 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-                fragmentTransaction.replace(R.id.main_container, new BankInformationFragment());
+                fragmentTransaction.replace(R.id.fragment_container, new BankInformationFragment());
                 fragmentTransaction.commit();
             }
         });

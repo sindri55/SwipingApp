@@ -123,7 +123,7 @@ public class PaymentFragment extends Fragment {
         public void onClick(View v) {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-            fragmentTransaction.replace(R.id.main_container, new ReceiptFragment());
+            fragmentTransaction.replace(R.id.fragment_container, new ReceiptFragment());
             fragmentTransaction.commit();
         }
     }
@@ -134,7 +134,7 @@ public class PaymentFragment extends Fragment {
         public void onClick(View v) {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-            fragmentTransaction.replace(R.id.main_container, new AmountFragment());
+            fragmentTransaction.replace(R.id.fragment_container, new AmountFragment());
             fragmentTransaction.commit();
         }
     }

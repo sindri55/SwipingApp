@@ -44,7 +44,7 @@ public class ReceiptFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_top);
-                fragmentTransaction.replace(R.id.main_container, new AmountFragment());
+                fragmentTransaction.replace(R.id.fragment_container, new AmountFragment());
                 fragmentTransaction.commit();
 
 
@@ -61,7 +61,7 @@ public class ReceiptFragment extends Fragment {
         public void onClick(View v) {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-            fragmentTransaction.replace(R.id.main_container, new PaymentFragment());
+            fragmentTransaction.replace(R.id.fragment_container, new PaymentFragment());
             fragmentTransaction.commit();
         }
     }

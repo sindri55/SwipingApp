@@ -85,7 +85,7 @@ public class AmountFragment extends Fragment {
                     // TODO: Fix so that only the main content slides, not the step indicators, attach them to the header layout?
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                     fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-                    fragmentTransaction.replace(R.id.main_container, PaymentFragment.newInstance(amountViewModel));
+                    fragmentTransaction.replace(R.id.fragment_container, PaymentFragment.newInstance(amountViewModel));
                     fragmentTransaction.commit();
                 }
             }
