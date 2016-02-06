@@ -26,7 +26,7 @@
     <dimen name="button_text_size_large">@dimen/text_size_large</dimen>
     <dimen name="button_text_size_xLarge">@dimen/text_size_xLarge</dimen>
     <dimen name="button_margin_top">15dp</dimen>
-    <dimen name="button_corner_radius">2dp</dimen>
+    <dimen name="button_corner_radius">3dp</dimen>
     <dimen name="button_border_width">1dp</dimen>
 
     <dimen name="button_transparent_margin_top25">25dp</dimen>
@@ -54,7 +54,7 @@
     <dimen name="form_control_label_text_size">@dimen/text_size_small</dimen>
     <dimen name="form_control_value_padding">10dp</dimen>
     <dimen name="form_control_value_text_size">@dimen/text_size_default</dimen>
-    <dimen name="form_control_value_border_width">4dp</dimen>
+    <dimen name="form_control_value_border_width">3dp</dimen>
     <dimen name="form_control_value_border_width_negative">-2dp</dimen>
 
     <!-- Input Box -->
