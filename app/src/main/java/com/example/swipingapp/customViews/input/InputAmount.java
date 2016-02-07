@@ -1,6 +1,7 @@
 package com.example.swipingapp.customViews.input;
 
 import android.content.Context;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -12,6 +13,7 @@ import com.example.swipingapp.services.settings.ISettingsService;
 import com.example.swipingapp.services.settings.SettingsServiceStub;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
 
 public class InputAmount extends EditText {
 
@@ -72,6 +74,25 @@ public class InputAmount extends EditText {
 
     // endregion
 
+    // region Override functions
+
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        super.onRestoreInstanceState(state);
+
+        String text = getText().toString();
+        if(text.length() > 0) {
+            try {
+                mAmount = mFormatter.parse(text).doubleValue();
+                updateView();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // endregion
+
     // region Public functions
 
     public double getAmount() {
@@ -103,7 +124,7 @@ public class InputAmount extends EditText {
 
     private void updateView() {
         mFormattedString = mFormatter.format(mAmount) + " ";    // TODO: Find solution to hack (spacing for error popup)
-        mDigits = mFormattedString.replaceAll("\\D", "");
+        mDigits = mFormattedString.replaceAll("\\D", "");       // TODO: This will not work for $ (where , is used)
 
         mInputAmountView.setText(mFormattedString);
         mInputAmountView.setSelection(mFormattedString.length() - 1);

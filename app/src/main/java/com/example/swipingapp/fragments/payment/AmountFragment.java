@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -16,20 +18,23 @@ import com.example.swipingapp.customViews.amountSpinner.AmountSpinnerAdapter;
 import com.example.swipingapp.customViews.amountSpinner.IAmountSpinnerListener;
 import com.example.swipingapp.customViews.input.InputAmount;
 import com.example.swipingapp.enums.Currency;
+import com.example.swipingapp.listeners.IFragmentListener;
 import com.example.swipingapp.services.settings.ISettingsService;
 import com.example.swipingapp.services.settings.SettingsServiceStub;
+import com.example.swipingapp.utils.FragmentUtils;
 import com.example.swipingapp.viewModels.payment.AmountViewModel;
 
 public class AmountFragment extends Fragment {
 
     // region Constants
 
-    private static final String ARG_AMOUNT = "amount";
+    public static final String TAG = AmountFragment.class.getSimpleName();
 
     // endregion
 
     // region Properties
 
+    private IFragmentListener mFragmentListener;
     private IAmountSpinnerListener mAmountListener;
     private ISettingsService mSettingsService;
     private FragmentManager mFragmentManager;
@@ -50,20 +55,6 @@ public class AmountFragment extends Fragment {
 
     public AmountFragment() {  }
 
-    public static AmountFragment newInstance() {
-        return new AmountFragment();
-    }
-
-    public static AmountFragment newInstance(double amount) {
-        AmountFragment fragment = new AmountFragment();
-        Bundle args = new Bundle();
-
-        args.putDouble(ARG_AMOUNT, amount);
-
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     // endregion
 
     // region Override functions
@@ -71,13 +62,8 @@ public class AmountFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mAmount = getArguments().getDouble(ARG_AMOUNT);
-        } else {
-            // TODO: Handle more elegant
-            mAmount = 0;
-        }
 
+        mAmount = 0;
         mFragmentManager = getFragmentManager();
         mAmountListener = new AmountSpinnerListener();
         mSettingsService = SettingsServiceStub.getInstance();
@@ -109,13 +95,27 @@ public class AmountFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // Attach listeners, etc.
+        if(context instanceof IFragmentListener) {
+            mFragmentListener = (IFragmentListener) context;
+        } else {
+            Log.e("onAttach", "context not instance of IFragmentListener");
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        // Detach listeners, etc.
+        mFragmentListener = null;
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        if (FragmentUtils.sDisableFragmentAnimations) {
+            Animation a = new Animation() {};
+            a.setDuration(0);
+            return a;
+        }
+        return super.onCreateAnimation(transit, enter, nextAnim);
     }
 
     // endregion
@@ -151,8 +151,9 @@ public class AmountFragment extends Fragment {
 
                     // TODO: Fix so that only the main content slides, not the step indicators, attach them to the header layout?
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-                    fragmentTransaction.replace(R.id.fragment_container, PaymentFragment.newInstance(amountViewModel));
+                    fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_in_left, R.anim.slide_out_right);
+                    fragmentTransaction.replace(R.id.fragment_container, PaymentFragment.newInstance(amountViewModel), PaymentFragment.TAG);
+                    fragmentTransaction.addToBackStack(PaymentFragment.TAG);
                     fragmentTransaction.commit();
                 }
             }

@@ -141,13 +141,6 @@
 
         </LinearLayout>
 
-        <!-- The back button does not belong here -->
-        <Button style="@style/Button"
-            android:id="@+id/btn_back"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Back"/>
-
     </LinearLayout>
 
     <LinearLayout style="@style/Layout.Padding"

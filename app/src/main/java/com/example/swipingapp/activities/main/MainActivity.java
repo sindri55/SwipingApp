@@ -1,14 +1,14 @@
 package com.example.swipingapp.activities.main;
 
-import android.content.Context;
 import android.content.Intent;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.example.swipingapp.DTOs.UserDTO;
@@ -17,9 +17,10 @@ import com.example.swipingapp.activities.account.LoginActivity;
 import com.example.swipingapp.enums.DrawerItem;
 import com.example.swipingapp.fragments.userAccount.UserFragment;
 import com.example.swipingapp.fragments.payment.AmountFragment;
+import com.example.swipingapp.listeners.IFragmentListener;
 import com.example.swipingapp.services.user.IUserService;
 import com.example.swipingapp.services.user.UserServiceStub;
-import com.mikepenz.iconics.context.IconicsContextWrapper;
+import com.example.swipingapp.utils.FragmentUtils;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -31,21 +32,18 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import java.util.ArrayList;
 
-public class MainActivity extends FragmentActivity{
-
-    // region Constants
-
-    private static String TAG = MainActivity.class.getSimpleName();
-
-    // endregion
+public class MainActivity extends AppCompatActivity implements IFragmentListener, FragmentManager.OnBackStackChangedListener {
 
     // region Properties
 
+    private View.OnClickListener mNavigationOriginalClickListener;
+    private View.OnClickListener mNavigationBackButtonClickListener;
     private IUserService mUserService;
     private FragmentManager mFragmentManager;
     private Drawer mDrawer;
     private ArrayList<PrimaryDrawerItem> mDrawerItems;
     private AccountHeader mDrawerAccountHeader;
+    private boolean mShowNavigationBackButton;
 
     // endregion
 
@@ -58,13 +56,12 @@ public class MainActivity extends FragmentActivity{
     // region Override functions
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(IconicsContextWrapper.wrap(newBase));
-    }
-
-    @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if(mFragmentManager.getBackStackEntryCount() > 0 && mShowNavigationBackButton) {
+            mFragmentManager.popBackStack();
+        } else {
+            selectItem(DrawerItem.MAKE_TRANSACTION.getIdentifier());
+        }
     }
 
     @Override
@@ -72,15 +69,19 @@ public class MainActivity extends FragmentActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mShowNavigationBackButton = true;
         mUserService = UserServiceStub.getInstance();
         mFragmentManager = getSupportFragmentManager();
-        FragmentTransaction ft = mFragmentManager.beginTransaction();
-        ft.add(R.id.fragment_container, AmountFragment.newInstance());
-        ft.commit();
+        mNavigationBackButtonClickListener = new NavigationBackButtonClickListener();
 
         mToolbarView = (Toolbar) findViewById(R.id.toolbar);
+        mToolbarView.setTitle("");  // TODO: Set title for each fragment
+        setSupportActionBar(mToolbarView);
+
+        mFragmentManager.addOnBackStackChangedListener(this);
 
         initializeDrawer();
+        selectItem(DrawerItem.MAKE_TRANSACTION.getIdentifier());
     }
 
     // endregion
@@ -104,6 +105,8 @@ public class MainActivity extends FragmentActivity{
         }
 
         mDrawer.addStickyFooterItem(DrawerItem.LOG_OUT.getDrawerItem());
+
+        mNavigationOriginalClickListener = mDrawer.getActionBarDrawerToggle().getToolbarNavigationClickListener();
     }
 
     private void setAccountHeader() {
@@ -134,13 +137,17 @@ public class MainActivity extends FragmentActivity{
 
         DrawerItem drawerItem = DrawerItem.getEnum(id);
         if(drawerItem != null) {
+            // Clear the back stack
+            clearBackStack();
+            mShowNavigationBackButton = true;
+
             switch (drawerItem){
                 case MAKE_TRANSACTION:
-                    ft.replace(R.id.fragment_container, new AmountFragment(), TAG);
+                    ft.replace(R.id.fragment_container, new AmountFragment(), AmountFragment.TAG);
                     ft.commit();
                     break;
                 case PROFILE:
-                    ft.replace(R.id.fragment_container, new UserFragment(), TAG);
+                    ft.replace(R.id.fragment_container, new UserFragment(), UserFragment.TAG);
                     ft.commit();
                     break;
                 case HISTORY:
@@ -158,6 +165,61 @@ public class MainActivity extends FragmentActivity{
         }
     }
 
+    private void clearBackStack() {
+        FragmentUtils.sDisableFragmentAnimations = true;
+        mFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        FragmentUtils.sDisableFragmentAnimations = false;
+    }
+
+    // endregion
+
+    // region OnBackStackChangedListener
+
+    @Override
+    public void onBackStackChanged() {
+        if(mFragmentManager.getBackStackEntryCount() > 0 && mShowNavigationBackButton) {
+            mDrawer.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+            if(getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            } else {
+                Log.e("getSupportActionBar", "null exception");
+            }
+
+            // Change the navigation listener
+            mToolbarView.setNavigationOnClickListener(mNavigationBackButtonClickListener);
+        } else {
+            // Show the hamburger icon
+            if(getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            } else {
+                Log.e("getSupportActionBar", "null exception");
+            }
+            mDrawer.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+
+            // Change the navigation listener to the original one
+            mToolbarView.setNavigationOnClickListener(mNavigationOriginalClickListener);
+        }
+    }
+
+    // endregion
+
+    // region IFragmentListener
+
+    @Override
+    public void setShowNavigationBackButton(boolean show) {
+        mShowNavigationBackButton = show;
+        /*// Show the hamburger icon
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        } else {
+            Log.e("getSupportActionBar", "null exception");
+        }
+        mDrawer.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+
+        // Change the navigation listener to the original one
+        mToolbarView.setNavigationOnClickListener(mNavigationOriginalClickListener);*/
+    }
+
     // endregion
 
     // region Listeners
@@ -171,6 +233,15 @@ public class MainActivity extends FragmentActivity{
                 mDrawer.closeDrawer();
             }
             return true;
+        }
+    }
+
+    private class NavigationBackButtonClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            // TODO: Set title or some?
+            mFragmentManager.popBackStack();
         }
     }
 

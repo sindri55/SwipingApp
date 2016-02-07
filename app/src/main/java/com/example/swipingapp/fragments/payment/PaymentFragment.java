@@ -5,9 +5,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,22 +19,25 @@ import com.example.swipingapp.R;
 import com.example.swipingapp.customViews.input.InputCardNumber;
 import com.example.swipingapp.customViews.spinner.CustomSpinner;
 import com.example.swipingapp.enums.Currency;
+import com.example.swipingapp.listeners.IFragmentListener;
+import com.example.swipingapp.utils.FragmentUtils;
 import com.example.swipingapp.viewModels.payment.AmountViewModel;
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class PaymentFragment extends Fragment {
 
     // region Constants
 
+    public static final String TAG = PaymentFragment.class.getSimpleName();
     private static final String ARG_AMOUNT_VIEW_MODEL = "amountViewModel";
 
     // endregion
 
     // region Properties
 
+    private IFragmentListener mFragmentListener;
     private FragmentManager mFragmentManager;
     private AmountViewModel mAmountViewModel;
 
@@ -47,7 +52,6 @@ public class PaymentFragment extends Fragment {
     private CustomSpinner mExpireMonthSpinner;
     private CustomSpinner mExpireYearSpinner;
 
-    private Button mBackButton;
     private Button mPayButton;
 
     // endregion
@@ -95,10 +99,8 @@ public class PaymentFragment extends Fragment {
         mCVCInput = (EditText) view.findViewById(R.id.input_cvc);
         mExpireMonthSpinner = (CustomSpinner) view.findViewById(R.id.spinner_expire_month);
         mExpireYearSpinner = (CustomSpinner) view.findViewById(R.id.spinner_expire_year);
-        mBackButton = (Button) view.findViewById(R.id.btn_back);
         mPayButton = (Button) view.findViewById(R.id.btn_confirm_payment);
 
-        mBackButton.setOnClickListener(new BackButtonClickListener());
         mPayButton.setOnClickListener(new ConfirmPaymentButtonClickListener());
 
         ArrayAdapter<CharSequence> expireMonthAdapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.months_array, R.layout.custom_spinner_dropdown_item);
@@ -119,13 +121,27 @@ public class PaymentFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // Attach listeners, etc.
+        if(context instanceof IFragmentListener) {
+            mFragmentListener = (IFragmentListener) context;
+        } else {
+            Log.e("onAttach", "context not instance of IFragmentListener");
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        // Detach listeners, etc.
+        mFragmentListener = null;
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        if (FragmentUtils.sDisableFragmentAnimations) {
+            Animation a = new Animation() {};
+            a.setDuration(0);
+            return a;
+        }
+        return super.onCreateAnimation(transit, enter, nextAnim);
     }
 
     // endregion
@@ -154,18 +170,8 @@ public class PaymentFragment extends Fragment {
         public void onClick(View v) {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-            fragmentTransaction.replace(R.id.fragment_container, new ReceiptFragment());
-            fragmentTransaction.commit();
-        }
-    }
-
-    private class BackButtonClickListener implements Button.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-            fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-            fragmentTransaction.replace(R.id.fragment_container, AmountFragment.newInstance(mAmountViewModel.amount));
+            fragmentTransaction.replace(R.id.fragment_container, new ReceiptFragment(), ReceiptFragment.TAG);
+            fragmentTransaction.addToBackStack(ReceiptFragment.TAG);
             fragmentTransaction.commit();
         }
     }

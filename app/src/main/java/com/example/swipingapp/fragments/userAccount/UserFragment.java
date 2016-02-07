@@ -24,6 +24,12 @@ import com.example.swipingapp.R;
 
 public class UserFragment extends Fragment {
 
+    // region Constants
+
+    public static final String TAG = UserFragment.class.getSimpleName();
+
+    // endregion
+
     // region Properties
 
     private FragmentManager fragmentManager;
