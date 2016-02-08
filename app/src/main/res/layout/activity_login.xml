@@ -8,13 +8,9 @@
         android:src="@drawable/background_login"
         android:contentDescription="@string/content_description_image_background"/>
 
-    <RelativeLayout
+    <RelativeLayout style="@style/Layout.Padding.Large"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_login_vertical_margin"
-        android:paddingLeft="@dimen/activity_login_horizontal_margin"
-        android:paddingRight="@dimen/activity_login_horizontal_margin"
-        android:paddingTop="@dimen/activity_login_vertical_margin"
         tools:context=".activities.account.LoginActivity">
 
         <LinearLayout style="@style/Header.Login"

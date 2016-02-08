@@ -1,4 +1,4 @@
-package com.example.swipingapp.fragments.userAccount;
+package com.example.swipingapp.fragments.profile;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,42 +10,30 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.swipingapp.R;
+import com.example.swipingapp.fragments.base.BaseFragment;
 
-public class UserFragment extends Fragment {
+public class ProfileFragment extends BaseFragment {
 
     // region Constants
 
-    public static final String TAG = UserFragment.class.getSimpleName();
-
-    // endregion
+    public static final String TAG = ProfileFragment.class.getSimpleName();
 
     // region Properties
-
-    private FragmentManager fragmentManager;
-    private FragmentTransaction fragmentTransaction;
 
     // endregion
 
     // region UI references
 
-    private View view;
-    private Button mButton;
-    private LinearLayout profileBtn, settingsBtn, bankBtn;
-
-    // endregion
-
-    // region Constructors
+    private LinearLayout mProfileSettingsButton;
+    private LinearLayout mBankInformationButton;
 
     // endregion
 
@@ -54,56 +42,52 @@ public class UserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        view = inflater.inflate(R.layout.fragment_user, container, false);
+        super.onCreateView(inflater, container, savedInstanceState);
 
+        View view = inflater.inflate(R.layout.fragment_profile_profile, container, false);
 
         // create bitmap from resource
         Bitmap bm = BitmapFactory.decodeResource(getResources(),
                 R.drawable.sindri);
 
         //binding
-        profileBtn = (LinearLayout) view.findViewById(R.id.profileBtn);
-        settingsBtn = (LinearLayout) view.findViewById(R.id.settingsBtn);
-        bankBtn = (LinearLayout) view.findViewById(R.id.bankBtn);
+        mProfileSettingsButton = (LinearLayout) view.findViewById(R.id.btn_profile_settings);
+        mBankInformationButton = (LinearLayout) view.findViewById(R.id.btn_bank_information);
 
-        fragmentManager = getFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-
-
-        // Set clicklistener
-        profileBtn.setOnClickListener(new View.OnClickListener() {
+        // TODO: Refactor
+        // Set click listener
+        mProfileSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-                fragmentTransaction.replace(R.id.fragment_container, new ProfileFragment());
-                fragmentTransaction.commit();
+                FragmentTransaction ft = mFragmentManager.beginTransaction();
+                ft.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_in_left, R.anim.slide_out_right);
+                ft.replace(R.id.fragment_container, new ProfileSettingsFragment(), ProfileSettingsFragment.TAG);
+                ft.addToBackStack(ProfileSettingsFragment.TAG);
+                ft.commit();
             }
         });
 
-        settingsBtn.setOnClickListener(new View.OnClickListener() {
+        mBankInformationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-                fragmentTransaction.replace(R.id.fragment_container, new SettingsFragment());
-                fragmentTransaction.commit();
+                FragmentTransaction ft = mFragmentManager.beginTransaction();
+                ft.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_in_left, R.anim.slide_out_right);
+                ft.replace(R.id.fragment_container, new BankInformationFragment(), BankInformationFragment.TAG);
+                ft.addToBackStack(BankInformationFragment.TAG);
+                ft.commit();
             }
         });
-
-        bankBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-                fragmentTransaction.replace(R.id.fragment_container, new BankInformationFragment());
-                fragmentTransaction.commit();
-            }
-        });
-
 
         // set circle bitmap
-        ImageView mImage = (ImageView) view.findViewById(R.id.image);
+        ImageView mImage = (ImageView) view.findViewById(R.id.image_profile);
         mImage.setImageBitmap(getCircleBitmap(bm));
 
         return view;
+    }
+
+    @Override
+    public String getTitle() {
+        return getString(R.string.fragment_profile_profile_title);
     }
 
     // endregion

@@ -15,8 +15,10 @@ import com.example.swipingapp.DTOs.UserDTO;
 import com.example.swipingapp.R;
 import com.example.swipingapp.activities.account.LoginActivity;
 import com.example.swipingapp.enums.DrawerItem;
-import com.example.swipingapp.fragments.userAccount.UserFragment;
+import com.example.swipingapp.fragments.history.HistoryFragment;
+import com.example.swipingapp.fragments.profile.ProfileFragment;
 import com.example.swipingapp.fragments.payment.AmountFragment;
+import com.example.swipingapp.fragments.settings.SettingsFragment;
 import com.example.swipingapp.listeners.IFragmentListener;
 import com.example.swipingapp.services.user.IUserService;
 import com.example.swipingapp.services.user.UserServiceStub;
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
         mNavigationBackButtonClickListener = new NavigationBackButtonClickListener();
 
         mToolbarView = (Toolbar) findViewById(R.id.toolbar);
-        mToolbarView.setTitle("");  // TODO: Set title for each fragment
+        mToolbarView.setTitle("");
         setSupportActionBar(mToolbarView);
 
         mFragmentManager.addOnBackStackChangedListener(this);
@@ -105,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
         }
 
         mDrawer.addStickyFooterItem(DrawerItem.LOG_OUT.getDrawerItem());
+        if(mDrawerItems != null && mDrawerItems.size() > 0) {
+            mDrawer.setSelection(mDrawerItems.get(0));
+        }
 
         mNavigationOriginalClickListener = mDrawer.getActionBarDrawerToggle().getToolbarNavigationClickListener();
     }
@@ -147,14 +152,16 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
                     ft.commit();
                     break;
                 case PROFILE:
-                    ft.replace(R.id.fragment_container, new UserFragment(), UserFragment.TAG);
+                    ft.replace(R.id.fragment_container, new ProfileFragment(), ProfileFragment.TAG);
                     ft.commit();
                     break;
                 case HISTORY:
-                    // TODO: Create fragment
+                    ft.replace(R.id.fragment_container, new HistoryFragment(), HistoryFragment.TAG);
+                    ft.commit();
                     break;
                 case SETTINGS:
-                    // TODO: Create fragment
+                    ft.replace(R.id.fragment_container, new SettingsFragment(), SettingsFragment.TAG);
+                    ft.commit();
                     break;
 
                 case LOG_OUT:
@@ -178,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
     @Override
     public void onBackStackChanged() {
         if(mFragmentManager.getBackStackEntryCount() > 0 && mShowNavigationBackButton) {
+            // Show back arrow
             mDrawer.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
             if(getSupportActionBar() != null) {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -208,16 +216,11 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
     @Override
     public void setShowNavigationBackButton(boolean show) {
         mShowNavigationBackButton = show;
-        /*// Show the hamburger icon
-        if(getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        } else {
-            Log.e("getSupportActionBar", "null exception");
-        }
-        mDrawer.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+    }
 
-        // Change the navigation listener to the original one
-        mToolbarView.setNavigationOnClickListener(mNavigationOriginalClickListener);*/
+    @Override
+    public void setNavigationTitle(String title) {
+        mToolbarView.setTitle(title);
     }
 
     // endregion

@@ -33,10 +33,12 @@
     <string name="fragment_payment_step_payment">Payment</string>
     <string name="fragment_payment_step_receipt">Receipt</string>
 
+    <string name="fragment_payment_amount_title">Select Amount</string>
     <string name="fragment_payment_amount_btn_payment">Payment</string>
     <string name="fragment_payment_amount_label_amount">Amount</string>
     <string name="fragment_payment_amount_error_amount_missing">Please specify the amount</string>
 
+    <string name="fragment_payment_payment_title">Payment</string>
     <string name="fragment_payment_payment_txt_amount">Amount</string>
     <string name="fragment_payment_payment_btn_confirm_payment">Confirm Payment</string>
     <string name="fragment_payment_payment_label_cardholder">Cardholder</string>
@@ -44,6 +46,20 @@
     <string name="fragment_payment_payment_label_expire_month">Exp. month</string>
     <string name="fragment_payment_payment_label_expire_year">Exp. year</string>
     <string name="fragment_payment_payment_label_cvc">CVC</string>
+
+    <string name="fragment_payment_receipt_title">Receipt</string>
+
+    <!-- Profile fragments -->
+    <string name="fragment_profile_profile_title">Profile</string>
+
+    <string name="fragment_profile_profile_settings_title">Profile Settings</string>
+    <string name="fragment_profile_bank_information_title">Bank Information</string>
+
+    <!-- History fragments -->
+    <string name="fragment_history_history_title">History</string>
+
+    <!-- Settings fragments -->
+    <string name="fragment_settings_settings_title">Settings</string>
 
     <!-- Drawer Items -->
     <string name="drawer_item_name_make_transaction">Make a Transaction</string>

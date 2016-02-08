@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/Layout.Background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/step_container"
@@ -30,9 +30,17 @@
 
     </LinearLayout>
 
-    <TextView style="@style/Text.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Receipt..."/>
+    <LinearLayout style="@style/Layout.Padding"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/step_container">
 
-</LinearLayout>
+        <TextView style="@style/Text.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Receipt..."/>
+
+    </LinearLayout>
+
+</RelativeLayout>

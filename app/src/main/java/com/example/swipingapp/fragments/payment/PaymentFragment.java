@@ -1,15 +1,10 @@
 package com.example.swipingapp.fragments.payment;
 
-import android.support.v4.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,14 +14,13 @@ import com.example.swipingapp.R;
 import com.example.swipingapp.customViews.input.InputCardNumber;
 import com.example.swipingapp.customViews.spinner.CustomSpinner;
 import com.example.swipingapp.enums.Currency;
-import com.example.swipingapp.listeners.IFragmentListener;
-import com.example.swipingapp.utils.FragmentUtils;
+import com.example.swipingapp.fragments.base.BaseFragment;
 import com.example.swipingapp.viewModels.payment.AmountViewModel;
 
 import java.text.NumberFormat;
 import java.util.Calendar;
 
-public class PaymentFragment extends Fragment {
+public class PaymentFragment extends BaseFragment {
 
     // region Constants
 
@@ -37,8 +31,6 @@ public class PaymentFragment extends Fragment {
 
     // region Properties
 
-    private IFragmentListener mFragmentListener;
-    private FragmentManager mFragmentManager;
     private AmountViewModel mAmountViewModel;
 
     // endregion
@@ -77,19 +69,19 @@ public class PaymentFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mAmountViewModel = getArguments().getParcelable(ARG_AMOUNT_VIEW_MODEL);
         } else {
             // TODO: Handle more elegant
             mAmountViewModel = new AmountViewModel(0, Currency.ICELANDIC_KRONA);
         }
-
-        mFragmentManager = getFragmentManager();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.fragment_payment_payment, container, false);
 
@@ -119,29 +111,8 @@ public class PaymentFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if(context instanceof IFragmentListener) {
-            mFragmentListener = (IFragmentListener) context;
-        } else {
-            Log.e("onAttach", "context not instance of IFragmentListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mFragmentListener = null;
-    }
-
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        if (FragmentUtils.sDisableFragmentAnimations) {
-            Animation a = new Animation() {};
-            a.setDuration(0);
-            return a;
-        }
-        return super.onCreateAnimation(transit, enter, nextAnim);
+    public String getTitle() {
+        return getString(R.string.fragment_payment_payment_title);
     }
 
     // endregion
