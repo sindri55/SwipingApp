@@ -6,6 +6,7 @@ import com.example.swipingapp.services.api.IApiService;
 import java.util.concurrent.TimeUnit;
 
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.mock.BehaviorDelegate;
 import retrofit2.mock.MockRetrofit;
 import retrofit2.mock.NetworkBehavior;
@@ -29,6 +30,7 @@ public class BaseServiceMock {
     protected static IApiService getApiService() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         NetworkBehavior behavior = NetworkBehavior.create();

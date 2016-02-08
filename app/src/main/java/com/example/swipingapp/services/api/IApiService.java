@@ -1,18 +1,18 @@
 package com.example.swipingapp.services.api;
 
+import com.example.swipingapp.viewModels.account.LoginViewModel;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface IApiService {
 
     // region Users
 
-    @FormUrlEncoded
     @POST("users/login/")
-    Call<ResponseBody> login(@Field("username") String email, @Field("password") String password);
+    Call<ResponseBody> login(@Body LoginViewModel loginViewModel);
 
     // endregion
 }

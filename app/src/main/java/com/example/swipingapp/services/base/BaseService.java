@@ -3,6 +3,7 @@ package com.example.swipingapp.services.base;
 import com.example.swipingapp.services.api.IApiService;
 
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BaseService {
 
@@ -24,6 +25,7 @@ public class BaseService {
         if(mApiService == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(API_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
             mApiService = retrofit.create(IApiService.class);

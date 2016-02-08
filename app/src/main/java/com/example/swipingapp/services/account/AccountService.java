@@ -32,8 +32,8 @@ public class AccountService extends BaseService implements IAccountService {
     // region Override functions
 
     @Override
-    public void login(LoginViewModel model, Callback<ResponseBody> response) {
-        Call<ResponseBody> result = getApiService().login(model.email, model.password);
+    public void login(LoginViewModel loginViewModel, Callback<ResponseBody> response) {
+        Call<ResponseBody> result = getApiService().login(loginViewModel);
         result.enqueue(response);
     }
 

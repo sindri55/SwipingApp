@@ -5,7 +5,7 @@ public class LoginViewModel {
     // region Properties
 
     public String email;
-    public String username;
+    public String username; // TODO: Remove
     public String password;
 
     // endregion
