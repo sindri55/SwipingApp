@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
     // region Private functions
 
-    private void UpdateButtonState(final boolean enabled) {
+    private void updateButtonState(final boolean enabled) {
         mLoginButton.setEnabled(enabled);
 
         if(enabled) {
@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            UpdateButtonState(false);
+            updateButtonState(false);
 
             String email = mEmailView.getText().toString();
             String password = mPasswordView.getText().toString();
@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final Boolean success) {
             mUserLoginTask = null;
-            UpdateButtonState(true);
+            updateButtonState(true);
 
             if (success) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -166,7 +166,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onCancelled() {
             mUserLoginTask = null;
-            UpdateButtonState(true);
+            updateButtonState(true);
         }
     }
 

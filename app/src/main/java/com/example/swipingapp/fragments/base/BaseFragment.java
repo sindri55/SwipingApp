@@ -17,6 +17,7 @@ public abstract class BaseFragment extends Fragment {
 
     // region Properties
 
+    protected Context mContext;
     protected IFragmentListener mFragmentListener;
     protected FragmentManager mFragmentManager;
 
@@ -44,6 +45,8 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        mContext = context;
         if(context instanceof IFragmentListener) {
             mFragmentListener = (IFragmentListener) context;
         } else {

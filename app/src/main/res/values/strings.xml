@@ -40,7 +40,8 @@
 
     <string name="fragment_payment_payment_title">Payment</string>
     <string name="fragment_payment_payment_txt_amount">Amount</string>
-    <string name="fragment_payment_payment_btn_confirm_payment">Confirm Payment</string>
+    <string name="fragment_payment_payment_btn_confirm">Confirm Payment</string>
+    <string name="fragment_payment_payment_btn_confirm_processing">Processing...</string>
     <string name="fragment_payment_payment_label_cardholder">Cardholder</string>
     <string name="fragment_payment_payment_label_card_number">Card number</string>
     <string name="fragment_payment_payment_label_expire_month">Exp. month</string>

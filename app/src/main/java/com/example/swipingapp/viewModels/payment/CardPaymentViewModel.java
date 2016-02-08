@@ -1,6 +1,6 @@
 package com.example.swipingapp.viewModels.payment;
 
-public class CreditCardViewModel {
+public class CardPaymentViewModel extends PaymentViewModel {
 
     // region Properties
 
@@ -14,7 +14,9 @@ public class CreditCardViewModel {
 
     // region Constructors
 
-    public CreditCardViewModel(String cardholder, String cardNumber, String expireMonth, String expireYear, String CVC) {
+    public CardPaymentViewModel(AmountViewModel amountViewModel, String cardholder, String cardNumber, String expireMonth, String expireYear, String CVC) {
+        super(amountViewModel);
+
         this.cardholder = cardholder;
         this.cardNumber = cardNumber;
         this.expireMonth = expireMonth;
