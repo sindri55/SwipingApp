@@ -1,10 +1,15 @@
 package com.example.swipingapp.services.account;
 
 import com.example.swipingapp.exceptions.NotImplementedException;
+import com.example.swipingapp.services.base.BaseService;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
-public class AccountService implements IAccountService {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class AccountService extends BaseService implements IAccountService {
 
     // region Properties
 
@@ -27,8 +32,9 @@ public class AccountService implements IAccountService {
     // region Override functions
 
     @Override
-    public boolean login(LoginViewModel model) {
-        throw new NotImplementedException();
+    public void login(LoginViewModel model, Callback<Response> response) {
+        Call<Response> result = getApiService().login(model.email, model.password);
+        result.enqueue(response);
     }
 
     @Override

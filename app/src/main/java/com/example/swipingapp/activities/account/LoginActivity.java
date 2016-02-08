@@ -3,10 +3,10 @@ package com.example.swipingapp.activities.account;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,12 +18,16 @@ import com.example.swipingapp.services.account.AccountServiceStub;
 import com.example.swipingapp.services.account.IAccountService;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity {
 
     // region Properties
 
     private IAccountService mAccountService;
-    private UserLoginTask mUserLoginTask = null;
+    private UserLoginResponse mUserLoginResponse = null;
     final Context mContext = this;
 
     // endregion
@@ -78,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             // If the login task is running, we do nothing
-            if(mUserLoginTask != null) {
+            if(mUserLoginResponse != null) {
                 return;
             }
 
@@ -89,8 +93,8 @@ public class LoginActivity extends AppCompatActivity {
 
             LoginViewModel loginViewModel = new LoginViewModel(email, password);
 
-            mUserLoginTask = new UserLoginTask(loginViewModel);
-            mUserLoginTask.execute();
+            mUserLoginResponse = new UserLoginResponse();
+            mAccountService.login(loginViewModel, mUserLoginResponse);
         }
     }
 
@@ -99,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             // If the login task is running, we do nothing
-            if(mUserLoginTask != null) {
+            if(mUserLoginResponse != null) {
                 return;
             }
 
@@ -110,35 +114,20 @@ public class LoginActivity extends AppCompatActivity {
 
     // endregion
 
-    // region Async tasks
+    // region Response callbacks
 
-    private class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        // Properties
-        private final LoginViewModel mLoginViewModel;
-
-        // Constructors
-        UserLoginTask(LoginViewModel loginViewModel) {
-            mLoginViewModel = loginViewModel;
-        }
-
-        // Override functions
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            return mAccountService.login(mLoginViewModel);
-        }
+    private class UserLoginResponse implements Callback<Response> {
 
         @Override
-        protected void onPostExecute(final Boolean success) {
-            mUserLoginTask = null;
+        public void onResponse(Call<Response> call, Response<Response> response) {
+            mUserLoginResponse = null;
             updateButtonState(true);
 
-            if (success) {
+            if(response.body().isSuccess()) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
-
             } else {
-                // TODO: Style, user @strings res to get text and display as fragment?, refactor
+                // TODO: Extract to some AlertUtils class, style, user @strings res to get text and display as fragment?, refactor
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         mContext);
 
@@ -164,9 +153,10 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onCancelled() {
-            mUserLoginTask = null;
+        public void onFailure(Call<Response> call, Throwable t) {
+            mUserLoginResponse = null;
             updateButtonState(true);
+            Log.e("onFailure", "Something went terribly wrong :/");
         }
     }
 

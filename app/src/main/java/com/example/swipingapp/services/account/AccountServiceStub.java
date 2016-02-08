@@ -1,9 +1,14 @@
 package com.example.swipingapp.services.account;
 
+import com.example.swipingapp.services.base.BaseServiceMock;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
-public class AccountServiceStub implements IAccountService {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class AccountServiceStub extends BaseServiceMock implements IAccountService {
 
     // region Properties
 
@@ -26,31 +31,13 @@ public class AccountServiceStub implements IAccountService {
     // region Override functions
 
     @Override
-    public boolean login(LoginViewModel model) {
-
-        // Simulate network access, sleep 2 seconds
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        // only accept login with email: "user" and pass: "123"
-        return model.email.equals("user") && model.password.equals("123");
+    public void login(LoginViewModel model, Callback<Response> response) {
+        Call<Response> result = getApiService().login(model.email, model.password);
+        result.enqueue(response);
     }
 
     @Override
     public boolean register(RegisterViewModel model) {
-
-        // Simulate network access, sleep for 2 seconds
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
-        }
-
         // Just always return true for now
         return true;
     }
