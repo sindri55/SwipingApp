@@ -1,6 +1,5 @@
 package com.example.swipingapp.services.account;
 
-import com.example.swipingapp.exceptions.NotImplementedException;
 import com.example.swipingapp.services.base.BaseService;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 import com.example.swipingapp.viewModels.account.RegisterViewModel;
@@ -38,8 +37,9 @@ public class AccountService extends BaseService implements IAccountService {
     }
 
     @Override
-    public boolean register(RegisterViewModel model) {
-        throw new NotImplementedException();
+    public void register(RegisterViewModel registerViewModel, Callback<ResponseBody> response) {
+        Call<ResponseBody> result = getApiService().register(registerViewModel);
+        result.enqueue(response);
     }
 
     // endregion

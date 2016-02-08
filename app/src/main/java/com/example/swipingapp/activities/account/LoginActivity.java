@@ -94,8 +94,6 @@ public class LoginActivity extends AppCompatActivity {
 
             LoginViewModel loginViewModel = new LoginViewModel(email, password);
 
-            updateButtonState(false);
-
             mUserLoginResponse = new UserLoginResponse();
             mAccountService.login(loginViewModel, mUserLoginResponse);
         }

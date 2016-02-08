@@ -10,8 +10,8 @@ public interface IAccountService {
 
     // region Public functions
 
-    void login(LoginViewModel model, Callback<ResponseBody> response);
-    boolean register(RegisterViewModel model);
+    void login(LoginViewModel loginViewModel, Callback<ResponseBody> response);
+    void register(RegisterViewModel registerViewModel, Callback<ResponseBody> response);
 
     // endregion
 }

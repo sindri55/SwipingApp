@@ -37,9 +37,9 @@ public class AccountServiceStub extends BaseServiceMock implements IAccountServi
     }
 
     @Override
-    public boolean register(RegisterViewModel model) {
-        // Just always return true for now
-        return true;
+    public void register(RegisterViewModel registerViewModel, Callback<ResponseBody> response) {
+        Call<ResponseBody> result = getApiService().register(registerViewModel);
+        result.enqueue(response);
     }
 
     // endregion
