@@ -14,10 +14,11 @@ import android.widget.TextView;
 
 import com.example.swipingapp.R;
 import com.example.swipingapp.activities.main.MainActivity;
-import com.example.swipingapp.services.account.AccountServiceStub;
+import com.example.swipingapp.services.account.AccountService;
 import com.example.swipingapp.services.account.IAccountService;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAccountService = AccountServiceStub.getInstance();
+        mAccountService = AccountService.getInstance();
 
         mEmailView = (EditText) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -93,6 +94,8 @@ public class LoginActivity extends AppCompatActivity {
 
             LoginViewModel loginViewModel = new LoginViewModel(email, password);
 
+            updateButtonState(false);
+
             mUserLoginResponse = new UserLoginResponse();
             mAccountService.login(loginViewModel, mUserLoginResponse);
         }
@@ -116,14 +119,15 @@ public class LoginActivity extends AppCompatActivity {
 
     // region Response callbacks
 
-    private class UserLoginResponse implements Callback<Response> {
+    // TODO: Make one BaseResponse class, that other extend from
+    private class UserLoginResponse implements Callback<ResponseBody> {
 
         @Override
-        public void onResponse(Call<Response> call, Response<Response> response) {
+        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
             mUserLoginResponse = null;
             updateButtonState(true);
 
-            if(response.body().isSuccess()) {
+            if(response.isSuccess()) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             } else {
@@ -153,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onFailure(Call<Response> call, Throwable t) {
+        public void onFailure(Call<ResponseBody> call, Throwable t) {
             mUserLoginResponse = null;
             updateButtonState(true);
             Log.e("onFailure", "Something went terribly wrong :/");

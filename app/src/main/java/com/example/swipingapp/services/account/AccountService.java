@@ -5,9 +5,9 @@ import com.example.swipingapp.services.base.BaseService;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AccountService extends BaseService implements IAccountService {
 
@@ -32,8 +32,8 @@ public class AccountService extends BaseService implements IAccountService {
     // region Override functions
 
     @Override
-    public void login(LoginViewModel model, Callback<Response> response) {
-        Call<Response> result = getApiService().login(model.email, model.password);
+    public void login(LoginViewModel model, Callback<ResponseBody> response) {
+        Call<ResponseBody> result = getApiService().login(model.email, model.password);
         result.enqueue(response);
     }
 

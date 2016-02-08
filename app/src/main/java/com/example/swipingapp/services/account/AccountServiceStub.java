@@ -4,9 +4,9 @@ import com.example.swipingapp.services.base.BaseServiceMock;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AccountServiceStub extends BaseServiceMock implements IAccountService {
 
@@ -31,8 +31,8 @@ public class AccountServiceStub extends BaseServiceMock implements IAccountServi
     // region Override functions
 
     @Override
-    public void login(LoginViewModel model, Callback<Response> response) {
-        Call<Response> result = getApiService().login(model.email, model.password);
+    public void login(LoginViewModel model, Callback<ResponseBody> response) {
+        Call<ResponseBody> result = getApiService().login(model.email, model.password);
         result.enqueue(response);
     }
 

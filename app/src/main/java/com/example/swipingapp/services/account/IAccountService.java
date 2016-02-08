@@ -3,14 +3,14 @@ package com.example.swipingapp.services.account;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
+import okhttp3.ResponseBody;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public interface IAccountService {
 
     // region Public functions
 
-    void login(LoginViewModel model, Callback<Response> response);
+    void login(LoginViewModel model, Callback<ResponseBody> response);
     boolean register(RegisterViewModel model);
 
     // endregion

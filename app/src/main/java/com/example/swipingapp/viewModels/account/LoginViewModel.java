@@ -5,6 +5,7 @@ public class LoginViewModel {
     // region Properties
 
     public String email;
+    public String username;
     public String password;
 
     // endregion
@@ -13,6 +14,7 @@ public class LoginViewModel {
 
     public LoginViewModel(String email, String password){
         this.email = email;
+        this.username = email;
         this.password = password;
     }
 

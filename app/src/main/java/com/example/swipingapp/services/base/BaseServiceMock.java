@@ -39,7 +39,7 @@ public class BaseServiceMock {
         BehaviorDelegate<IApiService> delegate = mockRetrofit.create(IApiService.class);
         mApiService = new ApiServiceMock(delegate);
 
-        behavior.setDelay(3000, TimeUnit.MILLISECONDS);
+        behavior.setDelay(2000, TimeUnit.MILLISECONDS);
 
         return mApiService;
     }
