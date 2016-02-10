@@ -20,6 +20,7 @@ import com.example.swipingapp.enums.Currency;
 import com.example.swipingapp.fragments.base.BaseFragment;
 import com.example.swipingapp.services.payment.IPaymentService;
 import com.example.swipingapp.services.payment.PaymentServiceStub;
+import com.example.swipingapp.utils.DialogUtils;
 import com.example.swipingapp.viewModels.payment.AmountViewModel;
 import com.example.swipingapp.viewModels.payment.CardPaymentViewModel;
 
@@ -218,28 +219,8 @@ public class PaymentFragment extends BaseFragment {
                 fragmentTransaction.addToBackStack(ReceiptFragment.TAG);
                 fragmentTransaction.commit();
             } else {
-                // TODO: Some error handling
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        mContext);
-
-                // set title
-                alertDialogBuilder.setTitle("Payment failed");
-
-                // set dialog message
-                alertDialogBuilder
-                        .setMessage("Something went wrong.\nPlease try again.")
-                        .setCancelable(true)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
-                alertDialog.show();
+                // TODO: Fix static strings
+                DialogUtils.displayMessageDialog(mContext, "Payment Failed", "Something went wrong.\nPlease try again.");
             }
         }
 
