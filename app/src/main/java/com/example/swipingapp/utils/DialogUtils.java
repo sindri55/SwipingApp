@@ -20,7 +20,7 @@ public class DialogUtils {
         alertDialogBuilder
                 .setMessage(message)
                 .setCancelable(true)
-                .setPositiveButton(R.string.dialog_btn_cancel, new CancelButtonClickListener());
+                .setPositiveButton(R.string.dialog_btn_close, new CloseButtonClickListener());
 
         AlertDialog dialog = alertDialogBuilder.create();
 
@@ -32,7 +32,7 @@ public class DialogUtils {
 
     // region Listeners
 
-    private static class CancelButtonClickListener implements DialogInterface.OnClickListener {
+    private static class CloseButtonClickListener implements DialogInterface.OnClickListener {
 
         @Override
         public void onClick(DialogInterface dialog, int id) {

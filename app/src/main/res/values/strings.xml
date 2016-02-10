@@ -9,7 +9,7 @@
     <string name="content_description_image_logo">Logo Image</string>
 
     <!-- Dialogs -->
-    <string name="dialog_btn_cancel">Cancel</string>
+    <string name="dialog_btn_close">Close</string>
 
     <!-- Login Activity -->
     <string name="activity_login_btn_login">Login</string>
