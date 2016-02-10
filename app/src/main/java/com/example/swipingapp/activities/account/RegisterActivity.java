@@ -17,6 +17,7 @@ import com.example.swipingapp.activities.about.TermsAndConditionsActivity;
 import com.example.swipingapp.activities.main.MainActivity;
 import com.example.swipingapp.services.account.AccountService;
 import com.example.swipingapp.services.account.IAccountService;
+import com.example.swipingapp.utils.DialogUtils;
 import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
 import okhttp3.ResponseBody;
@@ -63,6 +64,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         mSignUpButton.setOnClickListener(new SignUpButtonClickListener());
         mTermsAndConditionsText.setOnClickListener(new TermsAndConditionsTextClickListener());
+
+        updateButtonState(true);
     }
 
     // endregion
@@ -130,34 +133,17 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
             mUserRegisterResponse = null;
-            updateButtonState(true);
 
             if(response.isSuccess()) {
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                 startActivity(intent);
             } else {
-                // TODO: Style, user @strings res to get text and display as fragment?, refactor!
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        mContext);
+                updateButtonState(true);
 
-                // set title
-                alertDialogBuilder.setTitle("Couldn't Create an Account");
+                String title = getString(R.string.activity_register_error_register_failed_title);
+                String message = getString(R.string.activity_register_error_register_failed_message);
 
-                // set dialog message
-                alertDialogBuilder
-                        .setMessage("We were unable to create an account for you.\nPlease try again.")
-                        .setCancelable(true)
-                        .setPositiveButton("Close", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
-                alertDialog.show();
+                DialogUtils.displayMessageDialog(mContext, title, message);
             }
         }
 
