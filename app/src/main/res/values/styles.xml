@@ -1,9 +1,19 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <!-- MyMaterialTheme -->
+    <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
+
     </style>
+
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/orange_light</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/orange_dark</item>
+    </style>
+
+    <!-- Dialogs -->
 
     <!-- Layouts -->
     <style name="Layout"/>
@@ -11,7 +21,6 @@
     <style name="Layout.Background">
         <item name="android:background">@color/background_default</item>
     </style>
-
 
     <style name="Layout.Padding">
         <item name="android:paddingRight">@dimen/layout_padding_default</item>
@@ -157,6 +166,18 @@
         <item name="android:layout_marginTop">@dimen/form_group_margin_top</item>
     </style>
 
+
+
+    <style name="FormGroup.Item">
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:background">@drawable/gradient_unvarified</item>
+    <item name="android:gradientRadius">50dp</item>
+</style>
+
+    <style name="FormGroup.Item.verified">
+        <item name="android:background">@drawable/gradient_verified</item>
+    </style>
+
     <!-- Form control -->
     <style name="FormControl">
     </style>
@@ -236,24 +257,9 @@
         <item name="android:textColor">@color/text_step_indicator_text_active</item>
     </style>
 
-    <!-- MyMaterialTheme -->
-    <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
 
-    </style>
 
-    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="colorPrimary">@color/orange_light</item>
-        <item name="colorPrimaryDark">@color/orange_dark</item>
-        <item name="colorAccent">@color/orange_dark</item>
-    </style>
 
-    <style name="FormGroup.Item">
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:background">@drawable/gradient</item>
-        <item name="android:radius">80dp</item>
-    </style>
 
 
 </resources>

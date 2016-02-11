@@ -8,12 +8,17 @@
     <string name="content_description_image_background">Background Image</string>
     <string name="content_description_image_logo">Logo Image</string>
 
+    <!-- Dialogs -->
+    <string name="dialog_btn_close">Close</string>
+
     <!-- Login Activity -->
     <string name="activity_login_btn_login">Login</string>
     <string name="activity_login_btn_login_processing">Logging in...</string>
     <string name="activity_login_hint_email">Email</string>
     <string name="activity_login_hint_password">Password</string>
     <string name="activity_login_txt_create_account">Are you joining us? Lets create a account</string>
+    <string name="activity_login_error_login_failed_title">Couldn\'t Login</string>
+    <string name="activity_login_error_login_failed_message">Incorrect email or password.\nPlease try again.</string>
 
     <!-- Register Activity -->
     <string name="activity_register_btn_sign_up">Sign Up</string>
@@ -24,6 +29,8 @@
     <string name="activity_register_hint_email">Email</string>
     <string name="activity_register_hint_password">Password</string>
     <string name="activity_register_hint_confirm_password">Confirm Password</string>
+    <string name="activity_register_error_register_failed_title">Couldn\'t Create an Account</string>
+    <string name="activity_register_error_register_failed_message">We were unable to create an account for you.\nPlease try again.</string>
 
     <!-- Terms and Conditions Activity -->
     <string name="activity_terms_and_conditions_caption">Terms and Conditions</string>

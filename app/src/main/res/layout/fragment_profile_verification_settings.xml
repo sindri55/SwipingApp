@@ -24,7 +24,7 @@
                     android:layout_height="wrap_content"
                     >
 
-                    <TextView android:id="@+id/addBankAccountTxtView"
+                    <TextView android:id="@+id/addBankacountTxtView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
@@ -32,7 +32,7 @@
                         style="@style/Text.XXLarge.Light"
                         android:textSize="20sp" />
                     <ImageView
-                        android:layout_below="@id/addBankAccountTxtView"
+                        android:layout_below="@id/addBankacountTxtView"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_action_add"/>
@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                style="@style/FormGroup.Item">
+                style="@style/FormGroup.Item.verified">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"

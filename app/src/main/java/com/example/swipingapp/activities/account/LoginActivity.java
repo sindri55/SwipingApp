@@ -16,6 +16,7 @@ import com.example.swipingapp.R;
 import com.example.swipingapp.activities.main.MainActivity;
 import com.example.swipingapp.services.account.AccountService;
 import com.example.swipingapp.services.account.IAccountService;
+import com.example.swipingapp.utils.DialogUtils;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 
 import okhttp3.ResponseBody;
@@ -58,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
 
         mLoginButton.setOnClickListener(new LoginButtonClickListener());
         mRegisterText.setOnClickListener(new RegisterTextClickListener());
+
+        updateButtonState(true);
     }
 
     // endregion
@@ -123,34 +126,17 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
             mUserLoginResponse = null;
-            updateButtonState(true);
 
             if(response.isSuccess()) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             } else {
-                // TODO: Extract to some AlertUtils class, style, user @strings res to get text and display as fragment?, refactor
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        mContext);
+                updateButtonState(true);
 
-                // set title
-                alertDialogBuilder.setTitle("Couldn't Login");
+                String title = getString(R.string.activity_login_error_login_failed_title);
+                String message = getString(R.string.activity_login_error_login_failed_message);
 
-                // set dialog message
-                alertDialogBuilder
-                        .setMessage("Incorrect email or password.\nPlease try again.")
-                        .setCancelable(true)
-                        .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
-                alertDialog.show();
+                DialogUtils.displayMessageDialog(mContext, title, message);
             }
         }
 
