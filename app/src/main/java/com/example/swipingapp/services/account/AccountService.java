@@ -1,15 +1,23 @@
 package com.example.swipingapp.services.account;
 
-import com.example.swipingapp.exceptions.NotImplementedException;
+import com.example.swipingapp.services.base.BaseService;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
-public class AccountService implements IAccountService {
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
 
-    // Properties
+public class AccountService extends BaseService implements IAccountService {
+
+    // region Properties
+
     private static IAccountService mInstance;
 
-    // Functions
+    // endregion
+
+    // region Get instance (Singleton)
+
     public static IAccountService getInstance() {
         if(mInstance == null) {
             mInstance = new AccountService();
@@ -18,14 +26,21 @@ public class AccountService implements IAccountService {
         return mInstance;
     }
 
-    // Override functions
+    // endregion
+
+    // region Override functions
+
     @Override
-    public boolean login(LoginViewModel model) {
-        throw new NotImplementedException();
+    public void login(LoginViewModel loginViewModel, Callback<ResponseBody> response) {
+        Call<ResponseBody> result = getApiService().login(loginViewModel);
+        result.enqueue(response);
     }
 
     @Override
-    public boolean register(RegisterViewModel model) {
-        throw new NotImplementedException();
+    public void register(RegisterViewModel registerViewModel, Callback<ResponseBody> response) {
+        Call<ResponseBody> result = getApiService().register(registerViewModel);
+        result.enqueue(response);
     }
+
+    // endregion
 }

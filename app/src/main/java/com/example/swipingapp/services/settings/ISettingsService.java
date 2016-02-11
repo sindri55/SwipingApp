@@ -4,6 +4,9 @@ import com.example.swipingapp.enums.Currency;
 
 public interface ISettingsService {
 
-    // Public functions
+    // region Public functions
+
     Currency getUserCurrency();
+
+    // endregion
 }

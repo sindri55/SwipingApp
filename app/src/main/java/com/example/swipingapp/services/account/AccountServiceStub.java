@@ -1,14 +1,23 @@
 package com.example.swipingapp.services.account;
 
+import com.example.swipingapp.services.base.BaseServiceMock;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
-public class AccountServiceStub implements IAccountService {
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
 
-    // Properties
+public class AccountServiceStub extends BaseServiceMock implements IAccountService {
+
+    // region Properties
+
     private static IAccountService mInstance;
 
-    // Functions
+    // endregion
+
+    // region Get instance (Singleton)
+
     public static IAccountService getInstance() {
         if(mInstance == null) {
             mInstance = new AccountServiceStub();
@@ -17,33 +26,21 @@ public class AccountServiceStub implements IAccountService {
         return mInstance;
     }
 
-    // Override functions
+    // endregion
+
+    // region Override functions
+
     @Override
-    public boolean login(LoginViewModel model) {
-
-        // Simulate network access, sleep 2 seconds
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        // only accept login with email: "user" and pass: "123"
-        return model.email.equals("user") && model.password.equals("123");
+    public void login(LoginViewModel loginViewModel, Callback<ResponseBody> response) {
+        Call<ResponseBody> result = getApiService().login(loginViewModel);
+        result.enqueue(response);
     }
 
     @Override
-    public boolean register(RegisterViewModel model) {
-
-        // Simulate network access, sleep for 2 seconds
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
-        }
-        // Just always return true for now
-        return true;
+    public void register(RegisterViewModel registerViewModel, Callback<ResponseBody> response) {
+        Call<ResponseBody> result = getApiService().register(registerViewModel);
+        result.enqueue(response);
     }
+
+    // endregion
 }

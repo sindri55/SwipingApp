@@ -3,10 +3,10 @@ package com.example.swipingapp.activities.account;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,32 +14,42 @@ import android.widget.TextView;
 
 import com.example.swipingapp.R;
 import com.example.swipingapp.activities.main.MainActivity;
-import com.example.swipingapp.services.account.AccountServiceStub;
+import com.example.swipingapp.services.account.AccountService;
 import com.example.swipingapp.services.account.IAccountService;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity {
 
-    // Properties
+    // region Properties
+
     private IAccountService mAccountService;
-    private UserLoginTask mUserLoginTask = null;
+    private UserLoginResponse mUserLoginResponse = null;
     final Context mContext = this;
 
-    // UI references
+    // endregion
+
+    // region UI references
+
     private EditText mEmailView;
     private EditText mPasswordView;
     private Button mLoginButton;
     private TextView mRegisterText;
 
+    // endregion
 
+    // region Override functions
 
-    // Override functions
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAccountService = AccountServiceStub.getInstance();
+        mAccountService = AccountService.getInstance();
 
         mEmailView = (EditText) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -50,8 +60,11 @@ public class LoginActivity extends AppCompatActivity {
         mRegisterText.setOnClickListener(new RegisterTextClickListener());
     }
 
-    // Functions
-    private void UpdateButtonState(final boolean enabled) {
+    // endregion
+
+    // region Private functions
+
+    private void updateButtonState(final boolean enabled) {
         mLoginButton.setEnabled(enabled);
 
         if(enabled) {
@@ -61,25 +74,28 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    // Listeners
+    // endregion
+
+    // region Listeners
+
     private class LoginButtonClickListener implements Button.OnClickListener {
 
         @Override
         public void onClick(View v) {
             // If the login task is running, we do nothing
-            if(mUserLoginTask != null) {
+            if(mUserLoginResponse != null) {
                 return;
             }
 
-            UpdateButtonState(false);
+            updateButtonState(false);
 
             String email = mEmailView.getText().toString();
             String password = mPasswordView.getText().toString();
 
             LoginViewModel loginViewModel = new LoginViewModel(email, password);
 
-            mUserLoginTask = new UserLoginTask(loginViewModel);
-            mUserLoginTask.execute();
+            mUserLoginResponse = new UserLoginResponse();
+            mAccountService.login(loginViewModel, mUserLoginResponse);
         }
     }
 
@@ -88,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             // If the login task is running, we do nothing
-            if(mUserLoginTask != null) {
+            if(mUserLoginResponse != null) {
                 return;
             }
 
@@ -97,34 +113,23 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    // Async tasks
-    private class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    // endregion
 
-        // Properties
-        private final LoginViewModel mLoginViewModel;
+    // region Response callbacks
 
-        // Constructors
-        UserLoginTask(LoginViewModel loginViewModel) {
-            mLoginViewModel = loginViewModel;
-        }
-
-        // Override functions
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            return mAccountService.login(mLoginViewModel);
-        }
+    // TODO: Make one BaseResponse class, that other extend from
+    private class UserLoginResponse implements Callback<ResponseBody> {
 
         @Override
-        protected void onPostExecute(final Boolean success) {
-            mUserLoginTask = null;
-            UpdateButtonState(true);
+        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            mUserLoginResponse = null;
+            updateButtonState(true);
 
-            if (success) {
+            if(response.isSuccess()) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
-
             } else {
-                // TODO: Style, user @strings res to get text and display as fragment?, refactor
+                // TODO: Extract to some AlertUtils class, style, user @strings res to get text and display as fragment?, refactor
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         mContext);
 
@@ -150,9 +155,12 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onCancelled() {
-            mUserLoginTask = null;
-            UpdateButtonState(true);
+        public void onFailure(Call<ResponseBody> call, Throwable t) {
+            mUserLoginResponse = null;
+            updateButtonState(true);
+            Log.e("onFailure", "Something went terribly wrong :/");
         }
     }
+
+    // endregion
 }

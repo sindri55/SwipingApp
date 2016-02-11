@@ -8,25 +8,26 @@
         android:src="@drawable/background_register"
         android:contentDescription="@string/content_description_image_background"/>
 
-    <RelativeLayout
+    <RelativeLayout style="@style/Layout.Padding.Large"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_register_vertical_margin"
-        android:paddingLeft="@dimen/activity_register_horizontal_margin"
-        android:paddingRight="@dimen/activity_register_horizontal_margin"
-        android:paddingTop="@dimen/activity_register_vertical_margin"
         tools:context=".activities.account.RegisterActivity">
 
         <RelativeLayout style="@style/Header.Register"
             android:id="@+id/header_container">
 
-            <ImageView style="@style/Image.Center"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:src="@drawable/android_logo"
                 android:contentDescription="@string/content_description_image_logo"
                 android:layout_above="@+id/txt_sign_up"/>
 
             <TextView style="@style/Text.XLarge.Light"
                 android:id="@+id/txt_sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/activity_register_txt_sign_up"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"/>
@@ -63,6 +64,8 @@
 
             <Button style="@style/Button.Transparent"
                 android:id="@+id/btn_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/activity_register_btn_sign_up"/>
 
         </LinearLayout>
@@ -76,6 +79,8 @@
 
             <TextView style="@style/Text.Small.Light.Clickable"
                 android:id="@+id/txt_terms_and_conditions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/activity_register_txt_terms_and_conditions"/>
 

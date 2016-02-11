@@ -6,37 +6,33 @@
     </style>
 
     <!-- Layouts -->
-    <style name="Layout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-    </style>
+    <style name="Layout"/>
 
     <style name="Layout.Background">
         <item name="android:background">@color/background_default</item>
     </style>
 
+
     <style name="Layout.Padding">
-        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
-        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
-        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
-        <item name="android:paddingBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingRight">@dimen/layout_padding_default</item>
+        <item name="android:paddingLeft">@dimen/layout_padding_default</item>
+        <item name="android:paddingTop">@dimen/layout_padding_bottom_top</item>
+        <item name="android:paddingBottom">@dimen/layout_padding_bottom_top</item>
+    </style>
+
+    <style name="Layout.Padding.sides">
+        <item name="android:paddingLeft">@dimen/layout_padding_default</item>
+        <item name="android:paddingRight">@dimen/layout_padding_default</item>
+    </style>
+
+    <style name="Layout.Padding.Large">
+        <item name="android:padding">@dimen/layout_padding_large</item>
     </style>
 
     <style name="Layout.Transparent">
         <item name="android:background">@drawable/button_transparent</item>
         <item name="android:textColor">@drawable/button_transparent_text</item>
         <item name="android:layout_marginTop">@dimen/button_transparent_margin_top10</item>
-    </style>
-
-    <!-- Images -->
-    <style name="Image">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="Image.Center">
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
     </style>
 
     <!-- Background Images -->
@@ -56,23 +52,32 @@
     </style>
 
     <style name="Header.Login">
-        <item name="android:layout_height">@dimen/activity_login_header_layout_height</item>
+        <item name="android:layout_height">@dimen/layout_header_login_layout_height</item>
     </style>
-
     <style name="Header.Register">
-        <item name="android:layout_height">@dimen/activity_register_header_layout_height</item>
+        <item name="android:layout_height">@dimen/layout_header_register_layout_height</item>
+    </style>
+    <style name="Header.Profile">
+        <item name="android:layout_height">@dimen/layout_header_profile_layout_height</item>
     </style>
 
     <!-- Button styles -->
     <style name="Button">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/button_default</item>
         <item name="android:textColor">@color/button_default_text</item>
         <item name="android:gravity">center</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/button_text_size_default</item>
         <item name="android:layout_marginTop">@dimen/button_margin_top</item>
+    </style>
+    <style name="Button.Success">
+        <item name="android:background">@drawable/button_success</item>
+        <item name="android:textColor">@color/button_success_text</item>
+    </style>
+
+    <style name="Button.Change">
+        <item name="android:background">@drawable/button_change</item>
+        <item name="android:textColor">@color/button_change_text</item>
     </style>
 
     <style name="Button.Transparent">
@@ -122,27 +127,63 @@
     <!-- Input Box -->
     <style name="InputBox">
         <item name="android:layout_height">@dimen/input_box_layout_height</item>
+        <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">@dimen/input_box_text_size</item>
+        <item name="android:layout_marginTop">@dimen/input_box_margin_top</item>
     </style>
     <style name="InputBox.Label">
-        <item name="android:layout_width">wrap_content</item>
         <item name="android:background">@drawable/input_box_label</item>
-        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/input_box_label_text</item>
         <item name="android:paddingLeft">@dimen/input_box_label_padding_left</item>
         <item name="android:paddingRight">@dimen/input_box_label_padding_right</item>
     </style>
     <style name="InputBox.Value">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:gravity">center_vertical</item>
         <item name="android:background">@drawable/input_box_value</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:textColor">@color/input_box_value_text</item>
+        <item name="android:textColorHint">@color/input_box_value_text_hint</item>
+        <item name="android:paddingRight">@dimen/input_box_value_padding_right</item>
+        <item name="android:paddingLeft">@dimen/input_box_value_padding_left</item>
+    </style>
+    <style name="InputBox.Spinner">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textColor">@color/input_box_value_text</item>
         <item name="android:paddingRight">@dimen/input_box_value_padding_right</item>
         <item name="android:paddingLeft">@dimen/input_box_value_padding_left</item>
     </style>
 
+    <!-- Form group -->
+    <style name="FormGroup">
+        <item name="android:layout_marginTop">@dimen/form_group_margin_top</item>
+    </style>
+
+    <!-- Form control -->
+    <style name="FormControl">
+    </style>
+    <style name="FormControl.Label">
+        <item name="android:textSize">@dimen/form_control_label_text_size</item>
+        <item name="android:textColor">@color/form_control_label_text</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:paddingBottom">@dimen/form_control_label_padding_bottom</item>
+    </style>
+    <style name="FormControl.Value">
+        <item name="android:background">@drawable/form_control_value</item>
+        <item name="android:textSize">@dimen/form_control_value_text_size</item>
+        <item name="android:textColor">@color/form_control_value_text</item>
+        <item name="android:textColorHint">@color/form_control_value_hint</item>
+        <item name="android:padding">@dimen/form_control_value_padding</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+    <style name="FormControl.DropdownItem">
+        <item name="android:textColor">@color/form_control_value_text</item>
+        <item name="android:textSize">@dimen/form_control_value_text_size</item>
+        <item name="android:padding">@dimen/form_control_value_padding</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
     <!-- Texts -->
     <style name="Text">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/text_default</item>
         <item name="android:textSize">@dimen/text_size_default</item>
     </style>
@@ -156,6 +197,10 @@
     <style name="Text.Small.Light">
         <item name="android:textColor">@color/text_light</item>
     </style>
+    <style name="Text.Small.Light.center">
+        <item name="android:textColor">@color/text_light</item>
+    </style>
+
     <style name="Text.Small.Light.Clickable">
         <item name="android:textColor">@drawable/text_light_clickable</item>
     </style>
@@ -168,9 +213,15 @@
     </style>
 
     <style name="Text.XLarge">
-        <item name="android:textSize">@dimen/text_size_xxLarge</item>
+        <item name="android:textSize">@dimen/text_size_xLarge</item>
     </style>
     <style name="Text.XLarge.Light">
+        <item name="android:textColor">@color/text_light</item>
+    </style>
+    <style name="Text.XXLarge">
+        <item name="android:textSize">@dimen/text_size_xxLarge</item>
+    </style>
+    <style name="Text.XXLarge.Light">
         <item name="android:textColor">@color/text_light</item>
     </style>
 
@@ -193,9 +244,16 @@
     <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="colorPrimary">@color/green_light</item>
-        <item name="colorPrimaryDark">@color/green_dark</item>
-        <item name="colorAccent">@color/white</item>
+        <item name="colorPrimary">@color/orange_light</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/orange_dark</item>
     </style>
+
+    <style name="FormGroup.Item">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/gradient</item>
+        <item name="android:radius">80dp</item>
+    </style>
+
 
 </resources>

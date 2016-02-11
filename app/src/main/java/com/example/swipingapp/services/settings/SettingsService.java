@@ -5,10 +5,14 @@ import com.example.swipingapp.exceptions.NotImplementedException;
 
 public class SettingsService implements ISettingsService {
 
-    // Properties
+    // region Properties
+
     private static ISettingsService mInstance;
 
-    // Public functions
+    // endregion
+
+    // region Get instance (Singleton)
+
     public static ISettingsService getInstance() {
         if(mInstance == null) {
             mInstance = new SettingsService();
@@ -17,9 +21,14 @@ public class SettingsService implements ISettingsService {
         return mInstance;
     }
 
-    // Override functions
+    // endregion
+
+    // region Override functions
+
     @Override
     public Currency getUserCurrency() {
         throw new NotImplementedException();
     }
+
+    // endregion
 }

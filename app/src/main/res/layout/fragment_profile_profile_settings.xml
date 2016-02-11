@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Layout.Background"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout style="@style/Layout.Padding"
+        android:id="@+id/payment_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/FormGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView style="@style/FormControl.Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"/>
+
+            <EditText style="@style/FormControl.Value"
+                android:id="@+id/profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/FormGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView style="@style/FormControl.Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"/>
+
+            <EditText style="@style/FormControl.Value"
+                android:id="@+id/profile_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/FormGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView style="@style/FormControl.Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CCN"/>
+
+            <EditText style="@style/FormControl.Value"
+                android:id="@+id/profile_ccn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"/>
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/FormGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView style="@style/FormControl.Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Address"/>
+
+            <EditText style="@style/FormControl.Value"
+                android:id="@+id/profile_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/FormGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView style="@style/FormControl.Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Work place"/>
+
+            <EditText style="@style/FormControl.Value"
+                android:id="@+id/profile_workplace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/FormGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView style="@style/FormControl.Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contact number"/>
+
+            <EditText style="@style/FormControl.Value"
+                android:id="@+id/profile_contact_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button style="@style/Button.Success"
+                android:id="@+id/profile_btn_save"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
