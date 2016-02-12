@@ -1,7 +1,8 @@
 package com.example.swipingapp.services.base;
 
-import com.example.swipingapp.services.api.ApiServiceMock;
-import com.example.swipingapp.services.api.IApiService;
+import android.util.Log;
+
+import com.example.swipingapp.services.base.api.IBaseApiServiceStub;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +12,7 @@ import retrofit2.mock.BehaviorDelegate;
 import retrofit2.mock.MockRetrofit;
 import retrofit2.mock.NetworkBehavior;
 
-public class BaseServiceMock {
+public class BaseServiceStub<T, S extends IBaseApiServiceStub> {
 
     // region Constants
 
@@ -21,13 +22,24 @@ public class BaseServiceMock {
 
     // region Properties
 
-    private static IApiService mApiService;
+    private Class<T> mApiServiceType;
+    private Class<S> mApiServiceStubType;
+    private T mApiService;
+
+    // endregion
+
+    // region Constructors
+
+    public BaseServiceStub(Class<T> apiServiceType, Class<S> apiServiceStubType) {
+        mApiServiceType = apiServiceType;
+        mApiServiceStubType = apiServiceStubType;
+    }
 
     // endregion
 
     // region Get instance (Singleton)
 
-    protected static IApiService getApiService() {
+    protected T getApiService() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -38,8 +50,15 @@ public class BaseServiceMock {
                 .networkBehavior(behavior)
                 .build();
 
-        BehaviorDelegate<IApiService> delegate = mockRetrofit.create(IApiService.class);
-        mApiService = new ApiServiceMock(delegate);
+        BehaviorDelegate<T> delegate = mockRetrofit.create(mApiServiceType);
+
+        try {
+            S apiServiceStub = mApiServiceStubType.newInstance();
+            apiServiceStub.setBehaviorDelegate(delegate);
+            mApiService = (T) apiServiceStub;
+        } catch (Exception e) {
+            Log.e("mApiService", e.getMessage());
+        }
 
         behavior.setDelay(2000, TimeUnit.MILLISECONDS);
 
