@@ -1,7 +1,6 @@
 package com.example.swipingapp.services.account;
 
 import com.example.swipingapp.services.account.api.AccountApiServiceStub;
-import com.example.swipingapp.services.account.api.IAccountApiService;
 import com.example.swipingapp.services.base.BaseServiceStub;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 import com.example.swipingapp.viewModels.account.RegisterViewModel;
@@ -10,7 +9,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class AccountServiceStub extends BaseServiceStub<IAccountApiService, AccountApiServiceStub> implements IAccountService {
+public class AccountServiceStub<T extends AccountApiServiceStub> extends BaseServiceStub<T> implements IAccountService {
 
     // region Properties
 
@@ -20,8 +19,8 @@ public class AccountServiceStub extends BaseServiceStub<IAccountApiService, Acco
 
     // region Constructors
 
-    public AccountServiceStub(Class<IAccountApiService> apiServiceType, Class<AccountApiServiceStub> apiServiceStubClass) {
-        super(apiServiceType, apiServiceStubClass);
+    public AccountServiceStub(Class<T> apiServiceStubType) {
+        super(apiServiceStubType);
     }
 
     // endregion
@@ -30,7 +29,7 @@ public class AccountServiceStub extends BaseServiceStub<IAccountApiService, Acco
 
     public static IAccountService getInstance() {
         if(mInstance == null) {
-            mInstance = new AccountServiceStub(IAccountApiService.class, AccountApiServiceStub.class);
+            mInstance = new AccountServiceStub<>(AccountApiServiceStub.class);
         }
 
         return mInstance;

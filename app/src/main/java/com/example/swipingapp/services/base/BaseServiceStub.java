@@ -1,8 +1,6 @@
 package com.example.swipingapp.services.base;
 
-import android.util.Log;
-
-import com.example.swipingapp.services.base.api.IBaseApiServiceStub;
+import com.example.swipingapp.services.base.api.BaseApiServiceStub;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,7 +10,7 @@ import retrofit2.mock.BehaviorDelegate;
 import retrofit2.mock.MockRetrofit;
 import retrofit2.mock.NetworkBehavior;
 
-public class BaseServiceStub<T, S extends IBaseApiServiceStub> {
+public class BaseServiceStub<T extends BaseApiServiceStub> {
 
     // region Constants
 
@@ -22,16 +20,14 @@ public class BaseServiceStub<T, S extends IBaseApiServiceStub> {
 
     // region Properties
 
-    private Class<T> mApiServiceType;
-    private Class<S> mApiServiceStubType;
+    private Class<T> mApiServiceStubType;
     private T mApiService;
 
     // endregion
 
     // region Constructors
 
-    public BaseServiceStub(Class<T> apiServiceType, Class<S> apiServiceStubType) {
-        mApiServiceType = apiServiceType;
+    public BaseServiceStub(Class<T> apiServiceStubType) {
         mApiServiceStubType = apiServiceStubType;
     }
 
@@ -40,6 +36,16 @@ public class BaseServiceStub<T, S extends IBaseApiServiceStub> {
     // region Get instance (Singleton)
 
     protected T getApiService() {
+        T apiServiceStub;
+        Class<?> apiServiceInterface;
+        try {
+            apiServiceStub = mApiServiceStubType.newInstance();
+            apiServiceInterface = apiServiceStub.getClass().getInterfaces()[0];
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -50,15 +56,10 @@ public class BaseServiceStub<T, S extends IBaseApiServiceStub> {
                 .networkBehavior(behavior)
                 .build();
 
-        BehaviorDelegate<T> delegate = mockRetrofit.create(mApiServiceType);
+        BehaviorDelegate delegate = mockRetrofit.create(apiServiceInterface);
+        apiServiceStub.setBehaviorDelegate(delegate);
 
-        try {
-            S apiServiceStub = mApiServiceStubType.newInstance();
-            apiServiceStub.setBehaviorDelegate(delegate);
-            mApiService = (T) apiServiceStub;
-        } catch (Exception e) {
-            Log.e("mApiService", e.getMessage());
-        }
+        mApiService = apiServiceStub;
 
         behavior.setDelay(2000, TimeUnit.MILLISECONDS);
 

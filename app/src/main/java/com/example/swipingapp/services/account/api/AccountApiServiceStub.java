@@ -1,6 +1,6 @@
 package com.example.swipingapp.services.account.api;
 
-import com.example.swipingapp.services.base.api.IBaseApiServiceStub;
+import com.example.swipingapp.services.base.api.BaseApiServiceStub;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
@@ -8,18 +8,11 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
-import retrofit2.mock.BehaviorDelegate;
 import retrofit2.mock.Calls;
 
-public class AccountApiServiceStub<T extends IAccountApiService> implements IAccountApiService, IBaseApiServiceStub<T> {
+public class AccountApiServiceStub<T extends IAccountApiService> extends BaseApiServiceStub<T> implements IAccountApiService {
 
-    // region Constants
-
-    private BehaviorDelegate<T> delegate;
-
-    // endregion
-
-    // region Users
+    // region API endpoints
 
     @Override
     public Call<ResponseBody> login(@Body LoginViewModel loginViewModel) {
@@ -34,7 +27,7 @@ public class AccountApiServiceStub<T extends IAccountApiService> implements IAcc
             response = Response.error(404, responseBody);
         }
 
-        return delegate.returning(Calls.response(response)).login(loginViewModel);
+        return mDelegate.returning(Calls.response(response)).login(loginViewModel);
     }
 
     @Override
@@ -52,12 +45,7 @@ public class AccountApiServiceStub<T extends IAccountApiService> implements IAcc
             response = Response.error(400, responseBody);
         }
 
-        return delegate.returning(Calls.response(response)).register(registerViewModel);
-    }
-
-    @Override
-    public void setBehaviorDelegate(BehaviorDelegate<T> delegate) {
-        this.delegate = delegate;
+        return mDelegate.returning(Calls.response(response)).register(registerViewModel);
     }
 
     // endregion

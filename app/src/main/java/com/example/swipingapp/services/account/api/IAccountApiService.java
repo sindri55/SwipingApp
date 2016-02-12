@@ -12,9 +12,11 @@ public interface IAccountApiService {
 
     // region API endpoints
 
+    // TODO: Should be "accounts/login/"
     @POST("users/login/")
     Call<ResponseBody> login(@Body LoginViewModel loginViewModel);
 
+    // TODO: Should be "accounts/register/"
     @POST("users/register/")
     Call<ResponseBody> register(@Body RegisterViewModel registerViewModel);
 
