@@ -229,6 +229,10 @@
     <style name="Text.Large">
         <item name="android:textSize">@dimen/text_size_large</item>
     </style>
+
+    <style name="Text.Large.center">
+        <item name="android:gravity">center_vertical</item>
+    </style>
     <style name="Text.Large.Light">
         <item name="android:textColor">@color/text_light</item>
     </style>
@@ -256,8 +260,6 @@
         <item name="android:background">@color/text_step_indicator_background_active</item>
         <item name="android:textColor">@color/text_step_indicator_text_active</item>
     </style>
-
-
 
 
 
