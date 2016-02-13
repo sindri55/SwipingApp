@@ -73,14 +73,21 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean validateModel() {
         boolean valid = true;
+        View focusView = null;
 
         if(TextUtils.isEmpty(mEmailInput.getText())) {
             mEmailInput.setError(getString(R.string.error_field_required));
+            focusView = mEmailInput;
             valid = false;
         }
         if(TextUtils.isEmpty(mPasswordInput.getText())) {
             mPasswordInput.setError(getString(R.string.error_field_required));
+            focusView = (focusView == null) ? mPasswordInput : focusView;
             valid = false;
+        }
+
+        if(focusView != null) {
+            focusView.requestFocus();
         }
 
         return valid;
