@@ -1,10 +1,8 @@
 package com.example.swipingapp.fragments.payment;
 
-import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +11,29 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.swipingapp.DTOs.ReceiptDTO;
 import com.example.swipingapp.R;
 import com.example.swipingapp.customViews.input.InputCardNumber;
 import com.example.swipingapp.customViews.spinner.CustomSpinner;
 import com.example.swipingapp.enums.Currency;
 import com.example.swipingapp.fragments.base.BaseFragment;
+import com.example.swipingapp.responses.ErrorResponse;
 import com.example.swipingapp.services.payment.IPaymentService;
 import com.example.swipingapp.services.payment.PaymentServiceStub;
 import com.example.swipingapp.utils.DialogUtils;
 import com.example.swipingapp.viewModels.payment.AmountViewModel;
 import com.example.swipingapp.viewModels.payment.CardPaymentViewModel;
 
+import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.text.NumberFormat;
 import java.util.Calendar;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Converter;
+import retrofit2.Response;
 
 public class PaymentFragment extends BaseFragment {
 
@@ -40,7 +48,7 @@ public class PaymentFragment extends BaseFragment {
 
     private AmountViewModel mAmountViewModel;
     private IPaymentService mPaymentService;
-    private PaymentTask mPaymentTask = null;
+    private PaymentResponse mPaymentResponse = null;
 
     // endregion
 
@@ -161,7 +169,7 @@ public class PaymentFragment extends BaseFragment {
         @Override
         public void onClick(View v) {
             // If the payment task is running, we do nothing
-            if(mPaymentTask != null) {
+            if(mPaymentResponse != null) {
                 return;
             }
 
@@ -182,53 +190,52 @@ public class PaymentFragment extends BaseFragment {
                     cvc
             );
 
-            mPaymentTask = new PaymentTask(cardPaymentViewModel);
-            mPaymentTask.execute();
+            mPaymentResponse = new PaymentResponse();
+            mPaymentService.payWithCard(cardPaymentViewModel, mPaymentResponse);
         }
     }
 
     // endregion
 
-    // region Async tasks
+    // region Response callbacks
 
-    private class PaymentTask extends AsyncTask<Void, Void, Boolean> {
-
-        // Properties
-        private final CardPaymentViewModel mCardPaymentViewModel;
-
-        // Constructors
-        public PaymentTask(CardPaymentViewModel cardPaymentViewModel) {
-            mCardPaymentViewModel = cardPaymentViewModel;
-        }
-
-        // Override functions
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            return true;
-            //return mPaymentService.payWithCard(mCardPaymentViewModel);
-        }
+    private class PaymentResponse implements Callback<ReceiptDTO> {
 
         @Override
-        protected void onPostExecute(final Boolean success) {
-            mPaymentTask = null;
-            updateButtonState(true);
+        public void onResponse(Call<ReceiptDTO> call, Response<ReceiptDTO> response) {
+            mPaymentResponse = null;
 
-            if (success) {
+            if(response.isSuccess()) {
+                ReceiptDTO receiptDto = response.body();
+
                 FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-                fragmentTransaction.replace(R.id.fragment_container, new ReceiptFragment(), ReceiptFragment.TAG);
+                fragmentTransaction.replace(R.id.fragment_container, ReceiptFragment.newInstance(receiptDto), ReceiptFragment.TAG);
                 fragmentTransaction.addToBackStack(ReceiptFragment.TAG);
                 fragmentTransaction.commit();
             } else {
-                // TODO: Fix static strings
-                DialogUtils.displayMessageDialog(mContext, "Payment Failed", "Something went wrong.\nPlease try again.");
+                // TODO: Should we only use the message from the response?
+                String title = getString(R.string.fragment_payment_payment_error_payment_failed_title);
+                String message = getString(R.string.fragment_payment_payment_error_payment_failed_message);
+
+                try {
+                    Converter<ResponseBody, ErrorResponse> errorConverter = mPaymentService.getRetrofit().responseBodyConverter(ErrorResponse.class, new Annotation[0]);
+                    ErrorResponse error = errorConverter.convert(response.errorBody());
+                    message = error.message;
+                } catch (IOException e) {
+                    // TODO: Better error handling
+                    e.printStackTrace();
+                }
+
+                DialogUtils.displayMessageDialog(mContext, title, message);
             }
         }
 
         @Override
-        protected void onCancelled() {
-            mPaymentTask = null;
+        public void onFailure(Call<ReceiptDTO> call, Throwable t) {
+            mPaymentResponse = null;
             updateButtonState(true);
+            Log.e("onFailure", "Something went terribly wrong :/");
         }
     }
 

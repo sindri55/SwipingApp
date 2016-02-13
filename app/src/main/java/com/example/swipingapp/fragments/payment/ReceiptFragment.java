@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.swipingapp.DTOs.ReceiptDTO;
 import com.example.swipingapp.R;
 import com.example.swipingapp.fragments.base.BaseFragment;
 
@@ -13,10 +14,13 @@ public class ReceiptFragment extends BaseFragment {
     // region Constants
 
     public static final String TAG = ReceiptFragment.class.getSimpleName();
+    private static final String ARG_PAYMENT_DTO = "paymentDto";
 
     // endregion
 
     // region Properties
+
+    private ReceiptDTO mReceiptDto;
 
     // endregion
 
@@ -26,6 +30,18 @@ public class ReceiptFragment extends BaseFragment {
 
     // region Constructors
 
+    public ReceiptFragment() {  }
+
+    public static ReceiptFragment newInstance(ReceiptDTO receiptDTO) {
+        ReceiptFragment fragment = new ReceiptFragment();
+        Bundle args = new Bundle();
+
+        args.putParcelable(ARG_PAYMENT_DTO, receiptDTO);
+
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     // endregion
 
     // region Override functions
@@ -34,7 +50,12 @@ public class ReceiptFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO: Get arguments and stuff
+        if(getArguments() != null) {
+            mReceiptDto = getArguments().getParcelable(ARG_PAYMENT_DTO);
+        } else {
+            // TODO: Handle more elegantly
+            mReceiptDto = new ReceiptDTO(123, "Unknown");
+        }
     }
 
     @Override

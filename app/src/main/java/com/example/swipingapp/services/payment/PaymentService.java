@@ -1,10 +1,15 @@
 package com.example.swipingapp.services.payment;
 
-import com.example.swipingapp.exceptions.NotImplementedException;
+import com.example.swipingapp.DTOs.ReceiptDTO;
+import com.example.swipingapp.services.base.BaseService;
+import com.example.swipingapp.services.payment.api.IPaymentApiService;
 import com.example.swipingapp.viewModels.payment.CardPaymentViewModel;
 import com.example.swipingapp.viewModels.payment.PaymentViewModel;
 
-public class PaymentService implements IPaymentService {
+import retrofit2.Call;
+import retrofit2.Callback;
+
+public class PaymentService<T extends IPaymentApiService> extends BaseService<T> implements IPaymentService {
 
     // region Properties
 
@@ -12,11 +17,19 @@ public class PaymentService implements IPaymentService {
 
     // endregion
 
+    // region Constructors
+
+    public PaymentService(Class<T> apiServiceClassType) {
+        super(apiServiceClassType);
+    }
+
+    // endregion
+
     // region Get instance (Singleton)
 
     public static IPaymentService getInstance() {
         if(mInstance == null) {
-            mInstance = new PaymentService();
+            mInstance = new PaymentService<>(IPaymentApiService.class);
         }
 
         return mInstance;
@@ -27,13 +40,15 @@ public class PaymentService implements IPaymentService {
     // region Override functions
 
     @Override
-    public boolean payWithCard(CardPaymentViewModel cardPaymentViewModel) {
-        throw new NotImplementedException();
+    public void payWithCard(CardPaymentViewModel cardPaymentViewModel, Callback<ReceiptDTO> response) {
+        Call<ReceiptDTO> result = getApiService().payWithCard(cardPaymentViewModel);
+        result.enqueue(response);
     }
 
     @Override
-    public boolean payWithNFC(PaymentViewModel paymentViewModel) {
-        throw new NotImplementedException();
+    public void payWithNFC(PaymentViewModel paymentViewModel, Callback<ReceiptDTO> response) {
+        Call<ReceiptDTO> result = getApiService().payWithNfc(paymentViewModel);
+        result.enqueue(response);
     }
 
     // endregion

@@ -54,6 +54,8 @@
     <string name="fragment_payment_payment_label_expire_month">Exp. month</string>
     <string name="fragment_payment_payment_label_expire_year">Exp. year</string>
     <string name="fragment_payment_payment_label_cvc">CVC</string>
+    <string name="fragment_payment_payment_error_payment_failed_title">Payment Failed</string>
+    <string name="fragment_payment_payment_error_payment_failed_message">You are broke</string>
 
     <string name="fragment_payment_receipt_title">Receipt</string>
 
