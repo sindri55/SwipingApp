@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.swipingapp.DTOs.payment.ItemDTO;
+import com.example.swipingapp.DTOs.payment.PaymentDTO;
 import com.example.swipingapp.R;
 import com.example.swipingapp.customViews.amountSpinner.AmountSpinnerAdapter;
 import com.example.swipingapp.customViews.amountSpinner.IAmountSpinnerListener;
@@ -16,7 +18,8 @@ import com.example.swipingapp.enums.Currency;
 import com.example.swipingapp.fragments.base.BaseFragment;
 import com.example.swipingapp.services.settings.ISettingsService;
 import com.example.swipingapp.services.settings.SettingsServiceStub;
-import com.example.swipingapp.viewModels.payment.AmountViewModel;
+
+import java.util.ArrayList;
 
 public class AmountFragment extends BaseFragment {
 
@@ -106,12 +109,16 @@ public class AmountFragment extends BaseFragment {
         public void onClick(View v) {
             if(mInputAmountView != null){
                 if(validateInputAmount()) {
-                    AmountViewModel amountViewModel = new AmountViewModel(mInputAmountView.getAmount(), mCurrency);
+                    // TODO: this needs rethinking
+                    ArrayList<ItemDTO> items = new ArrayList<>();
+                    items.add(new ItemDTO("Payment", 1, mInputAmountView.getAmount()));
+
+                    PaymentDTO paymentDto = new PaymentDTO(mCurrency, mInputAmountView.getAmount(), items);
 
                     // TODO: Fix so that only the main content slides, not the step indicators, attach them to the header layout?
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                     fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_in_left, R.anim.slide_out_right);
-                    fragmentTransaction.replace(R.id.fragment_container, PaymentFragment.newInstance(amountViewModel), PaymentFragment.TAG);
+                    fragmentTransaction.replace(R.id.fragment_container, PaymentFragment.newInstance(paymentDto), PaymentFragment.TAG);
                     fragmentTransaction.addToBackStack(PaymentFragment.TAG);
                     fragmentTransaction.commit();
                 }

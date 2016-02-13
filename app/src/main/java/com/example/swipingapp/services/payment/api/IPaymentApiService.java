@@ -1,6 +1,6 @@
 package com.example.swipingapp.services.payment.api;
 
-import com.example.swipingapp.DTOs.ReceiptDTO;
+import com.example.swipingapp.DTOs.payment.PaymentConfirmedDTO;
 import com.example.swipingapp.viewModels.payment.CardPaymentViewModel;
 import com.example.swipingapp.viewModels.payment.PaymentViewModel;
 
@@ -13,10 +13,10 @@ public interface IPaymentApiService {
     // region API endpoints
 
     @POST("payments/card/")
-    Call<ReceiptDTO> payWithCard(@Body CardPaymentViewModel cardPaymentViewModel);
+    Call<PaymentConfirmedDTO> payWithCard(@Body CardPaymentViewModel cardPaymentViewModel);
 
     @POST("payments/nfc/")
-    Call<ReceiptDTO> payWithNfc(@Body PaymentViewModel paymentViewModel);
+    Call<PaymentConfirmedDTO> payWithNfc(@Body PaymentViewModel paymentViewModel);
 
     // endregion
 }

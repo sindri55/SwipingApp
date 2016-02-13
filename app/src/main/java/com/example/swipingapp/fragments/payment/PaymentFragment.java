@@ -11,17 +11,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.swipingapp.DTOs.ReceiptDTO;
+import com.example.swipingapp.DTOs.payment.PaymentConfirmedDTO;
+import com.example.swipingapp.DTOs.payment.PaymentDTO;
+import com.example.swipingapp.DTOs.payment.ReceiptDTO;
 import com.example.swipingapp.R;
 import com.example.swipingapp.customViews.input.InputCardNumber;
 import com.example.swipingapp.customViews.spinner.CustomSpinner;
-import com.example.swipingapp.enums.Currency;
 import com.example.swipingapp.fragments.base.BaseFragment;
 import com.example.swipingapp.responses.ErrorResponse;
 import com.example.swipingapp.services.payment.IPaymentService;
 import com.example.swipingapp.services.payment.PaymentServiceStub;
 import com.example.swipingapp.utils.DialogUtils;
-import com.example.swipingapp.viewModels.payment.AmountViewModel;
 import com.example.swipingapp.viewModels.payment.CardPaymentViewModel;
 
 import java.io.IOException;
@@ -40,13 +40,13 @@ public class PaymentFragment extends BaseFragment {
     // region Constants
 
     public static final String TAG = PaymentFragment.class.getSimpleName();
-    private static final String ARG_AMOUNT_VIEW_MODEL = "amountViewModel";
+    private static final String ARG_PAYMENT_DTO = PaymentDTO.class.getSimpleName();
 
     // endregion
 
     // region Properties
 
-    private AmountViewModel mAmountViewModel;
+    private PaymentDTO mPaymentDto;
     private IPaymentService mPaymentService;
     private PaymentResponse mPaymentResponse = null;
 
@@ -69,11 +69,11 @@ public class PaymentFragment extends BaseFragment {
 
     public PaymentFragment() {  }
 
-    public static PaymentFragment newInstance(AmountViewModel amountViewModel) {
+    public static PaymentFragment newInstance(PaymentDTO paymentDto) {
         PaymentFragment fragment = new PaymentFragment();
         Bundle args = new Bundle();
 
-        args.putParcelable(ARG_AMOUNT_VIEW_MODEL, amountViewModel);
+        args.putParcelable(ARG_PAYMENT_DTO, paymentDto);
 
         fragment.setArguments(args);
         return fragment;
@@ -88,10 +88,10 @@ public class PaymentFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mAmountViewModel = getArguments().getParcelable(ARG_AMOUNT_VIEW_MODEL);
+            mPaymentDto = getArguments().getParcelable(ARG_PAYMENT_DTO);
         } else {
             // TODO: Handle more elegant
-            mAmountViewModel = new AmountViewModel(0, Currency.ICELANDIC_KRONA);
+            throw new RuntimeException("PaymentFragment: Unable to get arguments");
         }
 
         mPaymentService = PaymentServiceStub.getInstance();
@@ -121,8 +121,8 @@ public class PaymentFragment extends BaseFragment {
         mExpireYearSpinner.setAdapter(expireYearAdapter);
 
         // TODO: This could use some refactoring...
-        NumberFormat formatter = NumberFormat.getCurrencyInstance(mAmountViewModel.currency.getLocale());
-        String formattedAmount = formatter.format(mAmountViewModel.amount);
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(mPaymentDto.currency.getLocale());
+        String formattedAmount = formatter.format(mPaymentDto.amount);
         String amountText = getString(R.string.fragment_payment_payment_txt_amount) + ": " + formattedAmount;
         mAmountText.setText(amountText);
 
@@ -182,7 +182,7 @@ public class PaymentFragment extends BaseFragment {
             String cvc = mCVCInput.getText().toString();
 
             CardPaymentViewModel cardPaymentViewModel = new CardPaymentViewModel(
-                    mAmountViewModel,
+                    mPaymentDto,
                     cardholder,
                     cardNumber,
                     expireMonth,
@@ -199,14 +199,16 @@ public class PaymentFragment extends BaseFragment {
 
     // region Response callbacks
 
-    private class PaymentResponse implements Callback<ReceiptDTO> {
+    private class PaymentResponse implements Callback<PaymentConfirmedDTO> {
 
         @Override
-        public void onResponse(Call<ReceiptDTO> call, Response<ReceiptDTO> response) {
+        public void onResponse(Call<PaymentConfirmedDTO> call, Response<PaymentConfirmedDTO> response) {
             mPaymentResponse = null;
 
             if(response.isSuccess()) {
-                ReceiptDTO receiptDto = response.body();
+                PaymentConfirmedDTO paymentConfirmedDto = response.body();
+
+                ReceiptDTO receiptDto = new ReceiptDTO(mPaymentDto, paymentConfirmedDto);
 
                 FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
@@ -234,7 +236,7 @@ public class PaymentFragment extends BaseFragment {
         }
 
         @Override
-        public void onFailure(Call<ReceiptDTO> call, Throwable t) {
+        public void onFailure(Call<PaymentConfirmedDTO> call, Throwable t) {
             mPaymentResponse = null;
             updateButtonState(true);
             Log.e("onFailure", "Something went terribly wrong :/");
