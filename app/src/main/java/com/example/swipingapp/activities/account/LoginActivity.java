@@ -15,7 +15,6 @@ import com.example.swipingapp.R;
 import com.example.swipingapp.activities.main.MainActivity;
 import com.example.swipingapp.responses.ErrorResponse;
 import com.example.swipingapp.services.account.AccountService;
-import com.example.swipingapp.services.account.AccountServiceStub;
 import com.example.swipingapp.services.account.IAccountService;
 import com.example.swipingapp.utils.DialogUtils;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
@@ -55,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAccountService = AccountServiceStub.getInstance();
+        mAccountService = AccountService.getInstance();
 
         mEmailInput = (EditText) findViewById(R.id.input_email);
         mPasswordInput = (EditText) findViewById(R.id.input_password);
