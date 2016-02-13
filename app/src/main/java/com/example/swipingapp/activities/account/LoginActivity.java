@@ -1,11 +1,10 @@
 package com.example.swipingapp.activities.account;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,14 +13,19 @@ import android.widget.TextView;
 
 import com.example.swipingapp.R;
 import com.example.swipingapp.activities.main.MainActivity;
+import com.example.swipingapp.responses.ErrorResponse;
 import com.example.swipingapp.services.account.AccountService;
 import com.example.swipingapp.services.account.IAccountService;
 import com.example.swipingapp.utils.DialogUtils;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 
+import java.io.IOException;
+import java.lang.annotation.Annotation;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Converter;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
@@ -36,8 +40,8 @@ public class LoginActivity extends AppCompatActivity {
 
     // region UI references
 
-    private EditText mEmailView;
-    private EditText mPasswordView;
+    private EditText mEmailInput;
+    private EditText mPasswordInput;
     private Button mLoginButton;
     private TextView mRegisterText;
 
@@ -52,8 +56,8 @@ public class LoginActivity extends AppCompatActivity {
 
         mAccountService = AccountService.getInstance();
 
-        mEmailView = (EditText) findViewById(R.id.email);
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mEmailInput = (EditText) findViewById(R.id.input_email);
+        mPasswordInput = (EditText) findViewById(R.id.input_password);
         mLoginButton = (Button) findViewById(R.id.btn_login);
         mRegisterText = (TextView) findViewById(R.id.txt_register);
 
@@ -66,6 +70,28 @@ public class LoginActivity extends AppCompatActivity {
     // endregion
 
     // region Private functions
+
+    private boolean validateModel() {
+        boolean valid = true;
+        View focusView = null;
+
+        if(TextUtils.isEmpty(mEmailInput.getText())) {
+            mEmailInput.setError(getString(R.string.error_field_required));
+            focusView = mEmailInput;
+            valid = false;
+        }
+        if(TextUtils.isEmpty(mPasswordInput.getText())) {
+            mPasswordInput.setError(getString(R.string.error_field_required));
+            focusView = (focusView == null) ? mPasswordInput : focusView;
+            valid = false;
+        }
+
+        if(focusView != null) {
+            focusView.requestFocus();
+        }
+
+        return valid;
+    }
 
     private void updateButtonState(final boolean enabled) {
         mLoginButton.setEnabled(enabled);
@@ -90,15 +116,17 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            updateButtonState(false);
+            if(validateModel()) {
+                updateButtonState(false);
 
-            String email = mEmailView.getText().toString();
-            String password = mPasswordView.getText().toString();
+                String email = mEmailInput.getText().toString();
+                String password = mPasswordInput.getText().toString();
 
-            LoginViewModel loginViewModel = new LoginViewModel(email, password);
+                LoginViewModel loginViewModel = new LoginViewModel(email, password);
 
-            mUserLoginResponse = new UserLoginResponse();
-            mAccountService.login(loginViewModel, mUserLoginResponse);
+                mUserLoginResponse = new UserLoginResponse();
+                mAccountService.login(loginViewModel, mUserLoginResponse);
+            }
         }
     }
 
@@ -133,8 +161,18 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 updateButtonState(true);
 
+                // TODO: Should we only use the message from the response?
                 String title = getString(R.string.activity_login_error_login_failed_title);
                 String message = getString(R.string.activity_login_error_login_failed_message);
+
+                try {
+                    Converter<ResponseBody, ErrorResponse> errorConverter = mAccountService.getRetrofit().responseBodyConverter(ErrorResponse.class, new Annotation[0]);
+                    ErrorResponse error = errorConverter.convert(response.errorBody());
+                    message = error.message;
+                } catch (IOException e) {
+                    // TODO: Better error handling
+                    e.printStackTrace();
+                }
 
                 DialogUtils.displayMessageDialog(mContext, title, message);
             }

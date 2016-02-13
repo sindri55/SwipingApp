@@ -1,10 +1,15 @@
 package com.example.swipingapp.services.payment;
 
-import com.example.swipingapp.exceptions.NotImplementedException;
+import com.example.swipingapp.DTOs.ReceiptDTO;
+import com.example.swipingapp.services.base.BaseServiceStub;
+import com.example.swipingapp.services.payment.api.PaymentApiServiceStub;
 import com.example.swipingapp.viewModels.payment.CardPaymentViewModel;
 import com.example.swipingapp.viewModels.payment.PaymentViewModel;
 
-public class PaymentServiceStub implements IPaymentService {
+import retrofit2.Call;
+import retrofit2.Callback;
+
+public class PaymentServiceStub<T extends PaymentApiServiceStub> extends BaseServiceStub<T> implements IPaymentService {
 
     // region Properties
 
@@ -12,11 +17,19 @@ public class PaymentServiceStub implements IPaymentService {
 
     // endregion
 
+    // region Constructors
+
+    public PaymentServiceStub(Class<T> apiServiceStubType) {
+        super(apiServiceStubType);
+    }
+
+    // endregion
+
     // region Get instance (Singleton)
 
     public static IPaymentService getInstance() {
         if(mInstance == null) {
-            mInstance = new PaymentServiceStub();
+            mInstance = new PaymentServiceStub<>(PaymentApiServiceStub.class);
         }
 
         return mInstance;
@@ -27,22 +40,15 @@ public class PaymentServiceStub implements IPaymentService {
     // region Override functions
 
     @Override
-    public boolean payWithCard(CardPaymentViewModel cardPaymentViewModel) {
-        // Simulate network access, sleep 2 seconds
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        // If amount is 500, payment is rejected, otherwise accepted
-        return cardPaymentViewModel.amount != 500;
+    public void payWithCard(CardPaymentViewModel cardPaymentViewModel, Callback<ReceiptDTO> response) {
+        Call<ReceiptDTO> result = getApiService().payWithCard(cardPaymentViewModel);
+        result.enqueue(response);
     }
 
     @Override
-    public boolean payWithNFC(PaymentViewModel paymentViewModel) {
-        throw new NotImplementedException();
+    public void payWithNFC(PaymentViewModel paymentViewModel, Callback<ReceiptDTO> response) {
+        Call<ReceiptDTO> result = getApiService().payWithNfc(paymentViewModel);
+        result.enqueue(response);
     }
 
     // endregion

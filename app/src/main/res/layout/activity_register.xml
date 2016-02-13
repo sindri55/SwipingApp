@@ -43,22 +43,22 @@
             android:layout_above="@+id/footer_container">
 
             <EditText style="@style/Input.Transparent"
-                android:id="@+id/full_name"
-                android:hint="@string/activity_register_hint_full_name"
+                android:id="@+id/input_name"
+                android:hint="@string/activity_register_hint_name"
                 android:inputType="textPersonName" />
 
             <EditText style="@style/Input.Transparent"
-                android:id="@+id/email"
+                android:id="@+id/input_email"
                 android:hint="@string/activity_register_hint_email"
                 android:inputType="textEmailAddress" />
 
             <EditText style="@style/Input.Transparent"
-                android:id="@+id/password"
+                android:id="@+id/input_password"
                 android:hint="@string/activity_register_hint_password"
                 android:inputType="textPassword" />
 
             <EditText style="@style/Input.Transparent"
-                android:id="@+id/confirm_password"
+                android:id="@+id/input_confirm_password"
                 android:hint="@string/activity_register_hint_confirm_password"
                 android:inputType="textPassword" />
 

@@ -1,12 +1,13 @@
 package com.example.swipingapp.services.account;
 
+import com.example.swipingapp.services.base.IBaseService;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
 
-public interface IAccountService {
+public interface IAccountService extends IBaseService {
 
     // region Public functions
 

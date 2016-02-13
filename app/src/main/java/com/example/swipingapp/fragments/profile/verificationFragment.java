@@ -11,11 +11,11 @@ import com.example.swipingapp.fragments.base.BaseFragment;
 /**
  * Created by Sindri on 11/02/16.
  */
-public class verificationFragment extends BaseFragment {
+public class VerificationFragment extends BaseFragment {
 
     // region Constants
 
-    public static final String TAG = SettingsFragment.class.getSimpleName();
+    public static final String TAG = VerificationFragment.class.getSimpleName();
 
     // endregion
 
@@ -39,7 +39,7 @@ public class verificationFragment extends BaseFragment {
 
     @Override
     public String getTitle() {
-        return getString(R.string.fragment_profile_profile_settings_title);
+        return null;
     }
 
     // endregion

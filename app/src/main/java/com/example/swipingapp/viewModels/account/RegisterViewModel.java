@@ -4,7 +4,7 @@ public class RegisterViewModel {
 
     // region Properties
 
-    public String fullName;
+    public String name;
     public String username; // TODO: remove
     public String email;
     public String password;
@@ -14,8 +14,8 @@ public class RegisterViewModel {
 
     // region Constructors
 
-    public RegisterViewModel(String fullName, String email, String password, String confirmPassword) {
-        this.fullName = fullName;
+    public RegisterViewModel(String name, String email, String password, String confirmPassword) {
+        this.name = name;
         this.username = email;
         this.email = email;
         this.password = password;

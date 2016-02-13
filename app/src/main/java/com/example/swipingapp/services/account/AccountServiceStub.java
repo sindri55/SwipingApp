@@ -1,6 +1,7 @@
 package com.example.swipingapp.services.account;
 
-import com.example.swipingapp.services.base.BaseServiceMock;
+import com.example.swipingapp.services.account.api.AccountApiServiceStub;
+import com.example.swipingapp.services.base.BaseServiceStub;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 import com.example.swipingapp.viewModels.account.RegisterViewModel;
 
@@ -8,7 +9,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class AccountServiceStub extends BaseServiceMock implements IAccountService {
+public class AccountServiceStub<T extends AccountApiServiceStub> extends BaseServiceStub<T> implements IAccountService {
 
     // region Properties
 
@@ -16,11 +17,19 @@ public class AccountServiceStub extends BaseServiceMock implements IAccountServi
 
     // endregion
 
+    // region Constructors
+
+    public AccountServiceStub(Class<T> apiServiceStubType) {
+        super(apiServiceStubType);
+    }
+
+    // endregion
+
     // region Get instance (Singleton)
 
     public static IAccountService getInstance() {
         if(mInstance == null) {
-            mInstance = new AccountServiceStub();
+            mInstance = new AccountServiceStub<>(AccountApiServiceStub.class);
         }
 
         return mInstance;
