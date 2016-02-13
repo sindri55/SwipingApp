@@ -10,7 +10,7 @@ import retrofit2.mock.BehaviorDelegate;
 import retrofit2.mock.MockRetrofit;
 import retrofit2.mock.NetworkBehavior;
 
-public class BaseServiceStub<T extends BaseApiServiceStub> {
+public class BaseServiceStub<T extends BaseApiServiceStub> implements IBaseService {
 
     // region Constants
 
@@ -22,6 +22,7 @@ public class BaseServiceStub<T extends BaseApiServiceStub> {
 
     private Class<T> mApiServiceStubType;
     private T mApiService;
+    private Retrofit mRetrofit;
 
     // endregion
 
@@ -33,7 +34,7 @@ public class BaseServiceStub<T extends BaseApiServiceStub> {
 
     // endregion
 
-    // region Get instance (Singleton)
+    // region Protected functions
 
     protected T getApiService() {
         T apiServiceStub;
@@ -46,13 +47,13 @@ public class BaseServiceStub<T extends BaseApiServiceStub> {
             return null;
         }
 
-        Retrofit retrofit = new Retrofit.Builder()
+        mRetrofit = new Retrofit.Builder()
                 .baseUrl(API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         NetworkBehavior behavior = NetworkBehavior.create();
-        MockRetrofit mockRetrofit = new MockRetrofit.Builder(retrofit)
+        MockRetrofit mockRetrofit = new MockRetrofit.Builder(mRetrofit)
                 .networkBehavior(behavior)
                 .build();
 
@@ -64,6 +65,15 @@ public class BaseServiceStub<T extends BaseApiServiceStub> {
         behavior.setDelay(2000, TimeUnit.MILLISECONDS);
 
         return mApiService;
+    }
+
+    // endregion
+
+    // region Override functions
+
+    @Override
+    public Retrofit getRetrofit() {
+        return mRetrofit;
     }
 
     // endregion

@@ -3,7 +3,7 @@ package com.example.swipingapp.services.base;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class BaseService<T> {
+public class BaseService<T> implements IBaseService {
 
     // region Constants
 
@@ -15,6 +15,7 @@ public class BaseService<T> {
 
     private final Class<T> mApiServiceType;
     private T mApiService;
+    private Retrofit mRetrofit;
 
     // endregion
 
@@ -24,19 +25,30 @@ public class BaseService<T> {
         mApiServiceType = apiServiceClassType;
     }
 
-    // region Get instance (Singleton)
+    // endregion
+
+    // region Protected functions
 
     protected T getApiService() {
         if(mApiService == null) {
-            Retrofit retrofit = new Retrofit.Builder()
+            mRetrofit = new Retrofit.Builder()
                     .baseUrl(API_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
-            mApiService = retrofit.create(mApiServiceType);
+            mApiService = mRetrofit.create(mApiServiceType);
         }
 
         return mApiService;
+    }
+
+    // endregion
+
+    // region Override functions
+
+    @Override
+    public Retrofit getRetrofit() {
+        return mRetrofit;
     }
 
     // endregion

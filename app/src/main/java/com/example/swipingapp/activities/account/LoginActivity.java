@@ -12,15 +12,19 @@ import android.widget.TextView;
 
 import com.example.swipingapp.R;
 import com.example.swipingapp.activities.main.MainActivity;
+import com.example.swipingapp.responses.ErrorResponse;
 import com.example.swipingapp.services.account.AccountService;
-import com.example.swipingapp.services.account.AccountServiceStub;
 import com.example.swipingapp.services.account.IAccountService;
 import com.example.swipingapp.utils.DialogUtils;
 import com.example.swipingapp.viewModels.account.LoginViewModel;
 
+import java.io.IOException;
+import java.lang.annotation.Annotation;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Converter;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
@@ -132,8 +136,18 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 updateButtonState(true);
 
+                // TODO: Should we only use the message from the response?
                 String title = getString(R.string.activity_login_error_login_failed_title);
                 String message = getString(R.string.activity_login_error_login_failed_message);
+
+                try {
+                    Converter<ResponseBody, ErrorResponse> errorConverter = mAccountService.getRetrofit().responseBodyConverter(ErrorResponse.class, new Annotation[0]);
+                    ErrorResponse error = errorConverter.convert(response.errorBody());
+                    message = error.message;
+                } catch (IOException e) {
+                    // TODO: Better error handling
+                    e.printStackTrace();
+                }
 
                 DialogUtils.displayMessageDialog(mContext, title, message);
             }
