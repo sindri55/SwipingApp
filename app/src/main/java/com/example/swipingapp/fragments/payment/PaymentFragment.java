@@ -214,6 +214,8 @@ public class PaymentFragment extends BaseFragment {
                 fragmentTransaction.addToBackStack(ReceiptFragment.TAG);
                 fragmentTransaction.commit();
             } else {
+                updateButtonState(true);
+
                 // TODO: Should we only use the message from the response?
                 String title = getString(R.string.fragment_payment_payment_error_payment_failed_title);
                 String message = getString(R.string.fragment_payment_payment_error_payment_failed_message);
