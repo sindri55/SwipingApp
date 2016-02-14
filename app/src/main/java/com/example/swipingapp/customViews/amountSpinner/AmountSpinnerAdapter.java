@@ -19,9 +19,9 @@ public class AmountSpinnerAdapter extends BaseAdapter {
     // region Properties
 
     private Context mContext;
-    private ArrayList<Integer> mValues;
-    private Currency mCurrency;
     private IAmountSpinnerListener mAmountListener;
+    private ArrayList<Integer> mValues;
+    private NumberFormat mFormatter;
 
     // endregion
 
@@ -29,10 +29,10 @@ public class AmountSpinnerAdapter extends BaseAdapter {
 
     public AmountSpinnerAdapter(Context context, Currency currency, IAmountSpinnerListener amountListener) {
         mContext = context;
-        mCurrency = currency;
         mAmountListener = amountListener;
 
         mValues = currency.getAmountSpinnerValues();
+        mFormatter = NumberFormat.getCurrencyInstance(currency.getLocale());
     }
 
     // endregion
@@ -57,9 +57,9 @@ public class AmountSpinnerAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            LayoutInflater mInflater = (LayoutInflater)
+            LayoutInflater inflater = (LayoutInflater)
                     mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.amount_spinner_item, null);
+            convertView = inflater.inflate(R.layout.amount_spinner_item, null);
         }
 
         int value = mValues.get(position);
@@ -68,8 +68,8 @@ public class AmountSpinnerAdapter extends BaseAdapter {
         Button amountButton = (Button) convertView.findViewById(R.id.btn_amount);
         Button increaseButton = (Button) convertView.findViewById(R.id.btn_increase);
 
-        NumberFormat formatter = NumberFormat.getCurrencyInstance(mCurrency.getLocale());
-        String amountText = formatter.format(value);
+
+        String amountText = mFormatter.format(value);
         amountButton.setText(amountText);
 
         decreaseButton.setOnClickListener(new AmountButtonClickListener(value));
