@@ -32,7 +32,7 @@ public class AmountSpinnerAdapter extends BaseAdapter {
         mAmountListener = amountListener;
 
         mValues = currency.getAmountSpinnerValues();
-        mFormatter = NumberFormat.getCurrencyInstance(currency.getLocale());
+        mFormatter = currency.getFormatter();
     }
 
     // endregion

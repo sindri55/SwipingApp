@@ -1,5 +1,6 @@
 package com.example.swipingapp.enums;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -32,15 +33,18 @@ public enum Currency {
         return this.currencyCode;
     }
 
-    public Locale getLocale() {
+    public NumberFormat getFormatter() {
+        Locale locale = new Locale("is", "IS");
         switch (this) {
             case ICELANDIC_KRONA:
-                return new Locale("is", "IS");
+                locale = new Locale("is", "IS");
+                break;
             case US_DOLLAR:
-                return new Locale("en", "US");
+                locale = new Locale("en", "US");
+                break;
         }
 
-        return new Locale("is", "IS");
+        return NumberFormat.getCurrencyInstance(locale);
     }
 
     public ArrayList<Integer> getAmountSpinnerValues() {

@@ -63,7 +63,7 @@ public class InputAmount extends EditText {
 
         mSettingsService = SettingsServiceStub.getInstance();
         mCurrency = mSettingsService.getUserCurrency();
-        mFormatter = NumberFormat.getCurrencyInstance(mCurrency.getLocale());
+        mFormatter = mCurrency.getFormatter();
 
         mFormattedString = mFormatter.format(mAmount) + " ";    // TODO: Find solution to hack (spacing for error popup)
 

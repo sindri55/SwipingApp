@@ -121,8 +121,7 @@ public class PaymentFragment extends BaseFragment {
         mExpireYearSpinner.setAdapter(expireYearAdapter);
 
         // TODO: This could use some refactoring...
-        NumberFormat formatter = NumberFormat.getCurrencyInstance(mPaymentDto.currency.getLocale());
-        String formattedAmount = formatter.format(mPaymentDto.amount);
+        String formattedAmount = mPaymentDto.currency.getFormatter().format(mPaymentDto.amount);
         String amountText = getString(R.string.fragment_payment_payment_txt_amount) + ": " + formattedAmount;
         mAmountText.setText(amountText);
 

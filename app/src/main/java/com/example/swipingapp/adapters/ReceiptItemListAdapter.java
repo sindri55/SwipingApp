@@ -31,7 +31,7 @@ public class ReceiptItemListAdapter extends BaseAdapter {
         mContext = context;
         mItems = items;
 
-        mFormatter = NumberFormat.getCurrencyInstance(currency.getLocale());
+        mFormatter = currency.getFormatter();
     }
 
     // endregion
