@@ -1,6 +1,6 @@
 package com.example.swipingapp.viewModels.inventory;
 
-public class ItemCategoryViewModel {
+public class CategoryViewModel {
 
     // region Properties
 
@@ -10,7 +10,7 @@ public class ItemCategoryViewModel {
 
     // region Constructors
 
-    public ItemCategoryViewModel(String description) {
+    public CategoryViewModel(String description) {
         this.description = description;
     }
 
