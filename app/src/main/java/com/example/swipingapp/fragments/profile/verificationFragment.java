@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 import com.example.swipingapp.R;
 import com.example.swipingapp.fragments.base.BaseFragment;
 
-/**
- * Created by Sindri on 11/02/16.
- */
 public class VerificationFragment extends BaseFragment {
 
     // region Constants

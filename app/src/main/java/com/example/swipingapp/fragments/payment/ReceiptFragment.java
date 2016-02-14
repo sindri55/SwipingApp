@@ -6,8 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.swipingapp.DTOs.ReceiptDTO;
+import com.example.swipingapp.DTOs.payment.ReceiptDTO;
 import com.example.swipingapp.R;
+import com.example.swipingapp.adapters.ReceiptItemListAdapter;
 import com.example.swipingapp.fragments.base.BaseFragment;
 
 public class ReceiptFragment extends BaseFragment {
@@ -15,12 +16,12 @@ public class ReceiptFragment extends BaseFragment {
     // region Constants
 
     public static final String TAG = ReceiptFragment.class.getSimpleName();
-    private static final String ARG_PAYMENT_DTO = "paymentDto";
+    private static final String ARG_RECEIPT_DTO = ReceiptDTO.class.getSimpleName();
 
     // endregion
 
     // region Properties
-    private ListView mItemsListview;
+    private ListView mItemsListView;
 
     private ReceiptDTO mReceiptDto;
 
@@ -38,7 +39,7 @@ public class ReceiptFragment extends BaseFragment {
         ReceiptFragment fragment = new ReceiptFragment();
         Bundle args = new Bundle();
 
-        args.putParcelable(ARG_PAYMENT_DTO, receiptDTO);
+        args.putParcelable(ARG_RECEIPT_DTO, receiptDTO);
 
         fragment.setArguments(args);
         return fragment;
@@ -48,23 +49,15 @@ public class ReceiptFragment extends BaseFragment {
 
     // region Override functions
 
-    public static String [] items = {
-        "Pylsa", "Buxur", "Nammi", "Sófi", "Kynlíf", "Sumardekk"
-    };
-
-    public static String [] amounts = {
-        "$1.11", "$5.99", "$0.99", "$299.59", "$59.99", "59.29"
-    };
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if(getArguments() != null) {
-            mReceiptDto = getArguments().getParcelable(ARG_PAYMENT_DTO);
+            mReceiptDto = getArguments().getParcelable(ARG_RECEIPT_DTO);
         } else {
             // TODO: Handle more elegantly
-            mReceiptDto = new ReceiptDTO(123, "Unknown");
+            throw new RuntimeException("ReceiptFragment: Unable to get arguments");
         }
     }
 
@@ -79,8 +72,8 @@ public class ReceiptFragment extends BaseFragment {
             mFragmentListener.setShowNavigationBackButton(false);
         }
 
-        mItemsListview = (ListView) view.findViewById(R.id.payment_receipt_listview);
-        mItemsListview.setAdapter(new customAdapterForReceiptFragment(getActivity().getApplicationContext(), items, amounts));
+        mItemsListView = (ListView) view.findViewById(R.id.payment_receipt_listview);
+        mItemsListView.setAdapter(new ReceiptItemListAdapter(getActivity().getApplicationContext(), mReceiptDto.getItems(), mReceiptDto.getCurrency()));
 
         return view;
     }
