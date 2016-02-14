@@ -7,12 +7,30 @@ public enum Currency {
 
     // region Values
 
-    ICELANDIC_KRONA,
-    US_DOLLAR;
+    ICELANDIC_KRONA         ("ISK"),
+    US_DOLLAR               ("USD");
+
+    // endregion
+
+    // region Properties
+
+    private String currencyCode;
+
+    // endregion
+
+    // region Constructors
+
+    Currency(String currencyCode) {
+        this.currencyCode = currencyCode;
+    }
 
     // endregion
 
     // region Public functions
+
+    public String getCurrencyCode() {
+        return this.currencyCode;
+    }
 
     public Locale getLocale() {
         switch (this) {
