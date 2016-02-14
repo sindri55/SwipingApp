@@ -6,7 +6,6 @@ public class ItemViewModel {
 
     // region Properties
 
-    public int categoryId;
     public String description;
     public double amount;
     public Currency currency;   // TODO: Should this be on each item?
@@ -15,8 +14,7 @@ public class ItemViewModel {
 
     // region Constructors
 
-    public ItemViewModel(int categoryId, String description, double amount, Currency currency) {
-        this.categoryId = categoryId;
+    public ItemViewModel(String description, double amount, Currency currency) {
         this.description = description;
         this.amount = amount;
         this.currency = currency;

@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
-public class ItemCategoryDTO implements Parcelable {
+public class CategoryDTO implements Parcelable {
 
     // region Properties
 
@@ -17,7 +17,7 @@ public class ItemCategoryDTO implements Parcelable {
 
     // region Constructors
 
-    public ItemCategoryDTO(int categoryId, String description, ArrayList<ItemDTO> items) {
+    public CategoryDTO(int categoryId, String description, ArrayList<ItemDTO> items) {
         this.categoryId = categoryId;
         this.description = description;
         this.items = items;
@@ -27,21 +27,21 @@ public class ItemCategoryDTO implements Parcelable {
 
     // region Parcelable
 
-    protected ItemCategoryDTO(Parcel in) {
+    protected CategoryDTO(Parcel in) {
         this.categoryId = in.readInt();
         this.description = in.readString();
         this.items = in.createTypedArrayList(ItemDTO.CREATOR);
     }
 
-    public static final Creator<ItemCategoryDTO> CREATOR = new Creator<ItemCategoryDTO>() {
+    public static final Creator<CategoryDTO> CREATOR = new Creator<CategoryDTO>() {
         @Override
-        public ItemCategoryDTO createFromParcel(Parcel in) {
-            return new ItemCategoryDTO(in);
+        public CategoryDTO createFromParcel(Parcel in) {
+            return new CategoryDTO(in);
         }
 
         @Override
-        public ItemCategoryDTO[] newArray(int size) {
-            return new ItemCategoryDTO[size];
+        public CategoryDTO[] newArray(int size) {
+            return new CategoryDTO[size];
         }
     };
 
