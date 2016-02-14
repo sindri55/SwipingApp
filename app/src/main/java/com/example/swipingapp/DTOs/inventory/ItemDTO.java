@@ -1,26 +1,28 @@
-package com.example.swipingapp.DTOs.payment;
+package com.example.swipingapp.DTOs.inventory;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.example.swipingapp.enums.Currency;
 
 public class ItemDTO implements Parcelable {
 
     // region Properties
 
+    public int itemId;
     public String description;
-    public int count;
-    public double unitAmount;
     public double amount;
+    public Currency currency;
 
     // endregion
 
     // region Constructors
 
-    public ItemDTO(String description, int count, double unitAmount) {
+    public ItemDTO(int itemId, String description, double amount, Currency currency) {
+        this.itemId = itemId;
         this.description = description;
-        this.count = count;
-        this.unitAmount = unitAmount;
-        this.amount = unitAmount * count;
+        this.amount = amount;
+        this.currency = currency;
     }
 
     // endregion
@@ -28,10 +30,10 @@ public class ItemDTO implements Parcelable {
     // region Parcelable
 
     protected ItemDTO(Parcel in) {
+        this.itemId = in.readInt();
         this.description = in.readString();
-        this.count = in.readInt();
-        this.unitAmount = in.readDouble();
-        this.amount = count * unitAmount;
+        this.amount = in.readDouble();
+        this.currency = (Currency) in.readSerializable();
     }
 
     public static final Creator<ItemDTO> CREATOR = new Creator<ItemDTO>() {
@@ -53,9 +55,10 @@ public class ItemDTO implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(itemId);
         dest.writeString(description);
-        dest.writeInt(count);
-        dest.writeDouble(unitAmount);
+        dest.writeDouble(amount);
+        dest.writeSerializable(currency);
     }
 
     // endregion

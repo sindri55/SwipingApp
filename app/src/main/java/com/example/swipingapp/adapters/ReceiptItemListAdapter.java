@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.swipingapp.DTOs.payment.ItemDTO;
+import com.example.swipingapp.DTOs.payment.PaymentItemDTO;
 import com.example.swipingapp.R;
 import com.example.swipingapp.enums.Currency;
 
@@ -20,18 +20,18 @@ public class ReceiptItemListAdapter extends BaseAdapter {
     // region Properties
 
     private Context mContext;
-    private ArrayList<ItemDTO> mItems;
+    private ArrayList<PaymentItemDTO> mItems;
     private NumberFormat mFormatter;
 
     // endregion
 
     // region Constructors
 
-    public ReceiptItemListAdapter(Context context, ArrayList<ItemDTO> items, Currency currency) {
+    public ReceiptItemListAdapter(Context context, ArrayList<PaymentItemDTO> items, Currency currency) {
         mContext = context;
         mItems = items;
 
-        mFormatter = NumberFormat.getCurrencyInstance(currency.getLocale());
+        mFormatter = currency.getFormatter();
     }
 
     // endregion
@@ -61,7 +61,7 @@ public class ReceiptItemListAdapter extends BaseAdapter {
         }
 
         Holder holder = new Holder();
-        ItemDTO item = mItems.get(position);
+        PaymentItemDTO item = mItems.get(position);
 
 
         String formattedAmount = mFormatter.format(item.amount);

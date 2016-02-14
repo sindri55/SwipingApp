@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.swipingapp.DTOs.payment.ItemDTO;
+import com.example.swipingapp.DTOs.payment.PaymentItemDTO;
 import com.example.swipingapp.DTOs.payment.PaymentDTO;
 import com.example.swipingapp.R;
 import com.example.swipingapp.customViews.amountSpinner.AmountSpinnerAdapter;
@@ -110,8 +110,8 @@ public class AmountFragment extends BaseFragment {
             if(mInputAmountView != null){
                 if(validateInputAmount()) {
                     // TODO: this needs rethinking
-                    ArrayList<ItemDTO> items = new ArrayList<>();
-                    items.add(new ItemDTO("Payment", 1, mInputAmountView.getAmount()));
+                    ArrayList<PaymentItemDTO> items = new ArrayList<>();
+                    items.add(new PaymentItemDTO("Payment", 1, mInputAmountView.getAmount()));
 
                     PaymentDTO paymentDto = new PaymentDTO(mCurrency, mInputAmountView.getAmount(), items);
 

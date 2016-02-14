@@ -1,6 +1,6 @@
 package com.example.swipingapp.viewModels.payment;
 
-import com.example.swipingapp.DTOs.payment.ItemDTO;
+import com.example.swipingapp.DTOs.payment.PaymentItemDTO;
 import com.example.swipingapp.DTOs.payment.PaymentDTO;
 import com.example.swipingapp.enums.Currency;
 
@@ -12,7 +12,7 @@ public class PaymentViewModel {
 
     public Currency currency;
     public double amount;
-    public ArrayList<ItemDTO> items;
+    public ArrayList<PaymentItemDTO> items;
 
     // endregion
 

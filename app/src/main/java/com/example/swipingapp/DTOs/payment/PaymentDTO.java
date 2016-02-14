@@ -13,11 +13,11 @@ public class PaymentDTO implements Parcelable {
 
     public Currency currency;
     public double amount;
-    public ArrayList<ItemDTO> items;
+    public ArrayList<PaymentItemDTO> items;
 
     // endregion
 
-    public PaymentDTO(Currency currency, double amount, ArrayList<ItemDTO> items) {
+    public PaymentDTO(Currency currency, double amount, ArrayList<PaymentItemDTO> items) {
         this.currency = currency;
         this.amount = amount;
         this.items = items;
@@ -28,7 +28,7 @@ public class PaymentDTO implements Parcelable {
     protected PaymentDTO(Parcel in) {
         this.currency = (Currency) in.readSerializable();
         this.amount = in.readDouble();
-        this.items = in.createTypedArrayList(ItemDTO.CREATOR);
+        this.items = in.createTypedArrayList(PaymentItemDTO.CREATOR);
     }
 
     public static final Creator<PaymentDTO> CREATOR = new Creator<PaymentDTO>() {
