@@ -27,7 +27,7 @@ public class ReceiptDTO implements Parcelable {
 
     // region Public functions
 
-    public ArrayList<ItemDTO> getItems() {
+    public ArrayList<PaymentItemDTO> getItems() {
         return paymentDto.items;
     }
 

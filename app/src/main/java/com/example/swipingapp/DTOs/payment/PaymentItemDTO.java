@@ -3,7 +3,7 @@ package com.example.swipingapp.DTOs.payment;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ItemDTO implements Parcelable {
+public class PaymentItemDTO implements Parcelable {
 
     // region Properties
 
@@ -16,7 +16,7 @@ public class ItemDTO implements Parcelable {
 
     // region Constructors
 
-    public ItemDTO(String description, int count, double unitAmount) {
+    public PaymentItemDTO(String description, int count, double unitAmount) {
         this.description = description;
         this.count = count;
         this.unitAmount = unitAmount;
@@ -27,22 +27,22 @@ public class ItemDTO implements Parcelable {
 
     // region Parcelable
 
-    protected ItemDTO(Parcel in) {
+    protected PaymentItemDTO(Parcel in) {
         this.description = in.readString();
         this.count = in.readInt();
         this.unitAmount = in.readDouble();
         this.amount = count * unitAmount;
     }
 
-    public static final Creator<ItemDTO> CREATOR = new Creator<ItemDTO>() {
+    public static final Creator<PaymentItemDTO> CREATOR = new Creator<PaymentItemDTO>() {
         @Override
-        public ItemDTO createFromParcel(Parcel in) {
-            return new ItemDTO(in);
+        public PaymentItemDTO createFromParcel(Parcel in) {
+            return new PaymentItemDTO(in);
         }
 
         @Override
-        public ItemDTO[] newArray(int size) {
-            return new ItemDTO[size];
+        public PaymentItemDTO[] newArray(int size) {
+            return new PaymentItemDTO[size];
         }
     };
 
