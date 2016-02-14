@@ -13,9 +13,10 @@ public enum DrawerItem {
     // region Values
 
     MAKE_TRANSACTION    (0),
-    PROFILE             (1),
-    HISTORY             (2),
-    SETTINGS            (3),
+    INVENTORY           (1),
+    PROFILE             (2),
+    HISTORY             (3),
+    SETTINGS            (4),
 
     LOG_OUT             (100);
 
@@ -42,10 +43,12 @@ public enum DrawerItem {
             case 0:
                 return MAKE_TRANSACTION;
             case 1:
-                return PROFILE;
+                return INVENTORY;
             case 2:
-                return HISTORY;
+                return PROFILE;
             case 3:
+                return HISTORY;
+            case 4:
                 return SETTINGS;
 
             case 100:
@@ -75,6 +78,11 @@ public enum DrawerItem {
                 return new PrimaryDrawerItem()
                         .withIdentifier(this.getIdentifier())
                         .withName(appContext.getString(R.string.drawer_item_name_make_transaction))
+                        .withIcon(R.mipmap.ic_launcher);    // TODO: Find icon
+            case INVENTORY:
+                return new PrimaryDrawerItem()
+                        .withIdentifier(this.getIdentifier())
+                        .withName(appContext.getString(R.string.drawer_item_name_inventory))
                         .withIcon(R.mipmap.ic_launcher);    // TODO: Find icon
             case PROFILE:
                 return new PrimaryDrawerItem()

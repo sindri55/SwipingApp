@@ -68,6 +68,9 @@
     <!-- History fragments -->
     <string name="fragment_history_history_title">History</string>
 
+    <!-- Inventory fragments -->
+    <string name="fragment_inventory_title">Inventory</string>
+
     <!-- Settings fragments -->
     <string name="fragment_settings_settings_title">Settings</string>
 
@@ -76,6 +79,7 @@
 
     <!-- Drawer Items -->
     <string name="drawer_item_name_make_transaction">Make a Transaction</string>
+    <string name="drawer_item_name_inventory">Inventory</string>
     <string name="drawer_item_name_profile">Profile</string>
     <string name="drawer_item_name_history">History</string>
     <string name="drawer_item_name_settings">Settings</string>

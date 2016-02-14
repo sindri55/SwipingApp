@@ -15,6 +15,7 @@ import com.example.swipingapp.DTOs.UserDTO;
 import com.example.swipingapp.R;
 import com.example.swipingapp.activities.account.LoginActivity;
 import com.example.swipingapp.enums.DrawerItem;
+import com.example.swipingapp.fragments.Inventory.InventoryFragment;
 import com.example.swipingapp.fragments.history.HistoryFragment;
 import com.example.swipingapp.fragments.profile.ProfileFragment;
 import com.example.swipingapp.fragments.payment.AmountFragment;
@@ -132,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
     private void setDrawerItems() {
         mDrawerItems = new ArrayList<>();
         mDrawerItems.add(DrawerItem.MAKE_TRANSACTION.getDrawerItem());
+        mDrawerItems.add(DrawerItem.INVENTORY.getDrawerItem());
         mDrawerItems.add(DrawerItem.PROFILE.getDrawerItem());
         mDrawerItems.add(DrawerItem.HISTORY.getDrawerItem());
         mDrawerItems.add(DrawerItem.SETTINGS.getDrawerItem());
@@ -149,6 +151,10 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
             switch (drawerItem){
                 case MAKE_TRANSACTION:
                     ft.replace(R.id.fragment_container, new AmountFragment(), AmountFragment.TAG);
+                    ft.commit();
+                    break;
+                case INVENTORY:
+                    ft.replace(R.id.fragment_container, new InventoryFragment(), InventoryFragment.TAG);
                     ft.commit();
                     break;
                 case PROFILE:
