@@ -86,4 +86,8 @@
 
     <string name="drawer_item_name_log_out">Log Out</string>
 
+    <!-- Inventory -->
+    <string name="collapsed">collapsed: %s</string>
+    <string name="expanded">expanded: %s</string>
+
 </resources>

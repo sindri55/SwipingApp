@@ -3,9 +3,13 @@ package com.example.swipingapp.DTOs.inventory;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
+import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
+import com.example.swipingapp.fragments.Inventory.Model.ParentListItem;
 
-public class CategoryDTO implements Parcelable {
+import java.util.ArrayList;
+import java.util.List;
+
+public class CategoryDTO implements Parcelable, ParentListItem {
 
     // region Properties
 
@@ -57,5 +61,14 @@ public class CategoryDTO implements Parcelable {
         dest.writeTypedList(items);
     }
 
+    @Override
+    public List<?> getChildItemList() {
+        return items;
+    }
+
+    @Override
+    public boolean isInitiallyExpanded() {
+        return false;
+    }
     // endregion
 }
