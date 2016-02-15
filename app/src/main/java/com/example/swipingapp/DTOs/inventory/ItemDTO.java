@@ -3,6 +3,7 @@ package com.example.swipingapp.DTOs.inventory;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.example.swipingapp.enums.Currency;
 
 public class ItemDTO implements Parcelable {
