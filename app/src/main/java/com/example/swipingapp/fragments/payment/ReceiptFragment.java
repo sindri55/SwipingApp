@@ -82,7 +82,7 @@ public class ReceiptFragment extends BaseFragment {
 
         NumberFormat formatter = mReceiptDto.paymentDto.currency.getFormatter();
 
-        mTransactionIdText = (TextView) view.findViewById(R.id.txt_transaction_Id);
+        mTransactionIdText = (TextView) view.findViewById(R.id.txt_transaction_id);
         mOrderDateText = (TextView) view.findViewById(R.id.txt_order_date);
         mAmountText = (TextView) view.findViewById(R.id.txt_amount);
         mAmountTotalText = (TextView) view.findViewById(R.id.txt_amount_total);

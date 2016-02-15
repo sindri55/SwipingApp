@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:right="@dimen/border_default_width_negative"
+        android:left="@dimen/border_default_width_negative">
+
+        <shape android:shape="rectangle">
+            <stroke android:width="@dimen/border_default_width" android:color="@color/border_default"/>
+        </shape>
+    </item>
+</layer-list>

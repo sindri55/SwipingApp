@@ -51,6 +51,14 @@
     <color name="button_default_border">#adadad</color>
     <color name="button_default_border_pressed">#8c8c8c</color>
     <color name="button_default_border_disabled">#cccccc</color>
+
+    <color name="button_primary_background">#025aa5</color>
+    <color name="button_primary_background_pressed">#014682</color>
+    <color name="button_primary_background_disabled">#0275d8</color>
+    <color name="button_primary_text">@color/white</color>
+    <color name="button_primary_border">#01549b</color>
+    <color name="button_primary_border_pressed">#01315a</color>
+    <color name="button_primary_border_disabled">#0275d8</color>
     
     <color name="button_success_background">#449d44</color>
     <color name="button_success_background_pressed">#398439</color>
@@ -119,4 +127,7 @@
     <color name="text_step_indicator_text">@color/black_lighter</color>
     <color name="text_step_indicator_text_active">@color/white</color>
     <color name="text_step_indicator_border">@color/gray</color>
+
+    <!-- Borders -->
+    <color name="border_default">@color/gray_dark</color>
 </resources>

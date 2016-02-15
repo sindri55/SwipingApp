@@ -79,6 +79,10 @@
         <item name="android:textSize">@dimen/button_text_size_default</item>
         <item name="android:layout_marginTop">@dimen/button_margin_top</item>
     </style>
+    <style name="Button.Primary">
+        <item name="android:background">@drawable/button_primary</item>
+        <item name="android:textColor">@color/button_primary_text</item>
+    </style>
     <style name="Button.Success">
         <item name="android:background">@drawable/button_success</item>
         <item name="android:textColor">@color/button_success_text</item>
@@ -166,21 +170,17 @@
         <item name="android:layout_marginTop">@dimen/form_group_margin_top</item>
     </style>
 
-
-
     <style name="FormGroup.Item">
-    <item name="android:gravity">center_vertical</item>
-    <item name="android:background">@drawable/gradient_unvarified</item>
-    <item name="android:gradientRadius">50dp</item>
-</style>
-
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/gradient_unvarified</item>
+        <item name="android:gradientRadius">50dp</item>
+    </style>
     <style name="FormGroup.Item.verified">
         <item name="android:background">@drawable/gradient_verified</item>
     </style>
 
     <!-- Form control -->
-    <style name="FormControl">
-    </style>
+    <style name="FormControl"/>
     <style name="FormControl.Label">
         <item name="android:textSize">@dimen/form_control_label_text_size</item>
         <item name="android:textColor">@color/form_control_label_text</item>
@@ -261,7 +261,24 @@
         <item name="android:textColor">@color/text_step_indicator_text_active</item>
     </style>
 
+    <!-- List views -->
+    <style name="ListView" />
 
+    <style name="ListItem">
+        <item name="android:paddingTop">@dimen/list_item_padding_top</item>
+        <item name="android:paddingBottom">@dimen/list_item_padding_bottom</item>
+    </style>
 
+    <!-- Borders -->
+    <style name="Border" />
+    <style name="Border.Top">
+        <item name="android:background">@drawable/border_default_top</item>
+    </style>
+    <style name="Border.Bottom">
+        <item name="android:background">@drawable/border_default_bottom</item>
+    </style>
+    <style name="Border.TopBottom">
+        <item name="android:background">@drawable/border_default_top_bottom</item>
+    </style>
 
 </resources>

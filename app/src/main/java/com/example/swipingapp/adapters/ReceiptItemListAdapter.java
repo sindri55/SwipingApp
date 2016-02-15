@@ -57,22 +57,21 @@ public class ReceiptItemListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.custom_receipt_item_list_item, null);
+            convertView = inflater.inflate(R.layout.list_receipt_item, null);
         }
 
         Holder holder = new Holder();
         PaymentItemDTO item = mItems.get(position);
 
+        holder.description = (TextView) convertView.findViewById(R.id.txt_description);
+        holder.count = (TextView) convertView.findViewById(R.id.txt_count);
+        holder.unitAmount = (TextView) convertView.findViewById(R.id.txt_unit_amount);
+        holder.amount = (TextView) convertView.findViewById(R.id.txt_amount);
 
-        String formattedAmount = mFormatter.format(item.amount);
-
-        holder.id = (TextView) convertView.findViewById(R.id.receipt_customlistview_id);
-        holder.item = (TextView) convertView.findViewById(R.id.receipt_customlistview_item_name);
-        holder.amount = (TextView) convertView.findViewById(R.id.receipt_customlistview_amount);
-
-        holder.id.setText(String.valueOf(position + 1));
-        holder.item.setText(item.description);
-        holder.amount.setText(formattedAmount);
+        holder.description.setText(item.description);
+        holder.count.setText(Integer.toString(item.count));
+        holder.unitAmount.setText(mFormatter.format(item.unitAmount));
+        holder.amount.setText(mFormatter.format(item.amount));
 
         return convertView;
     }
@@ -83,8 +82,9 @@ public class ReceiptItemListAdapter extends BaseAdapter {
 
     private class Holder
     {
-        TextView id;
-        TextView item;
+        TextView description;
+        TextView count;
+        TextView unitAmount;
         TextView amount;
     }
 

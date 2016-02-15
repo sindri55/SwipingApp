@@ -1,6 +1,5 @@
 <resources>
     <!-- Layouts -->
-
     <dimen name="layout_padding_bottom_top">5dp</dimen>
     <dimen name="layout_padding_default">16dp</dimen>
     <dimen name="layout_padding_large">30dp</dimen>
@@ -68,4 +67,12 @@
 
     <dimen name="input_box_value_padding_left">10dp</dimen>
     <dimen name="input_box_value_padding_right">@dimen/input_box_value_padding_left</dimen>
+
+    <!-- List views -->
+    <dimen name="list_item_padding_top">5dp</dimen>
+    <dimen name="list_item_padding_bottom">@dimen/list_item_padding_top</dimen>
+
+    <!-- Borders -->
+    <dimen name="border_default_width">1dp</dimen>
+    <dimen name="border_default_width_negative">-1dp</dimen>
 </resources>
