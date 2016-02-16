@@ -84,31 +84,7 @@ public class InventoryFragment extends BaseFragment {
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 
-        // TODO: This needs some rethinking, need to be able to set items dynamically
         mAdapter = new SectionAdapter(getContext(), mItemList);
-        mAdapter.setExpandCollapseListener(new ExpandableRecyclerAdapter.ExpandCollapseListener() {
-            @Override
-            public void onListItemExpanded(int position) {
-                CategoryDTO expandedCategory = mItemList.get(position);
-
-                String toastMsg = getResources().getString(R.string.expanded, expandedCategory.description);
-                Toast.makeText(getActivity(),
-                        toastMsg,
-                        Toast.LENGTH_SHORT)
-                        .show();
-            }
-
-            @Override
-            public void onListItemCollapsed(int position) {
-                CategoryDTO collapsedCategory = mItemList.get(position);
-
-                String toastMsg = getResources().getString(R.string.collapsed, collapsedCategory.description);
-                Toast.makeText(getActivity(),
-                        toastMsg,
-                        Toast.LENGTH_SHORT)
-                        .show();
-            }
-        });
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
