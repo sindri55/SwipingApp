@@ -12,6 +12,7 @@ import com.example.swipingapp.DTOs.inventory.ItemDTO;
 import com.example.swipingapp.R;
 import com.example.swipingapp.extensions.App;
 import com.example.swipingapp.fragments.inventory.adapter.ExpandableRecyclerAdapter;
+import com.example.swipingapp.fragments.inventory.model.ParentWrapper;
 import com.example.swipingapp.fragments.inventory.viewHolder.ItemViewHolder;
 import com.example.swipingapp.fragments.inventory.model.ParentListItem;
 import com.example.swipingapp.fragments.inventory.viewHolder.SectionViewHolder;
@@ -66,13 +67,26 @@ public class SectionAdapter extends ExpandableRecyclerAdapter<SectionViewHolder,
 
     // endregion
 
+    // region Public functions
+
+    public void addItem(CategoryDTO category) {
+        ParentWrapper parentWrapper = new ParentWrapper(category);
+
+        mItemList.add(parentWrapper);
+
+        notifyItemInserted(mItemList.size() - 1);
+    }
+
+    // endregion
+
     // region ExpandCollapseListener
 
     @Override
     public void onListItemExpanded(int position) {
-        CategoryDTO categoryDto = (CategoryDTO) getParentItemList().get(position);
+        ParentWrapper parentWrapper = (ParentWrapper) getListItem(position);
+        CategoryDTO category = (CategoryDTO) parentWrapper.getParentListItem();
 
-        String toastMsg = App.getContext().getString(R.string.expanded, categoryDto.description);
+        String toastMsg = App.getContext().getString(R.string.expanded, category.description);
         Toast.makeText(mContext,
                 toastMsg,
                 Toast.LENGTH_SHORT)
@@ -81,9 +95,10 @@ public class SectionAdapter extends ExpandableRecyclerAdapter<SectionViewHolder,
 
     @Override
     public void onListItemCollapsed(int position) {
-        CategoryDTO categoryDto = (CategoryDTO) getParentItemList().get(position);
+        ParentWrapper parentWrapper = (ParentWrapper) getListItem(position);
+        CategoryDTO category = (CategoryDTO) parentWrapper.getParentListItem();
 
-        String toastMsg = App.getContext().getString(R.string.collapsed, categoryDto.description);
+        String toastMsg = App.getContext().getString(R.string.collapsed, category.description);
         Toast.makeText(mContext,
                 toastMsg,
                 Toast.LENGTH_SHORT)
