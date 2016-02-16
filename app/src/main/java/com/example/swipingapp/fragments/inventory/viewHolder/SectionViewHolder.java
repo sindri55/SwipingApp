@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.view.View;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,22 +13,42 @@ import com.example.swipingapp.R;
 
 public class SectionViewHolder extends ParentViewHolder {
 
+    // region Constants
+
     private static final float INITIAL_POSITION = 0.0f;
     private static final float ROTATED_POSITION = 180f;
 
+    // endregion
+
+    // region Properties
+
+    private CategoryButtonListener mCategoryButtonListener;
+
+    // endregion
+
+    // region UI references
+
     private final ImageView mArrowExpandImageView;
     private TextView mSectionTextView;
+    private Button mDeleteButton;
 
-    public SectionViewHolder(View itemView) {
+    // endregion
+
+    // region Constructors
+
+    public SectionViewHolder(View itemView, CategoryButtonListener categoryButtonListener) {
         super(itemView);
-        mSectionTextView = (TextView) itemView.findViewById(R.id.parent_list_item_section_title_text_view);
 
+        mCategoryButtonListener = categoryButtonListener;
+
+        mSectionTextView = (TextView) itemView.findViewById(R.id.txt_category_description);
+        mDeleteButton = (Button) itemView.findViewById(R.id.btn_delete);
         mArrowExpandImageView = (ImageView) itemView.findViewById(R.id.parent_list_item_expand_arrow);
     }
 
-    public void bind(CategoryDTO category) {
-        mSectionTextView.setText(category.description);
-    }
+    // endregion
+
+    // region Override functions
 
     @SuppressLint("NewApi")
     @Override
@@ -64,4 +85,37 @@ public class SectionViewHolder extends ParentViewHolder {
             mArrowExpandImageView.startAnimation(rotateAnimation);
         }
     }
+
+    // endregion
+
+    // region Public functions
+
+    public void bind(final CategoryDTO category) {
+        mSectionTextView.setText(category.description);
+        mDeleteButton.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if(mCategoryButtonListener != null) {
+                    mCategoryButtonListener.onDeleteCategory(category.categoryId);
+                }
+            }
+        });
+    }
+
+    // endregion
+
+    // region Listeners
+
+
+    // endregion
+
+    // region Interfaces
+
+    // TODO: This needs some rethinking
+    public interface CategoryButtonListener {
+        void onDeleteCategory(int categoryId);
+    }
+
+    // endregion
 }

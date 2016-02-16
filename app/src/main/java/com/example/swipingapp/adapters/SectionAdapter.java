@@ -25,15 +25,17 @@ public class SectionAdapter extends ExpandableRecyclerAdapter<SectionViewHolder,
 
     private LayoutInflater mInflator;
     private Context mContext;
+    private SectionViewHolder.CategoryButtonListener mCategoryButtonListener;
 
     // endregion
 
     // region Constructors
 
-    public SectionAdapter(Context context, @NonNull List<? extends ParentListItem> parentItemList) {
+    public SectionAdapter(Context context, @NonNull List<? extends ParentListItem> parentItemList, SectionViewHolder.CategoryButtonListener categoryButtonListener) {
         super(parentItemList);
         setExpandCollapseListener(this);
         mContext = context;
+        mCategoryButtonListener = categoryButtonListener;
         mInflator = LayoutInflater.from(context);
     }
 
@@ -44,7 +46,7 @@ public class SectionAdapter extends ExpandableRecyclerAdapter<SectionViewHolder,
     @Override
     public SectionViewHolder onCreateParentViewHolder(ViewGroup parentViewGroup) {
         View sectionView = mInflator.inflate(R.layout.fragment_inventory_section_listview_parent, parentViewGroup, false);
-        return new SectionViewHolder(sectionView);
+        return new SectionViewHolder(sectionView, mCategoryButtonListener);
     }
 
     @Override
@@ -69,12 +71,33 @@ public class SectionAdapter extends ExpandableRecyclerAdapter<SectionViewHolder,
 
     // region Public functions
 
-    public void addItem(CategoryDTO category) {
+    public void addCategory(CategoryDTO category) {
         ParentWrapper parentWrapper = new ParentWrapper(category);
-
+        
         mItemList.add(parentWrapper);
 
         notifyItemInserted(mItemList.size() - 1);
+    }
+
+    public void deleteCategory(int categoryId) {
+        int index = -1;
+
+        // TODO: Do better
+        for(int i=0; i<mItemList.size(); i++) {
+            ParentWrapper current = (ParentWrapper) mItemList.get(i);
+            CategoryDTO currentCategory = (CategoryDTO) current.getParentListItem();
+            if(currentCategory.categoryId == categoryId) {
+                index = i;
+            }
+        }
+
+        if(index < 0) {
+            return;
+        }
+
+        mItemList.remove(index);
+
+        notifyItemRemoved(index);
     }
 
     // endregion

@@ -4,17 +4,27 @@
     android:background="#dbdbda">
 
     <TextView
-        android:id="@+id/parent_list_item_section_title_text_view"
-        android:layout_width="wrap_content"
+        android:id="@+id/txt_category_description"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:textStyle="bold"
+        android:layout_toLeftOf="@+id/btn_delete"
         android:text="Crime Title" />
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/parent_list_item_expand_arrow"
+        android:layout_toLeftOf="@+id/parent_list_item_expand_arrow"
+        android:text="Delete"/>
 
     <ImageButton
         android:id="@+id/parent_list_item_expand_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_margin="8dp"
         android:src="@android:drawable/arrow_down_float" />

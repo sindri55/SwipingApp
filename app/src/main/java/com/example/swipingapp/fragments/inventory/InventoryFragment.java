@@ -17,6 +17,7 @@ import com.example.swipingapp.R;
 import com.example.swipingapp.adapters.SectionAdapter;
 import com.example.swipingapp.enums.Currency;
 import com.example.swipingapp.fragments.base.BaseFragment;
+import com.example.swipingapp.fragments.inventory.viewHolder.SectionViewHolder;
 import com.example.swipingapp.responses.ErrorResponse;
 import com.example.swipingapp.services.inventory.IInventoryService;
 import com.example.swipingapp.services.inventory.InventoryServiceStub;
@@ -49,6 +50,7 @@ public class InventoryFragment extends BaseFragment {
     private IInventoryService mInventoryService;
     private Currency mCurrency;
     private SectionAdapter mAdapter;
+    private SectionViewHolder.CategoryButtonListener mCategoryButtonListener;
 
     // endregion
 
@@ -72,6 +74,7 @@ public class InventoryFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         mInventoryService = InventoryServiceStub.getInstance();
+        mCategoryButtonListener = new CategoryButtonListener();
     }
 
     @Override
@@ -86,12 +89,12 @@ public class InventoryFragment extends BaseFragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mAddCategoryButton = (Button) view.findViewById(R.id.btn_add_category);
 
-        mAdapter = new SectionAdapter(getContext(), mItemList);
+        mAdapter = new SectionAdapter(getContext(), mItemList, mCategoryButtonListener);
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mSectionTitleTextView = (TextView) view.findViewById(R.id.parent_list_item_section_title_text_view);
+        mSectionTitleTextView = (TextView) view.findViewById(R.id.txt_category_description);
         mSectionDropDownArrow = (ImageButton) view.findViewById(R.id.parent_list_item_expand_arrow);
         mItemDateText = (TextView) view.findViewById(R.id.txt_category_description);
         mItemSolvedCheckBox = (CheckBox) view.findViewById(R.id.child_list_item_crime_solved_check_box);
@@ -116,6 +119,16 @@ public class InventoryFragment extends BaseFragment {
 
     // endregion
 
+    // region Listeners
+
+    private class CategoryButtonListener implements SectionViewHolder.CategoryButtonListener {
+
+        @Override
+        public void onDeleteCategory(int categoryId) {
+            mInventoryService.deleteCategory(0, categoryId, new DeleteCategoryResponse(categoryId));
+        }
+    }
+
     // region Responses
 
     private class AddCategoryResponse implements Callback<CategoryDTO> {
@@ -123,7 +136,7 @@ public class InventoryFragment extends BaseFragment {
         @Override
         public void onResponse(Call<CategoryDTO> call, Response<CategoryDTO> response) {
             if(response.isSuccess()) {
-                mAdapter.addItem(response.body());
+                mAdapter.addCategory(response.body());
             } else {
                 String title = "Oh fuck";
                 String message = "message";
@@ -155,7 +168,7 @@ public class InventoryFragment extends BaseFragment {
             if(response.isSuccess()) {
                 mItemList = response.body();
                 // TODO: This needs some rethinking, need to be able to set items dynamically
-                mAdapter = new SectionAdapter(getContext(), mItemList);
+                mAdapter = new SectionAdapter(getContext(), mItemList, mCategoryButtonListener);
                 mRecyclerView.setAdapter(mAdapter);
             } else {
                 String title = "Oh fuck";
@@ -176,6 +189,41 @@ public class InventoryFragment extends BaseFragment {
 
         @Override
         public void onFailure(Call<List<CategoryDTO>> call, Throwable t) {
+            Log.e("onFailure", "Something went terribly wrong :/");
+        }
+    }
+
+    private class DeleteCategoryResponse implements Callback<ResponseBody> {
+
+        private int mCategoryId;
+
+        public DeleteCategoryResponse(int categoryId) {
+            mCategoryId = categoryId;
+        }
+
+        @Override
+        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            if(response.isSuccess()) {
+                mAdapter.deleteCategory(mCategoryId);
+            } else {
+                String title = "Oh fuck";
+                String message = "message";
+
+                try {
+                    Converter<ResponseBody, ErrorResponse> errorConverter = mInventoryService.getRetrofit().responseBodyConverter(ErrorResponse.class, new Annotation[0]);
+                    ErrorResponse error = errorConverter.convert(response.errorBody());
+                    message = error.message;
+                } catch (IOException e) {
+                    // TODO: Better error handling
+                    e.printStackTrace();
+                }
+
+                DialogUtils.displayMessageDialog(mContext, title, message);
+            }
+        }
+
+        @Override
+        public void onFailure(Call<ResponseBody> call, Throwable t) {
             Log.e("onFailure", "Something went terribly wrong :/");
         }
     }

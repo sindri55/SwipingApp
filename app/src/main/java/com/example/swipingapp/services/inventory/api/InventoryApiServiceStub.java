@@ -74,7 +74,10 @@ public class InventoryApiServiceStub<T extends IInventoryApiService> extends Bas
         Response<CategoryDTO> response;
 
         mHighestCategoryId++;
-        response = Response.success(new CategoryDTO(mHighestCategoryId, categoryViewModel.description, new ArrayList<ItemDTO>()));
+        CategoryDTO category = new CategoryDTO(mHighestCategoryId, categoryViewModel.description, new ArrayList<ItemDTO>());
+        mCategories.add(category);
+
+        response = Response.success(category);
 
         return mDelegate.returning(Calls.response(response)).addCategory(userId, categoryViewModel);
     }
@@ -96,9 +99,22 @@ public class InventoryApiServiceStub<T extends IInventoryApiService> extends Bas
         Response<ResponseBody> response;
         ResponseBody responseBody = ResponseBody.create(MediaType.parse(MEDIA_TYPE), "Category deleted");
 
-        mCategories.remove(categoryId);
+        CategoryDTO category = null;
+        for(int i=0; i<mCategories.size(); i++) {
+            if(mCategories.get(i).categoryId == categoryId) {
+                category = mCategories.get(i);
+                break;
+            }
+        }
 
-        response = Response.success(responseBody);
+        if(category != null) {
+            mCategories.remove(category);
+            response = Response.success(responseBody);
+        } else {
+            ErrorResponse errorResponse = new ErrorResponse("Category with id: " + categoryId + " was not found!");
+            responseBody = ResponseBody.create(MediaType.parse(MEDIA_TYPE), mGson.toJson(errorResponse));
+            response = Response.error(404, responseBody);
+        }
 
         return mDelegate.returning(Calls.response(response)).deleteCategory(userId, categoryId);
     }
