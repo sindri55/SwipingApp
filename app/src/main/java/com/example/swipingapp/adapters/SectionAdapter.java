@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import com.example.swipingapp.DTOs.inventory.CategoryDTO;
 import com.example.swipingapp.DTOs.inventory.ItemDTO;
 import com.example.swipingapp.R;
-import com.example.swipingapp.fragments.Inventory.Adapter.ExpandableRecyclerAdapter;
-import com.example.swipingapp.fragments.Inventory.ItemViewHolder;
-import com.example.swipingapp.fragments.Inventory.Model.ParentListItem;
-import com.example.swipingapp.fragments.Inventory.SectionViewHolder;
+import com.example.swipingapp.fragments.inventory.adapter.ExpandableRecyclerAdapter;
+import com.example.swipingapp.fragments.inventory.ItemViewHolder;
+import com.example.swipingapp.fragments.inventory.model.ParentListItem;
+import com.example.swipingapp.fragments.inventory.SectionViewHolder;
 
 import java.util.List;
 

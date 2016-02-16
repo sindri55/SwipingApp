@@ -3,7 +3,7 @@ package com.example.swipingapp.DTOs.inventory;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.swipingapp.fragments.Inventory.Model.ParentListItem;
+import com.example.swipingapp.fragments.inventory.model.ParentListItem;
 
 import java.util.ArrayList;
 import java.util.List;
