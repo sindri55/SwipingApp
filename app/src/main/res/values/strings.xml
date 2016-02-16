@@ -7,6 +7,7 @@
     <!-- Content Descriptions -->
     <string name="content_description_image_background">Background Image</string>
     <string name="content_description_image_logo">Logo Image</string>
+    <string name="content_description_image_cart">Cart Image</string>
 
     <!-- Dialogs -->
     <string name="dialog_btn_close">Close</string>

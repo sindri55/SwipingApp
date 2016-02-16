@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.swipingapp.DTOs.UserDTO;
 import com.example.swipingapp.R;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
     // region UI references
 
     private Toolbar mToolbarView;
+    private ImageButton mCartImageButton;
 
     //endregion
 
@@ -81,6 +83,9 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
         mToolbarView = (Toolbar) findViewById(R.id.toolbar);
         mToolbarView.setTitle("");
         setSupportActionBar(mToolbarView);
+
+        mCartImageButton = (ImageButton) mToolbarView.findViewById(R.id.btn_cart);
+        mCartImageButton.setOnClickListener(new CartButtonClickListener());
 
         mFragmentManager.addOnBackStackChangedListener(this);
 
@@ -138,8 +143,6 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
         mDrawerItems.add(DrawerItem.PROFILE.getDrawerItem());
         mDrawerItems.add(DrawerItem.HISTORY.getDrawerItem());
         mDrawerItems.add(DrawerItem.SETTINGS.getDrawerItem());
-        // TODO: REMOVE
-        mDrawerItems.add(DrawerItem.CHECKOUT.getDrawerItem());
     }
 
     private void selectItem(int id) {
@@ -176,12 +179,6 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
                 case LOG_OUT:
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
-                    break;
-
-                // TODO: REMOVE
-                case CHECKOUT:
-                    ft.replace(R.id.fragment_container, new CheckoutFragment(), CheckoutFragment.TAG);
-                    ft.commit();
                     break;
             }
         }
@@ -258,8 +255,25 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
 
         @Override
         public void onClick(View v) {
-            // TODO: Set title or some?
             mFragmentManager.popBackStack();
+        }
+    }
+
+    private class CartButtonClickListener implements ImageButton.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            // Clear the stack
+            clearBackStack();
+
+            // Set the "Make a Transaction" item as selected
+            if(mDrawerItems != null && mDrawerItems.size() > 0) {
+                mDrawer.setSelection(mDrawerItems.get(0));
+            }
+
+            FragmentTransaction ft = mFragmentManager.beginTransaction();
+            ft.replace(R.id.fragment_container, new CheckoutFragment(), CheckoutFragment.TAG);
+            ft.commit();
         }
     }
 

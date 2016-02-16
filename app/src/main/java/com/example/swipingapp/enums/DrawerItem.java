@@ -1,11 +1,9 @@
 package com.example.swipingapp.enums;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 
 import com.example.swipingapp.R;
 import com.example.swipingapp.extensions.App;
-import com.example.swipingapp.fragments.payment.AmountFragment;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 
 public enum DrawerItem {
@@ -18,10 +16,7 @@ public enum DrawerItem {
     HISTORY             (3),
     SETTINGS            (4),
 
-    LOG_OUT             (100),
-
-    // TODO: Remove
-    CHECKOUT            (900);
+    LOG_OUT             (100);
 
     // endregion
 
@@ -56,10 +51,6 @@ public enum DrawerItem {
 
             case 100:
                 return LOG_OUT;
-
-            // TODO: REMOVE
-            case 900:
-                return CHECKOUT;
         }
 
         return null;
@@ -109,14 +100,6 @@ public enum DrawerItem {
                         .withIdentifier(this.getIdentifier())
                         .withName(appContext.getString(R.string.drawer_item_name_log_out))
                         .withIcon(R.mipmap.ic_launcher);    // TODO: Find icon
-
-
-            // TODO: REMOVE
-            case CHECKOUT:
-                return new PrimaryDrawerItem()
-                        .withIdentifier(this.getIdentifier())
-                        .withName("Checkout")
-                        .withIcon(R.mipmap.ic_launcher);
 
         }
 
