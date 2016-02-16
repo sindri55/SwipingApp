@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.example.swipingapp.fragments.inventory.model.ParentListItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDTO implements Parcelable, ParentListItem {
@@ -14,16 +13,24 @@ public class CategoryDTO implements Parcelable, ParentListItem {
 
     public int categoryId;
     public String description;
-    public ArrayList<ItemDTO> items;
+    public List<ItemDTO> items;
 
     // endregion
 
     // region Constructors
 
-    public CategoryDTO(int categoryId, String description, ArrayList<ItemDTO> items) {
+    public CategoryDTO(int categoryId, String description, List<ItemDTO> items) {
         this.categoryId = categoryId;
         this.description = description;
         this.items = items;
+    }
+
+    // endregion
+
+    // region Public functions
+
+    public void addItem(ItemDTO item) {
+        this.items.add(item);
     }
 
     // endregion

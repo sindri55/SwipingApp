@@ -21,29 +21,45 @@ import retrofit2.mock.Calls;
 
 public class InventoryApiServiceStub<T extends IInventoryApiService> extends BaseApiServiceStub<T> implements IInventoryApiService {
 
+    // region Properties
+
+    private static List<CategoryDTO> mCategories;
+    private static int mHighestCategoryId;
+    private static int mHighestItemId;
+
+    // endregion
+
+    // region Constructors
+
+    public InventoryApiServiceStub() {
+        mCategories = new ArrayList<>();
+        mHighestCategoryId = 0;
+        mHighestItemId = 0;
+
+        for(int i=0; i<4; i++) {
+            List<ItemDTO> items = new ArrayList<>();
+
+            for(int j=0; j<4; j++) {
+                items.add(new ItemDTO(mHighestItemId, "Item " + mHighestItemId, 40, Currency.ICELANDIC_KRONA));
+                mHighestItemId++;
+            }
+
+            mCategories.add(new CategoryDTO(mHighestCategoryId, "Category " + mHighestCategoryId, items));
+            mHighestCategoryId++;
+        }
+    }
+
+    // endregion
+
     // region API endpoints
 
     @Override
     public Call<List<CategoryDTO>> getCategories(@Path("userId") int userId) {
-        ArrayList<CategoryDTO> categories;
-        ArrayList<ItemDTO> items;
-
-        categories = new ArrayList<>();
-        items = new ArrayList<>();
-
-        items.add(new ItemDTO(1, "item 1", 10, Currency.ICELANDIC_KRONA));
-        items.add(new ItemDTO(2, "item 2", 20, Currency.ICELANDIC_KRONA));
-        items.add(new ItemDTO(3, "item 3", 30, Currency.ICELANDIC_KRONA));
-
-        categories.add(new CategoryDTO(1, "category 1", items));
-        categories.add(new CategoryDTO(2, "category 2", items));
-        categories.add(new CategoryDTO(3, "category 3", items));
-
         Response<List<CategoryDTO>> response;
         ResponseBody responseBody;
 
         if(userId > 0) {
-            response = Response.success((List<CategoryDTO>) categories);
+            response = Response.success(mCategories);
         } else {
             ErrorResponse errorResponse = new ErrorResponse("Unable to get list");
             responseBody = ResponseBody.create(MediaType.parse(MEDIA_TYPE), mGson.toJson(errorResponse));
@@ -57,7 +73,8 @@ public class InventoryApiServiceStub<T extends IInventoryApiService> extends Bas
     public Call<CategoryDTO> addCategory(@Path("userId") int userId, @Body CategoryViewModel categoryViewModel) {
         Response<CategoryDTO> response;
 
-        response = Response.success(new CategoryDTO(10, categoryViewModel.description, new ArrayList<ItemDTO>()));
+        mHighestCategoryId++;
+        response = Response.success(new CategoryDTO(mHighestCategoryId, categoryViewModel.description, new ArrayList<ItemDTO>()));
 
         return mDelegate.returning(Calls.response(response)).addCategory(userId, categoryViewModel);
     }
@@ -66,7 +83,10 @@ public class InventoryApiServiceStub<T extends IInventoryApiService> extends Bas
     public Call<CategoryDTO> editCategory(@Path("userId") int userId, @Path("categoryId") int categoryId, @Body CategoryViewModel categoryViewModel) {
         Response<CategoryDTO> response;
 
-        response = Response.success(new CategoryDTO(10, categoryViewModel.description, new ArrayList<ItemDTO>()));
+        CategoryDTO category = mCategories.get(categoryId);
+        category.description = categoryViewModel.description;
+
+        response = Response.success(category);
 
         return mDelegate.returning(Calls.response(response)).editCategory(userId, categoryId, categoryViewModel);
     }
@@ -75,6 +95,8 @@ public class InventoryApiServiceStub<T extends IInventoryApiService> extends Bas
     public Call<ResponseBody> deleteCategory(@Path("userId") int userId, @Path("categoryId") int categoryId) {
         Response<ResponseBody> response;
         ResponseBody responseBody = ResponseBody.create(MediaType.parse(MEDIA_TYPE), "Category deleted");
+
+        mCategories.remove(categoryId);
 
         response = Response.success(responseBody);
 
@@ -85,7 +107,12 @@ public class InventoryApiServiceStub<T extends IInventoryApiService> extends Bas
     public Call<ItemDTO> addItem(@Path("userId") int userId, @Path("categoryId") int categoryId, @Body ItemViewModel itemViewModel) {
         Response<ItemDTO> response;
 
-        response = Response.success(new ItemDTO(110, itemViewModel.description, itemViewModel.amount, itemViewModel.currency));
+        mHighestItemId++;
+
+        ItemDTO itemDto = new ItemDTO(mHighestItemId, itemViewModel.description, itemViewModel.amount, itemViewModel.currency);
+        mCategories.get(categoryId).addItem(itemDto);
+
+        response = Response.success(itemDto);
 
         return mDelegate.returning(Calls.response(response)).addItem(userId, categoryId, itemViewModel);
     }
@@ -94,7 +121,12 @@ public class InventoryApiServiceStub<T extends IInventoryApiService> extends Bas
     public Call<ItemDTO> editItem(@Path("userId") int userId, @Path("categoryId") int categoryId, @Path("itemId") int itemId, @Body ItemViewModel itemViewModel) {
         Response<ItemDTO> response;
 
-        response = Response.success(new ItemDTO(110, itemViewModel.description, itemViewModel.amount, itemViewModel.currency));
+        ItemDTO item = mCategories.get(categoryId).items.get(itemId);
+        item.description = itemViewModel.description;
+        item.amount = itemViewModel.amount;
+        item.currency = itemViewModel.currency;
+
+        response = Response.success(item);
 
         return mDelegate.returning(Calls.response(response)).editItem(userId, categoryId, itemId, itemViewModel);
     }
@@ -103,6 +135,8 @@ public class InventoryApiServiceStub<T extends IInventoryApiService> extends Bas
     public Call<ResponseBody> deleteItem(@Path("userId") int userId, @Path("categoryId") int categoryId, @Path("itemId") int itemId) {
         Response<ResponseBody> response;
         ResponseBody responseBody = ResponseBody.create(MediaType.parse(MEDIA_TYPE), "Item deleted");
+
+        mCategories.get(categoryId).items.remove(itemId);
 
         response = Response.success(responseBody);
 
