@@ -1,11 +1,10 @@
-package com.example.swipingapp.fragments.inventory;
+package com.example.swipingapp.fragments.inventory.viewHolder;
 
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.swipingapp.DTOs.inventory.ItemDTO;
 import com.example.swipingapp.R;
-import com.example.swipingapp.fragments.inventory.viewHolder.ChildViewHolder;
 
 public class ItemViewHolder extends ChildViewHolder {
 

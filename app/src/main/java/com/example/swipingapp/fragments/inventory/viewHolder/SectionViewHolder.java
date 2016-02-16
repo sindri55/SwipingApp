@@ -1,4 +1,4 @@
-package com.example.swipingapp.fragments.inventory;
+package com.example.swipingapp.fragments.inventory.viewHolder;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.swipingapp.DTOs.inventory.CategoryDTO;
 import com.example.swipingapp.R;
-import com.example.swipingapp.fragments.inventory.viewHolder.ParentViewHolder;
 
 public class SectionViewHolder extends ParentViewHolder {
 

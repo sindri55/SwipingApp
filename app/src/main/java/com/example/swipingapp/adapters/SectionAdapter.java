@@ -12,9 +12,9 @@ import com.example.swipingapp.DTOs.inventory.ItemDTO;
 import com.example.swipingapp.R;
 import com.example.swipingapp.extensions.App;
 import com.example.swipingapp.fragments.inventory.adapter.ExpandableRecyclerAdapter;
-import com.example.swipingapp.fragments.inventory.ItemViewHolder;
+import com.example.swipingapp.fragments.inventory.viewHolder.ItemViewHolder;
 import com.example.swipingapp.fragments.inventory.model.ParentListItem;
-import com.example.swipingapp.fragments.inventory.SectionViewHolder;
+import com.example.swipingapp.fragments.inventory.viewHolder.SectionViewHolder;
 
 import java.util.List;
 
