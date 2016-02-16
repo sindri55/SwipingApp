@@ -73,7 +73,7 @@ public class InventoryApiServiceStub<T extends IInventoryApiService> extends Bas
     public Call<CategoryDTO> addCategory(@Path("userId") int userId, @Body CategoryViewModel categoryViewModel) {
         Response<CategoryDTO> response;
 
-        mHighestCategoryId++;
+        mHighestCategoryId = mHighestCategoryId++;
         CategoryDTO category = new CategoryDTO(mHighestCategoryId, categoryViewModel.description, new ArrayList<ItemDTO>());
         mCategories.add(category);
 

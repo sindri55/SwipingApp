@@ -37,6 +37,10 @@ public class BaseServiceStub<T extends BaseApiServiceStub> implements IBaseServi
     // region Protected functions
 
     protected T getApiService() {
+        if(mApiService != null) {
+            return mApiService;
+        }
+
         T apiServiceStub;
         Class<?> apiServiceInterface;
         try {

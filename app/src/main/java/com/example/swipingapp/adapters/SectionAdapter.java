@@ -73,7 +73,7 @@ public class SectionAdapter extends ExpandableRecyclerAdapter<SectionViewHolder,
 
     public void addCategory(CategoryDTO category) {
         ParentWrapper parentWrapper = new ParentWrapper(category);
-        
+
         mItemList.add(parentWrapper);
 
         notifyItemInserted(mItemList.size() - 1);
