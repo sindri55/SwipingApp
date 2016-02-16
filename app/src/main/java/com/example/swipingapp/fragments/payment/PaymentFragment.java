@@ -26,7 +26,6 @@ import com.example.swipingapp.viewModels.payment.CardPaymentViewModel;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
-import java.text.NumberFormat;
 import java.util.Calendar;
 
 import okhttp3.ResponseBody;
@@ -41,6 +40,7 @@ public class PaymentFragment extends BaseFragment {
 
     public static final String TAG = PaymentFragment.class.getSimpleName();
     private static final String ARG_PAYMENT_DTO = PaymentDTO.class.getSimpleName();
+    private static final String ARG_CALLING_FRAGMENT_TAG = "CallingFragmentTag";
 
     // endregion
 
@@ -49,10 +49,13 @@ public class PaymentFragment extends BaseFragment {
     private PaymentDTO mPaymentDto;
     private IPaymentService mPaymentService;
     private PaymentResponse mPaymentResponse = null;
+    private String mCallingFragmentTag;
 
     // endregion
 
     // region UI references
+
+    private TextView mStepOneText;
 
     private TextView mAmountText;
     private EditText mCardholderInput;
@@ -69,11 +72,12 @@ public class PaymentFragment extends BaseFragment {
 
     public PaymentFragment() {  }
 
-    public static PaymentFragment newInstance(PaymentDTO paymentDto) {
+    public static PaymentFragment newInstance(PaymentDTO paymentDto, String callingFragmentTag) {
         PaymentFragment fragment = new PaymentFragment();
         Bundle args = new Bundle();
 
         args.putParcelable(ARG_PAYMENT_DTO, paymentDto);
+        args.putString(ARG_CALLING_FRAGMENT_TAG, callingFragmentTag);
 
         fragment.setArguments(args);
         return fragment;
@@ -89,6 +93,7 @@ public class PaymentFragment extends BaseFragment {
 
         if (getArguments() != null) {
             mPaymentDto = getArguments().getParcelable(ARG_PAYMENT_DTO);
+            mCallingFragmentTag = getArguments().getString(ARG_CALLING_FRAGMENT_TAG);
         } else {
             // TODO: Handle more elegant
             throw new RuntimeException("PaymentFragment: Unable to get arguments");
@@ -104,6 +109,8 @@ public class PaymentFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.fragment_payment_payment, container, false);
 
+        mStepOneText = (TextView) view.findViewById(R.id.txt_step_one);
+
         mAmountText = (TextView) view.findViewById(R.id.txt_amount);
         mCardholderInput = (EditText) view.findViewById(R.id.input_cardholder);
         mCardNumberInput = (InputCardNumber) view.findViewById(R.id.input_card_number);
@@ -111,6 +118,13 @@ public class PaymentFragment extends BaseFragment {
         mExpireMonthSpinner = (CustomSpinner) view.findViewById(R.id.spinner_expire_month);
         mExpireYearSpinner = (CustomSpinner) view.findViewById(R.id.spinner_expire_year);
         mPayButton = (Button) view.findViewById(R.id.btn_confirm_payment);
+
+        // TODO: Do this different?
+        if(mCallingFragmentTag.equals(AmountFragment.TAG)) {
+            mStepOneText.setText(R.string.fragment_payment_step_amount);
+        } else {
+            mStepOneText.setText(R.string.fragment_payment_step_items);
+        }
 
         mPayButton.setOnClickListener(new ConfirmPaymentButtonClickListener());
 
@@ -124,6 +138,8 @@ public class PaymentFragment extends BaseFragment {
         String formattedAmount = mPaymentDto.currency.getFormatter().format(mPaymentDto.amount);
         String amountText = getString(R.string.fragment_payment_payment_txt_amount) + ": " + formattedAmount;
         mAmountText.setText(amountText);
+
+        updateButtonState(true);
 
         return view;
     }
@@ -211,7 +227,7 @@ public class PaymentFragment extends BaseFragment {
 
                 FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right);
-                fragmentTransaction.replace(R.id.fragment_container, ReceiptFragment.newInstance(receiptDto), ReceiptFragment.TAG);
+                fragmentTransaction.replace(R.id.fragment_container, ReceiptFragment.newInstance(receiptDto, mCallingFragmentTag), ReceiptFragment.TAG);
                 fragmentTransaction.addToBackStack(ReceiptFragment.TAG);
                 fragmentTransaction.commit();
             } else {

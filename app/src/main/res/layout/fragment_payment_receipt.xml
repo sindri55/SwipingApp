@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/Layout.Background"
+<RelativeLayout style="@style/Layout.Background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/step_container"
@@ -12,6 +12,7 @@
         android:weightSum="3">
 
         <TextView style="@style/Text.StepIndicator"
+            android:id="@+id/txt_step_one"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

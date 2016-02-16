@@ -17,6 +17,7 @@ import com.example.swipingapp.activities.account.LoginActivity;
 import com.example.swipingapp.enums.DrawerItem;
 import com.example.swipingapp.fragments.history.HistoryFragment;
 import com.example.swipingapp.fragments.inventory.InventoryFragment;
+import com.example.swipingapp.fragments.payment.CheckoutFragment;
 import com.example.swipingapp.fragments.profile.ProfileFragment;
 import com.example.swipingapp.fragments.payment.AmountFragment;
 import com.example.swipingapp.fragments.settings.SettingsFragment;
@@ -137,6 +138,8 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
         mDrawerItems.add(DrawerItem.PROFILE.getDrawerItem());
         mDrawerItems.add(DrawerItem.HISTORY.getDrawerItem());
         mDrawerItems.add(DrawerItem.SETTINGS.getDrawerItem());
+        // TODO: REMOVE
+        mDrawerItems.add(DrawerItem.CHECKOUT.getDrawerItem());
     }
 
     private void selectItem(int id) {
@@ -173,6 +176,12 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
                 case LOG_OUT:
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    break;
+
+                // TODO: REMOVE
+                case CHECKOUT:
+                    ft.replace(R.id.fragment_container, new CheckoutFragment(), CheckoutFragment.TAG);
+                    ft.commit();
                     break;
             }
         }

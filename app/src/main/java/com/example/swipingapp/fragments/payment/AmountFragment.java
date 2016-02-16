@@ -112,13 +112,14 @@ public class AmountFragment extends BaseFragment {
                     // TODO: this needs rethinking
                     ArrayList<PaymentItemDTO> items = new ArrayList<>();
                     items.add(new PaymentItemDTO("Payment", 1, mInputAmountView.getAmount()));
+                    items.add(new PaymentItemDTO("Payment 2", 2, mInputAmountView.getAmount()));
 
-                    PaymentDTO paymentDto = new PaymentDTO(mCurrency, mInputAmountView.getAmount(), items);
+                    PaymentDTO paymentDto = new PaymentDTO(items, mCurrency);
 
                     // TODO: Fix so that only the main content slides, not the step indicators, attach them to the header layout?
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                     fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_in_left, R.anim.slide_out_right);
-                    fragmentTransaction.replace(R.id.fragment_container, PaymentFragment.newInstance(paymentDto), PaymentFragment.TAG);
+                    fragmentTransaction.replace(R.id.fragment_container, PaymentFragment.newInstance(paymentDto, TAG), PaymentFragment.TAG);
                     fragmentTransaction.addToBackStack(PaymentFragment.TAG);
                     fragmentTransaction.commit();
                 }

@@ -35,6 +35,10 @@ public class ReceiptDTO implements Parcelable {
         return paymentDto.currency;
     }
 
+    public String getFormattedAmount() {
+        return paymentDto.getFormattedAmount();
+    }
+
     // endregion
 
     // region Parcelable

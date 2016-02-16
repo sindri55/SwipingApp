@@ -37,6 +37,7 @@
 
     <!-- Payment Fragments -->
     <string name="fragment_payment_step_amount">Amount</string>
+    <string name="fragment_payment_step_items">Items</string>
     <string name="fragment_payment_step_payment">Payment</string>
     <string name="fragment_payment_step_receipt">Receipt</string>
 
@@ -44,6 +45,9 @@
     <string name="fragment_payment_amount_btn_payment">Payment</string>
     <string name="fragment_payment_amount_label_amount">Amount</string>
     <string name="fragment_payment_amount_error_amount_missing">Please specify the amount</string>
+
+    <string name="fragment_payment_checkout_title">Checkout</string>
+    <string name="fragment_payment_checkout_btn_payment">Payment</string>
 
     <string name="fragment_payment_payment_title">Payment</string>
     <string name="fragment_payment_payment_txt_amount">Amount</string>

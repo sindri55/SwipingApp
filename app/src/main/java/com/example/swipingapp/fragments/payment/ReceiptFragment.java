@@ -12,24 +12,26 @@ import com.example.swipingapp.R;
 import com.example.swipingapp.adapters.ReceiptItemListAdapter;
 import com.example.swipingapp.fragments.base.BaseFragment;
 
-import java.text.NumberFormat;
-
 public class ReceiptFragment extends BaseFragment {
 
     // region Constants
 
     public static final String TAG = ReceiptFragment.class.getSimpleName();
     private static final String ARG_RECEIPT_DTO = ReceiptDTO.class.getSimpleName();
+    private static final String ARG_CALLING_FRAGMENT_TAG = "CallingFragmentTag";
 
     // endregion
 
     // region Properties
 
     private ReceiptDTO mReceiptDto;
+    private String mCallingFragmentTag;
 
     // endregion
 
     // region UI references
+
+    private TextView mStepOneText;
 
     private TextView mTransactionIdText;
     private TextView mOrderDateText;
@@ -43,11 +45,12 @@ public class ReceiptFragment extends BaseFragment {
 
     public ReceiptFragment() {  }
 
-    public static ReceiptFragment newInstance(ReceiptDTO receiptDTO) {
+    public static ReceiptFragment newInstance(ReceiptDTO receiptDTO, String callingFragmentTag) {
         ReceiptFragment fragment = new ReceiptFragment();
         Bundle args = new Bundle();
 
         args.putParcelable(ARG_RECEIPT_DTO, receiptDTO);
+        args.putString(ARG_CALLING_FRAGMENT_TAG, callingFragmentTag);
 
         fragment.setArguments(args);
         return fragment;
@@ -63,6 +66,7 @@ public class ReceiptFragment extends BaseFragment {
 
         if(getArguments() != null) {
             mReceiptDto = getArguments().getParcelable(ARG_RECEIPT_DTO);
+            mCallingFragmentTag = getArguments().getString(ARG_CALLING_FRAGMENT_TAG);
         } else {
             // TODO: Handle more elegantly
             throw new RuntimeException("ReceiptFragment: Unable to get arguments");
@@ -80,8 +84,7 @@ public class ReceiptFragment extends BaseFragment {
             mFragmentListener.setShowNavigationBackButton(false);
         }
 
-        NumberFormat formatter = mReceiptDto.paymentDto.currency.getFormatter();
-
+        mStepOneText = (TextView) view.findViewById(R.id.txt_step_one);
         mTransactionIdText = (TextView) view.findViewById(R.id.txt_transaction_id);
         mOrderDateText = (TextView) view.findViewById(R.id.txt_order_date);
         mAmountText = (TextView) view.findViewById(R.id.txt_amount);
@@ -90,8 +93,15 @@ public class ReceiptFragment extends BaseFragment {
 
         mTransactionIdText.setText(mReceiptDto.paymentConfirmedDto.orderId);
         mOrderDateText.setText(mReceiptDto.paymentConfirmedDto.orderDate);
-        mAmountText.setText(formatter.format(mReceiptDto.paymentConfirmedDto.amount));
-        mAmountTotalText.setText(formatter.format(mReceiptDto.paymentDto.amount));
+        mAmountText.setText(mReceiptDto.getFormattedAmount());
+        mAmountTotalText.setText(mReceiptDto.getFormattedAmount());
+
+        // TODO: Do this different?
+        if(mCallingFragmentTag.equals(AmountFragment.TAG)) {
+            mStepOneText.setText(R.string.fragment_payment_step_amount);
+        } else {
+            mStepOneText.setText(R.string.fragment_payment_step_items);
+        }
 
         mItemsListView.setAdapter(new ReceiptItemListAdapter(getActivity().getApplicationContext(), mReceiptDto.getItems(), mReceiptDto.getCurrency()));
 

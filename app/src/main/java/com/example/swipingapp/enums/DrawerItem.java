@@ -18,7 +18,10 @@ public enum DrawerItem {
     HISTORY             (3),
     SETTINGS            (4),
 
-    LOG_OUT             (100);
+    LOG_OUT             (100),
+
+    // TODO: Remove
+    CHECKOUT            (900);
 
     // endregion
 
@@ -53,6 +56,10 @@ public enum DrawerItem {
 
             case 100:
                 return LOG_OUT;
+
+            // TODO: REMOVE
+            case 900:
+                return CHECKOUT;
         }
 
         return null;
@@ -64,10 +71,6 @@ public enum DrawerItem {
 
     public int getIdentifier() {
         return this.id;
-    }
-
-    public Fragment getFragment() {
-        return new AmountFragment();
     }
 
     public PrimaryDrawerItem getDrawerItem() {
@@ -106,6 +109,14 @@ public enum DrawerItem {
                         .withIdentifier(this.getIdentifier())
                         .withName(appContext.getString(R.string.drawer_item_name_log_out))
                         .withIcon(R.mipmap.ic_launcher);    // TODO: Find icon
+
+
+            // TODO: REMOVE
+            case CHECKOUT:
+                return new PrimaryDrawerItem()
+                        .withIdentifier(this.getIdentifier())
+                        .withName("Checkout")
+                        .withIcon(R.mipmap.ic_launcher);
 
         }
 

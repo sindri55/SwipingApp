@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout style="@style/Layout.Background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/step_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:weightSum="3">
+
+        <TextView style="@style/Text.StepIndicator.Active"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/fragment_payment_step_items"/>
+
+        <TextView style="@style/Text.StepIndicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/fragment_payment_step_payment"/>
+
+        <TextView style="@style/Text.StepIndicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/fragment_payment_step_receipt"/>
+
+    </LinearLayout>
+
+    <RelativeLayout style="@style/Layout.Padding"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/step_container"
+        android:layout_above="@+id/btn_container">
+
+        <LinearLayout style="@style/ListItem"
+            android:id="@+id/table_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true">
+
+            <TextView style="@style/Text.Small"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:textColor="@color/gray_dark"
+                android:text="@string/fragment_payment_receipt_table_header_product"/>
+
+            <TextView style="@style/Text.Small"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:gravity="end"
+                android:textColor="@color/gray_dark"
+                android:text="@string/fragment_payment_receipt_table_header_quantity"/>
+
+            <TextView style="@style/Text.Small"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="end"
+                android:textColor="@color/gray_dark"
+                android:text="@string/fragment_payment_receipt_table_header_price"/>
+
+            <TextView style="@style/Text.Small"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="end"
+                android:textColor="@color/gray_dark"
+                android:text="@string/fragment_payment_receipt_table_header_total"/>
+
+        </LinearLayout>
+
+        <ListView style="@style/Border.TopBottom"
+            android:id="@+id/list_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/table_header"/>
+
+        <LinearLayout style="@style/Border.Bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/list_item_padding_top"
+            android:paddingBottom="@dimen/list_item_padding_bottom"
+            android:orientation="horizontal"
+            android:layout_below="@+id/list_items">
+
+            <TextView style="@style/Text.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="start"
+                android:textStyle="bold"
+                android:text="@string/fragment_payment_receipt_txt_total"/>
+
+            <TextView style="@style/Text.Small"
+                android:id="@+id/txt_amount_total"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="end"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout style="@style/Layout.Padding"
+        android:id="@+id/btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button style="@style/Button.Success"
+            android:id="@+id/btn_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:text="@string/fragment_payment_checkout_btn_payment"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
