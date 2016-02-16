@@ -1,11 +1,9 @@
 package com.example.swipingapp.fragments.Inventory;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,27 +15,44 @@ import android.widget.Toast;
 import com.example.swipingapp.DTOs.inventory.CategoryDTO;
 import com.example.swipingapp.DTOs.inventory.ItemDTO;
 import com.example.swipingapp.R;
-import com.example.swipingapp.activities.main.MainActivity;
 import com.example.swipingapp.adapters.SectionAdapter;
 import com.example.swipingapp.enums.Currency;
 import com.example.swipingapp.fragments.Inventory.Adapter.ExpandableRecyclerAdapter;
 import com.example.swipingapp.fragments.base.BaseFragment;
+import com.example.swipingapp.responses.ErrorResponse;
 import com.example.swipingapp.services.inventory.IInventoryService;
 import com.example.swipingapp.services.inventory.InventoryServiceStub;
 import com.example.swipingapp.services.settings.ISettingsService;
+import com.example.swipingapp.utils.DialogUtils;
 
+import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Sindri on 13/02/16.
- */
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Converter;
+import retrofit2.Response;
+
 public class InventoryFragment extends BaseFragment {
 
     // region Constants
 
     public static final String TAG = InventoryFragment.class.getSimpleName();
+
+    // endregion
+
+    // region Properties
+
+    private ISettingsService mSettingsService;
+    private IInventoryService mInventoryService;
+    private Currency mCurrency;
+    private SectionAdapter mAdapter;
+
+    // endregion
 
     // region UI references
 
@@ -45,41 +60,26 @@ public class InventoryFragment extends BaseFragment {
     public ImageButton mSectionDropDownArrow;
     public TextView mItemDateText;
     public CheckBox mItemSolvedCheckBox;
-    // endregion
-
-
-    // region Properties
-    private ISettingsService mSettingsService;
-    private IInventoryService mInventoryService;
-    private Currency mCurrency;
+    private List<CategoryDTO> mItemList;
+    private RecyclerView mRecyclerView;
 
     // endregion
-    private List<Object> mItemList;
-    private View rootView;
-
-    private SectionAdapter mAdapter;
 
     // region Override functions
-
-
-    public static Intent newIntent(Context context) {
-        return new Intent(context, MainActivity.class);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-      //  mInventoryService = InventoryServiceStub.getInstance();
-      //  mCurrency = mSettingsService.getUserCurrency();
+        mInventoryService = InventoryServiceStub.getInstance();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        rootView = inflater.inflate(R.layout.fragment_inventory, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_inventory, container, false);
 
         ItemDTO item1 = new ItemDTO(1, "item1", 2, Currency.ICELANDIC_KRONA);
         ItemDTO item2 = new ItemDTO(2, "item2", 4, Currency.ICELANDIC_KRONA);
@@ -120,23 +120,20 @@ public class InventoryFragment extends BaseFragment {
         list3.add(item13);
         list3.add(item14);
 
-
-
         CategoryDTO category1 = new CategoryDTO(1, "Category 1", list1);
         CategoryDTO category2 = new CategoryDTO(2, "Category 2", list2);
         CategoryDTO category3 = new CategoryDTO(2, "Category 3", list3);
 
+        mItemList = Arrays.asList(category1, category2, category3);
 
-        final List<CategoryDTO> categories = Arrays.asList(category1, category2, category3);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
-
-        mAdapter = new SectionAdapter(getContext(), categories);
+        mAdapter = new SectionAdapter(getContext(), mItemList);
 
         mAdapter.setExpandCollapseListener(new ExpandableRecyclerAdapter.ExpandCollapseListener() {
             @Override
             public void onListItemExpanded(int position) {
-                CategoryDTO expandedCategory = categories.get(position);
+                CategoryDTO expandedCategory = mItemList.get(position);
 
                 String toastMsg = getResources().getString(R.string.expanded, expandedCategory.description);
                 Toast.makeText(getActivity(),
@@ -147,7 +144,7 @@ public class InventoryFragment extends BaseFragment {
 
             @Override
             public void onListItemCollapsed(int position) {
-                CategoryDTO collapsedCategory = categories.get(position);
+                CategoryDTO collapsedCategory = mItemList.get(position);
 
                 String toastMsg = getResources().getString(R.string.collapsed, collapsedCategory.description);
                 Toast.makeText(getActivity(),
@@ -157,21 +154,58 @@ public class InventoryFragment extends BaseFragment {
             }
         });
 
-        recyclerView.setAdapter(mAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-            mSectionTitleTextView=(TextView)rootView.findViewById(R.id.parent_list_item_section_title_text_view);
-            mSectionDropDownArrow=(ImageButton)rootView.findViewById(R.id.parent_list_item_expand_arrow);
-            mItemDateText=(TextView)rootView.findViewById(R.id.child_list_item_crime_date_text_view);
-            mItemSolvedCheckBox=(CheckBox)rootView.findViewById(R.id.child_list_item_crime_solved_check_box);
+        mSectionTitleTextView = (TextView) view.findViewById(R.id.parent_list_item_section_title_text_view);
+        mSectionDropDownArrow = (ImageButton) view.findViewById(R.id.parent_list_item_expand_arrow);
+        mItemDateText = (TextView) view.findViewById(R.id.txt_category_description);
+        mItemSolvedCheckBox = (CheckBox) view.findViewById(R.id.child_list_item_crime_solved_check_box);
 
+        mInventoryService.getCategories(1, new GetCategoriesResponse());
 
-            return rootView;
+        return view;
+    }
+
+    @Override
+    public String getTitle() {
+        return getString(R.string.fragment_inventory_title);
+    }
+
+    // endregion
+
+    // region Responses
+
+    private class GetCategoriesResponse implements Callback<List<CategoryDTO>> {
+
+        @Override
+        public void onResponse(Call<List<CategoryDTO>> call, Response<List<CategoryDTO>> response) {
+
+            if(response.isSuccess()) {
+                mItemList = response.body();
+                mAdapter = new SectionAdapter(getContext(), mItemList);
+                mRecyclerView.setAdapter(mAdapter);
+            } else {
+                String title = "Oh fuck";
+                String message = "message";
+
+                try {
+                    Converter<ResponseBody, ErrorResponse> errorConverter = mInventoryService.getRetrofit().responseBodyConverter(ErrorResponse.class, new Annotation[0]);
+                    ErrorResponse error = errorConverter.convert(response.errorBody());
+                    message = error.message;
+                } catch (IOException e) {
+                    // TODO: Better error handling
+                    e.printStackTrace();
+                }
+
+                DialogUtils.displayMessageDialog(mContext, title, message);
+            }
         }
 
         @Override
-    public String getTitle() {
-        return getString(R.string.fragment_inventory_title);
+        public void onFailure(Call<List<CategoryDTO>> call, Throwable t) {
+            Log.e("onFailure", "Something went terribly wrong :/");
+        }
     }
 
     // endregion

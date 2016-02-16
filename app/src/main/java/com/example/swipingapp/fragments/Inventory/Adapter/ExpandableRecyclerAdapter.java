@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.example.swipingapp.DTOs.inventory.CategoryDTO;
 import com.example.swipingapp.fragments.Inventory.Model.ParentListItem;
 import com.example.swipingapp.fragments.Inventory.Model.ParentWrapper;
 import com.example.swipingapp.fragments.Inventory.ViewHolder.ChildViewHolder;

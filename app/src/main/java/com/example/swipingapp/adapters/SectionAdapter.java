@@ -1,6 +1,5 @@
 package com.example.swipingapp.adapters;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -17,17 +16,24 @@ import com.example.swipingapp.fragments.Inventory.SectionViewHolder;
 
 import java.util.List;
 
-/**
- * Created by Sindri on 14/02/16.
- */
 public class SectionAdapter extends ExpandableRecyclerAdapter<SectionViewHolder, ItemViewHolder> {
 
+    // region Properties
+
     private LayoutInflater mInflator;
+
+    // endregion
+
+    // region Constructors
 
     public SectionAdapter(Context context, @NonNull List<? extends ParentListItem> parentItemList) {
         super(parentItemList);
         mInflator = LayoutInflater.from(context);
     }
+
+    // endregion
+
+    // region Override functions
 
     @Override
     public SectionViewHolder onCreateParentViewHolder(ViewGroup parentViewGroup) {
@@ -41,8 +47,6 @@ public class SectionAdapter extends ExpandableRecyclerAdapter<SectionViewHolder,
         return new ItemViewHolder(itemView);
     }
 
-
-
     @Override
     public void onBindParentViewHolder(SectionViewHolder sectionViewHolder, int position, ParentListItem parentListItem) {
         CategoryDTO category = (CategoryDTO) parentListItem;
@@ -54,4 +58,6 @@ public class SectionAdapter extends ExpandableRecyclerAdapter<SectionViewHolder,
         ItemDTO item = (ItemDTO) childListItem;
         itemViewHolder.bind(item);
     }
+
+    // endregion
 }

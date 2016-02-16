@@ -2,7 +2,7 @@ package com.example.swipingapp.services.inventory;
 
 import com.example.swipingapp.DTOs.inventory.CategoryDTO;
 import com.example.swipingapp.DTOs.inventory.ItemDTO;
-import com.example.swipingapp.services.base.BaseService;
+import com.example.swipingapp.services.base.BaseServiceStub;
 import com.example.swipingapp.services.inventory.api.InventoryApiServiceStub;
 import com.example.swipingapp.viewModels.inventory.CategoryViewModel;
 import com.example.swipingapp.viewModels.inventory.ItemViewModel;
@@ -13,7 +13,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class InventoryServiceStub<T extends InventoryApiServiceStub> extends BaseService<T> implements IInventoryService {
+public class InventoryServiceStub<T extends InventoryApiServiceStub> extends BaseServiceStub<T> implements IInventoryService {
 
     // region Properties
 
