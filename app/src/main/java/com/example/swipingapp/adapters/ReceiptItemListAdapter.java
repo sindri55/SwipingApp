@@ -36,6 +36,15 @@ public class ReceiptItemListAdapter extends BaseAdapter {
 
     // endregion
 
+    // region Public functions
+
+    public void setItems(ArrayList<PaymentItemDTO> items) {
+        mItems = items;
+        notifyDataSetChanged();
+    }
+
+    // endregion
+
     // region Override functions
 
     @Override

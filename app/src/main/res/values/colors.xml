@@ -68,6 +68,14 @@
     <color name="button_success_border_pressed">#2d672d</color>
     <color name="button_success_border_disabled">#5cb85c</color>
 
+    <color name="button_danger_background">#c9302c</color>
+    <color name="button_danger_background_pressed">#ac2925</color>
+    <color name="button_danger_background_disabled">#d9534f</color>
+    <color name="button_danger_text">@color/white</color>
+    <color name="button_danger_border">#c12e2a</color>
+    <color name="button_danger_border_pressed">#8b211e</color>
+    <color name="button_danger_border_disabled">#d9534f</color>
+
     <color name="button_change_background">#ff7f24</color>
     <color name="button_change_background_pressed">#e6661f</color>
     <color name="button_change_background_disabled">#ff9232</color>
@@ -91,6 +99,9 @@
     <color name="button_amount_spinner_border">@color/gray</color>
     <color name="button_amount_spinner_border_pressed">@color/gray_dark</color>
     <color name="button_amount_spinner_text">@color/black_lighter</color>
+
+    <!-- Image buttons -->
+    <color name="image_button_background">@color/transparent</color>
 
     <!-- Inputs -->
     <color name="input_text">#55595c</color>
@@ -130,4 +141,7 @@
 
     <!-- Borders -->
     <color name="border_default">@color/gray_dark</color>
+
+    <!-- List views -->
+    <color name="list_header_text">@color/gray_darker</color>
 </resources>

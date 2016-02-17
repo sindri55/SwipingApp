@@ -23,6 +23,7 @@ public class CartService implements ICartService {
     private static ICartService mInstance;
     private static Gson mGson;
     private static SharedPreferences mSharedPreferences;
+    private static SharedPreferences.OnSharedPreferenceChangeListener mSharedPreferencesListener;
 
     // endregion
 
@@ -74,11 +75,6 @@ public class CartService implements ICartService {
     public void addToCart(PaymentItemDTO paymentItem) {
         PaymentDTO paymentDto = getCartItems();
 
-        if(paymentDto == null) {
-            // TODO: This needs some rethinking
-            paymentDto = new PaymentDTO(new ArrayList<PaymentItemDTO>(), Currency.ICELANDIC_KRONA);
-        }
-
         paymentDto.items.add(paymentItem);
 
         SharedPreferences.Editor editor = mSharedPreferences.edit();
@@ -89,9 +85,7 @@ public class CartService implements ICartService {
     public void removeFromCart(PaymentItemDTO paymentItem) {
         PaymentDTO paymentDto = getCartItems();
 
-        if(paymentDto != null) {
-            paymentDto.items.remove(paymentItem);
-        }
+        paymentDto.items.remove(paymentItem);
 
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString("items", mGson.toJson(paymentDto)).apply();
@@ -101,6 +95,13 @@ public class CartService implements ICartService {
     public void clearCart() {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString("items", null).apply();
+    }
+
+    @Override
+    public void setSharedPreferencesListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
+        mSharedPreferencesListener = listener;
+
+        mSharedPreferences.registerOnSharedPreferenceChangeListener(mSharedPreferencesListener);
     }
 
     // endregion

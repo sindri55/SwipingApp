@@ -49,6 +49,7 @@
 
     <string name="fragment_payment_checkout_title">Checkout</string>
     <string name="fragment_payment_checkout_btn_payment">Payment</string>
+    <string name="fragment_payment_checkout_btn_clear_cart">Clear Cart</string>
 
     <string name="fragment_payment_payment_title">Payment</string>
     <string name="fragment_payment_payment_txt_amount">Amount</string>
@@ -63,10 +64,10 @@
     <string name="fragment_payment_payment_error_payment_failed_message">You are broke</string>
 
     <string name="fragment_payment_receipt_title">Receipt</string>
-    <string name="fragment_payment_receipt_table_header_product">Product</string>
-    <string name="fragment_payment_receipt_table_header_quantity">Quantity</string>
-    <string name="fragment_payment_receipt_table_header_price">Price</string>
-    <string name="fragment_payment_receipt_table_header_total">Total</string>
+    <string name="fragment_payment_receipt_list_header_product">Product</string>
+    <string name="fragment_payment_receipt_list_header_quantity">Quantity</string>
+    <string name="fragment_payment_receipt_list_header_price">Price</string>
+    <string name="fragment_payment_receipt_list_header_total">Total</string>
     <string name="fragment_payment_receipt_txt_total">Total</string>
     <string name="fragment_payment_receipt_btn_send_receipt">Send Receipt</string>
 

@@ -39,6 +39,9 @@
     <dimen name="button_amount_spinner_decrement_text_size">@dimen/text_size_xLarge</dimen>
     <dimen name="button_amount_spinner_increment_text_size">@dimen/text_size_default</dimen>
 
+    <!-- Image buttons -->
+    <dimen name="image_button_cart_margin_right">15dp</dimen>
+
     <!-- Inputs -->
     <dimen name="input_layout_height">50dp</dimen>
     <dimen name="input_padding_left">10dp</dimen>

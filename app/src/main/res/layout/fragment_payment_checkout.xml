@@ -49,32 +49,32 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.3"
-                android:textColor="@color/gray_dark"
-                android:text="@string/fragment_payment_receipt_table_header_product"/>
+                android:textColor="@color/list_header_text"
+                android:text="@string/fragment_payment_receipt_list_header_product"/>
 
             <TextView style="@style/Text.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
                 android:gravity="end"
-                android:textColor="@color/gray_dark"
-                android:text="@string/fragment_payment_receipt_table_header_quantity"/>
+                android:textColor="@color/list_header_text"
+                android:text="@string/fragment_payment_receipt_list_header_quantity"/>
 
             <TextView style="@style/Text.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
                 android:gravity="end"
-                android:textColor="@color/gray_dark"
-                android:text="@string/fragment_payment_receipt_table_header_price"/>
+                android:textColor="@color/list_header_text"
+                android:text="@string/fragment_payment_receipt_list_header_price"/>
 
             <TextView style="@style/Text.Small"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
                 android:gravity="end"
-                android:textColor="@color/gray_dark"
-                android:text="@string/fragment_payment_receipt_table_header_total"/>
+                android:textColor="@color/list_header_text"
+                android:text="@string/fragment_payment_receipt_list_header_total"/>
 
         </LinearLayout>
 
@@ -114,13 +114,20 @@
         android:id="@+id/btn_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true">
+
+        <Button style="@style/Button.Danger"
+            android:id="@+id/btn_clear_cart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:text="@string/fragment_payment_checkout_btn_clear_cart"/>
 
         <Button style="@style/Button.Success"
             android:id="@+id/btn_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
             android:text="@string/fragment_payment_checkout_btn_payment"/>
 
     </LinearLayout>

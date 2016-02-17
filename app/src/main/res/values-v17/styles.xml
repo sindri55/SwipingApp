@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ImageButton.Cart">
+        <item name="android:layout_gravity">end</item>
+        <item name="android:layout_marginEnd">@dimen/image_button_cart_margin_right</item>
+        <item name="android:layout_marginRight">@dimen/image_button_cart_margin_right</item>
+    </style>
+</resources>

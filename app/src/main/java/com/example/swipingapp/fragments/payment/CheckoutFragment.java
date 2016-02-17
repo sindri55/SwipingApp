@@ -27,6 +27,7 @@ public class CheckoutFragment extends BaseFragment {
     // region Properties
 
     private ICartService mCartService;
+    private ReceiptItemListAdapter mReceiptItemListAdapter;
 
     // endregion
 
@@ -34,8 +35,22 @@ public class CheckoutFragment extends BaseFragment {
 
     private PaymentDTO mPaymentDto;
     private ListView mItemsListView;
-    private Button mPaymentButton;
     private TextView mAmountTotalText;
+
+    private Button mPaymentButton;
+    private Button mClearCartButton;
+
+    // endregion
+
+    // region Private functions
+
+    private void updateView() {
+        if(mReceiptItemListAdapter != null) {
+            mReceiptItemListAdapter.setItems(mPaymentDto.items);
+        }
+
+        mAmountTotalText.setText(mPaymentDto.getFormattedAmount());
+    }
 
     // endregion
 
@@ -57,12 +72,16 @@ public class CheckoutFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_payment_checkout, container, false);
 
         mItemsListView = (ListView) view.findViewById(R.id.list_items);
-        mPaymentButton = (Button) view.findViewById(R.id.btn_payment);
         mAmountTotalText = (TextView) view.findViewById(R.id.txt_amount_total);
+        mPaymentButton = (Button) view.findViewById(R.id.btn_payment);
+        mClearCartButton = (Button) view.findViewById(R.id.btn_clear_cart);
 
-        mAmountTotalText.setText(mPaymentDto.getFormattedAmount());
         mPaymentButton.setOnClickListener(new PaymentButtonClickListener());
-        mItemsListView.setAdapter(new ReceiptItemListAdapter(getActivity().getApplicationContext(), mPaymentDto.items, mPaymentDto.currency));
+        mClearCartButton.setOnClickListener(new ClearCartButtonClickListener());
+
+        mReceiptItemListAdapter = new ReceiptItemListAdapter(getActivity().getApplicationContext(), mPaymentDto.items, mPaymentDto.currency);
+        mAmountTotalText.setText(mPaymentDto.getFormattedAmount());
+        mItemsListView.setAdapter(mReceiptItemListAdapter);
 
         return view;
     }
@@ -76,16 +95,28 @@ public class CheckoutFragment extends BaseFragment {
 
     // region Listeners
 
+    private class ClearCartButtonClickListener implements Button.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            mCartService.clearCart();
+            mPaymentDto = mCartService.getCartItems();
+
+            updateView();
+        }
+    }
+
     private class PaymentButtonClickListener implements Button.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            // TODO: Fix so that only the main content slides, not the step indicators, attach them to the header layout?
-            FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-            fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_in_left, R.anim.slide_out_right);
-            fragmentTransaction.replace(R.id.fragment_container, PaymentFragment.newInstance(mPaymentDto, TAG), PaymentFragment.TAG);
-            fragmentTransaction.addToBackStack(PaymentFragment.TAG);
-            fragmentTransaction.commit();
+            if(mPaymentDto.items.size() > 0) {
+                FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_in_left, R.anim.slide_out_right);
+                fragmentTransaction.replace(R.id.fragment_container, PaymentFragment.newInstance(mPaymentDto, TAG), PaymentFragment.TAG);
+                fragmentTransaction.addToBackStack(PaymentFragment.TAG);
+                fragmentTransaction.commit();
+            }
         }
     }
 
