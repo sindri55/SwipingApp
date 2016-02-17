@@ -19,9 +19,9 @@ public class PaymentViewModel {
     // region Constructors
 
     public PaymentViewModel(PaymentDTO paymentDto) {
-        this.amount = paymentDto.amount;
         this.currency= paymentDto.currency;
         this.items = paymentDto.items;
+        this.amount = paymentDto.getAmount();
     }
 
     // endregion

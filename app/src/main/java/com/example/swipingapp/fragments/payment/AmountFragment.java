@@ -16,6 +16,7 @@ import com.example.swipingapp.customViews.amountSpinner.IAmountSpinnerListener;
 import com.example.swipingapp.customViews.input.InputAmount;
 import com.example.swipingapp.enums.Currency;
 import com.example.swipingapp.fragments.base.BaseFragment;
+import com.example.swipingapp.services.cart.CartService;
 import com.example.swipingapp.services.settings.ISettingsService;
 import com.example.swipingapp.services.settings.SettingsServiceStub;
 
@@ -43,6 +44,8 @@ public class AmountFragment extends BaseFragment {
     private Button mNextButton;
     private ListView mAmountSpinnerList;
 
+    private Button mAddToCartButton;    // TODO: REMOVE
+
     // endregion
 
     // region Override functions
@@ -66,6 +69,16 @@ public class AmountFragment extends BaseFragment {
         mInputAmountView = (InputAmount) view.findViewById(R.id.input_amount);
         mNextButton = (Button) view.findViewById(R.id.btn_next);
         mAmountSpinnerList = (ListView) view.findViewById(R.id.amount_spinner_list);
+
+        mAddToCartButton = (Button) view.findViewById(R.id.btn_add_to_cart);   // TODO: REMOVE
+        mAddToCartButton.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                PaymentItemDTO item = new PaymentItemDTO("Something", 2, mInputAmountView.getAmount());
+                CartService.getInstance().addToCart(item);
+            }
+        });
 
         mNextButton.setOnClickListener(new NextButtonClickListener());
 

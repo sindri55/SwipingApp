@@ -13,24 +13,27 @@ public class PaymentDTO implements Parcelable {
 
     public ArrayList<PaymentItemDTO> items;
     public Currency currency;
-    public double amount;
 
     // endregion
 
     public PaymentDTO(ArrayList<PaymentItemDTO> items, Currency currency) {
         this.items = items;
         this.currency = currency;
-
-        this.amount = 0;
-        for (PaymentItemDTO item: items) {
-            this.amount += item.amount;
-        }
     }
 
     // region Public functions
 
+    public double getAmount() {
+        double amount = 0;
+        for (PaymentItemDTO item: items) {
+            amount += item.amount;
+        }
+
+        return amount;
+    }
+
     public String getFormattedAmount() {
-        return currency.getFormatter().format(amount);
+        return currency.getFormatter().format(getAmount());
     }
 
     // region Parcelable
@@ -38,7 +41,6 @@ public class PaymentDTO implements Parcelable {
     protected PaymentDTO(Parcel in) {
         this.items = in.createTypedArrayList(PaymentItemDTO.CREATOR);
         this.currency = (Currency) in.readSerializable();
-        this.amount = in.readDouble();
     }
 
     public static final Creator<PaymentDTO> CREATOR = new Creator<PaymentDTO>() {
@@ -62,7 +64,6 @@ public class PaymentDTO implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(items);
         dest.writeSerializable(currency);
-        dest.writeDouble(amount);
     }
 
     // endregion
